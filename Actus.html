@@ -1,0 +1,131 @@
+<!DOCTYPE html> <!-- type de doc -->
+<html lang="fr"> <!-- langue de la page : français -->
+<!--html5-->
+
+	<head>
+		<meta charset ="UTF-8" /> <!--encodage de la page -->
+		<title>
+			HÒPUR Bienvenue sur le site de notre groupe de musique
+		</title>
+		<link rel="stylesheet" type="text/css" href="../CSS/themeActus.css">
+		<link rel="shortcut icon" href="../media/minibateau.ico" >
+	</head>
+
+	<body>
+
+		<!--en-tête -->
+		<header>
+			<!--menu déroulant -->
+			<nav>
+			 	<div id="bloc_menu">
+					<ul id="menu">
+
+						<!--accueil-->
+						<li>
+							<a href="Actus.html">ACCUEIL</a>
+						</li>
+
+						<!--description du groupe et extraits sonores-->
+						<li><a>LE GROUPE</a>
+							<ul>
+							    <li><a href="page_bio.html">Histoire </a> </li>
+						  	    <li><a href="page_son.html">Sons</a></li>
+							</ul>
+						</li>
+
+						<!--médias vidéos et tournées -->
+						<li><a>NOUS VOIR</a>
+							<ul>
+							    <li><a href="videos.html"> Regardez </a></li>
+								<li><a href="tournées.html">Tournées</a></li>
+							</ul>
+					 	</li>
+
+						<!--espace boutique et billeterie-->
+						<li><a>BOUTIQUE</a>
+						  <ul>
+						    <li><a href="tournées.html#ancre_boutique">Boutique</a></li>
+						    <li><a href="tournées.html">Billeterie</a></li>
+						  </ul>
+						</li>
+				    </ul>
+			    </div>
+			</nav>
+		</header>
+		<main>
+
+
+
+			<section id="section1" data-blabla='bla'>
+					<article data-test="ok">
+
+						<h1>   NOTRE DERNIER CONCERT   </h1>
+						<p>
+							Vendredi, nous étions avec le Comite Des Fetes Villeneuve pour faire la fête en Alsace. Nous avons eu le plaisir de partager la scène avec les fous furieux des Music Web (merci à eux d'être venu délirer sur scène avec nous, c'était la folie !)
+							Petite pensée pour les People in the woods qui ont été dans le regret de ne pas pouvoir jouer ce soir-là.. On a votre CD, on vous kiff les gars ;)
+						</p>
+						<p>
+							Dimanche, nous étions à la Fête de la musique avec les Blabla. Un grand honneur d'avoir joué après eux, le public était chaud bouillant !
+						</p>
+							Merci aux comités des fêtes de Villeneuve qui ont su nous accueillir comme des princes :)
+						</p>
+						<p>
+							Mention spéciale à Arthur Nomdefamille qui à remplacé notre amour de pianiste Hugo Piano pour ces deux concerts. Merci à lui !!
+						</p>
+						<p>
+							Et surtout merci aux public présent ces deux soirs, on vous aime.
+
+						</p>
+					</article>
+					<div id="imagePremierConcert" >
+						<img src="../media/concert.png">
+					</div>
+				</section>
+
+				<section id="nous">
+					<h1>  HÒPUR, le DVD   </h1>
+					<a href="tournées.html#notre_dvd" title="Découvrez notre DVD !"><img src="../media/documentaire.png"></a>
+
+				</section>
+
+				<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+				  <defs>
+				<filter id="goo">
+				      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+				      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 21 -9" result="cm" />
+				      <feBlend/>
+				  	</filter>
+
+				    <linearGradient id="coralGrad" x1="400" x2="400" y2="600" gradientUnits="userSpaceOnUse">
+				      <stop offset="0.2" stop-color="#212130"/>
+				      <stop offset="0.5" stop-color="#F49A4A"/>
+				      <stop offset="1" stop-color="#CF1D33"/>
+				    </linearGradient>
+				  <circle id="dot" cx="0" cy="0" r="6" fill="#CF1D33"/>
+				   <line id="connector" x1="0" x2="0" y1="0" y2="0" stroke-width="3" stroke-dasharray="" stroke-linecap="round" />
+				   </defs>
+				 <g id="lineContainer" stroke="url(#coralGrad)" />
+				 <g id="dotContainer" />
+				</svg>
+
+
+		</main>
+
+		<!--pied de page -->
+		<footer>
+
+            <details>
+                <summary >Merci à notre professeur, Mr Pierrick Marie</summary>
+                <p>Un site conçu par Natacha Camuglia, Pascal Barrios et Hania Stapel </p>
+                <p> Retour sur la page d'<a href="Actus.html">ACCUEIL</a></p>
+                <p><a href="credits.html" title="Ici, toutes les adresses liées aux crédits"> crédits </a>
+            <a href="contact.html" title="Pour nous contacter"> contacts </a></p>
+            </details>
+            <div>
+                <a href="https://www.facebook.com" title="partagez sur facebook!"><img src="../media/fb.png" alt="truc soc" ></a>
+                <a href="https://twitter.com" title="twitter en liberté (ou presque)"><img src="../media/twt.png" alt="truc soc" ></a>
+            </div>
+        </footer>
+
+	</body>
+</html>
