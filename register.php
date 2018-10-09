@@ -24,7 +24,6 @@ if (filter_input(INPUT_POST, "submitRegister")) {
     <title>Inscription</title>
 </head>
 <body>
-
 <form method="post">
   <h1 align='center'>Création d'un nouveau compte</h1>
   <div class="">
