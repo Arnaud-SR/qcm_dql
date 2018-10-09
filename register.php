@@ -16,11 +16,8 @@ if (filter_input(INPUT_POST, "submitRegister")) {
 <!doctype html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <?php require_once 'head.php' ?>
+    <script src="assets/js/main.js"></script>
     <title>Inscription</title>
 </head>
 <body>
@@ -30,35 +27,37 @@ if (filter_input(INPUT_POST, "submitRegister")) {
 
   </div>
   <div class="form-group col-sm-6">
-    <input placeholder="adresse@email.com" type="email" class="form-control" >
+    <input placeholder="adresse@email.com" type="email" class="form-control" required>
   </div>
 
   <div class="form-group col-sm-6">
-    <input for="pwd1" placeholder="mot de passe" class="form-control">
+      <input name="password" placeholder="mot de passe" class="form-control" required>
   </div>
 
   <div class="form-group col-sm-6">
-    <input for="pwd2" placeholder="confirmation du mot de passe" class="form-control">
+      <input name="password_verify" placeholder="confirmation du mot de passe" class="form-control" required>
   </div>
 
   <div class="form-group col-sm-6">
-    <input placeholder="Nom" class="form-control">
+      <input placeholder="Nom" class="form-control" name="nom" required>
   </div>
 
   <div class="form-group col-sm-6">
-    <input placeholder="Prénom" class="form-control">
+      <input placeholder="Prénom" class="form-control" name="prenom" required>
   </div>
 
   <div class="form-group col-sm-6">
-
-  </select>
-    <select class="form-control" name="">
-
-    <input placeholder="identifiant" class="form-control">
+      <select class="form-control" required title="status" id="select_role">
+          <option value="" disabled selected>Vous êtes..</option>
+          <option value="0">Etudiant</option>
+          <option value="1">Enseignant</option>
+      </select>
   </div>
 
-    <input type="submit" name="submitRegister">
-  </div>
+    <div class="form-group col-sm-6 d-none" id="block_code">
+        <input placeholder="identifiant" class="form-control">
+    </div>
+    <input type="submit" name="submitRegister" class="btn btn-success">
 </form>
 </body>
 </html>
