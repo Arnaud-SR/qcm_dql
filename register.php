@@ -20,15 +20,45 @@ if (filter_input(INPUT_POST, "submitRegister")) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>Inscription</title>
 </head>
 <body>
 <form method="post">
-    <label for="">Login : <input type="text" name="login"></label>
-    <label for="">Mdp : <input type="password" name="password"></label>
-    <label for="">Nom : <input type="text" name="nom"></label>
-    <label for="">Prenom : <input type="text" name="prenom"></label>
+  <h1 align='center'>Création d'un nouveau compte</h1>
+  <div class="">
+
+  </div>
+  <div class="form-group col-sm-6">
+    <input placeholder="adresse@email.com" type="email" class="form-control" >
+  </div>
+
+  <div class="form-group col-sm-6">
+    <input for="pwd1" placeholder="mot de passe" class="form-control">
+  </div>
+
+  <div class="form-group col-sm-6">
+    <input for="pwd2" placeholder="confirmation du mot de passe" class="form-control">
+  </div>
+
+  <div class="form-group col-sm-6">
+    <input placeholder="Nom" class="form-control">
+  </div>
+
+  <div class="form-group col-sm-6">
+    <input placeholder="Prénom" class="form-control">
+  </div>
+
+  <div class="form-group col-sm-6">
+
+  </select>
+    <select class="form-control" name="">
+
+    <input placeholder="identifiant" class="form-control">
+  </div>
+
     <input type="submit" name="submitRegister">
+  </div>
 </form>
 </body>
 </html>
