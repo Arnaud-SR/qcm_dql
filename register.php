@@ -9,6 +9,7 @@ if (filter_input(INPUT_POST, "submitRegister")) {
 
     $user->register();
     header('location: index.php');
+    exit;
 }
 ?>
 
