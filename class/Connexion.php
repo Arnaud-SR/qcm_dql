@@ -55,7 +55,7 @@ class Connexion
         return $this->db->quote($val);
     }
 
-
+    // FONCTION PERMETTANT D'EXECUTER DIRECTEMENT LA REQUETE ET DETERMINE SI SELECT OU AUTRE
     public function xeq($req)
     {
         try {
@@ -79,6 +79,7 @@ class Connexion
         return $this->nb;
     }
 
+// RETOURNE UN ARRAY RELATIF A LA REQUETE
     public function tab($classe = 'stdClass')
     {
         if (!$this->jeu) {

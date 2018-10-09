@@ -1,7 +1,5 @@
 <?php
 require_once'class/Cfg.php';
-
-
 ?>
 <!doctype html>
 <html lang="fr">
@@ -14,6 +12,12 @@ require_once'class/Cfg.php';
     <title>Accueil</title>
 </head>
 <body>
+<div class="row">
+    <div class="col-3 mx-auto text-center">
+        <h4>Bienvenue dans cette application web fait par Natasha et Arnaud</h4>
+    </div>
+</div>
+
 <nav>
     <ul>
         <li><a href="register.php">Inscription</a></li>
