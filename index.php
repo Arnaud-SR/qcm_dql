@@ -15,22 +15,22 @@ require_once'class/Cfg.php';
 </div>
 
 
-<div class="row mt-5">
+<div class="row mt-5 mt">
     <div class="col-4 mx-auto p-3">
         <form method="post">
             <div class="row form-group">
                 <div class="mx-auto">
-                    <input type="text" placeholder="Login..." class="form-control">
+                    <input type="text" placeholder="Login..." class="form-control" required>
                 </div>
             </div>
             <div class="row mt-3 form-group">
                 <div class="mx-auto">
-                    <input type="password" placeholder="mot de passe..." class="form-control">
+                    <input type="password" placeholder="Mot de passe..." class="form-control" required>
                 </div>
             </div>
             <div class="row mt-2 form-group">
                 <div class="mx-auto">
-                    <input type="button" class="btn btn-success" value="Se connecter">
+                    <input type="submit" class="btn btn-success" value="Se connecter">
                 </div>
             </div>
         </form>
