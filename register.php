@@ -23,7 +23,6 @@ if (filter_input(INPUT_POST, "submitRegister")) {
     <title>Inscription</title>
 </head>
 <body>
-
 <form method="post">
     <label for="">Login : <input type="text" name="login"></label>
     <label for="">Mdp : <input type="password" name="password"></label>
