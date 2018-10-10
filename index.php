@@ -13,8 +13,6 @@ require_once'class/Cfg.php';
         <h4>Bienvenue dans cette application web fait par Natacha et Arnaud</h4>
     </div>
 </div>
-
-
 <div class="row mt-5 mt">
     <div class="col-4 mx-auto p-3">
         <form method="post">
