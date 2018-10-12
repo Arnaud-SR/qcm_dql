@@ -30,10 +30,30 @@ class User {
     public function register() {
         $cnx = Connexion::getInstance();
         $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
-        $req = "INSERT INTO user VALUES(DEFAULT, {$cnx->esc($this->login)}, {$password_hash}, {$cnx->esc($this->nom)}, {$cnx->esc($this->prenom)}, NULL, {$cnx->esc($this->student_code)})";
+        $req = "INSERT INTO user VALUES(DEFAULT, {$cnx->esc($this->login)}, '{$password_hash}', {$cnx->esc($this->nom)}, {$cnx->esc($this->prenom)}, NULL, {$cnx->esc($this->student_code)})";
         $cnx->xeq($req);
 
         return true;
+    }
+
+    public function loguer() {
+        $cnx = Connexion::getInstance();
+        $password = $this->password;
+        $req = "SELECT * FROM user WHERE login = {$cnx->esc($this->login)}";
+
+        if ($cnx->xeq($req)->nb() && !$cnx->xeq($req)->ins($this)) {
+            return false;
+        }
+        if (!password_verify($password, $this->password)) {
+            return false;
+        }
+
+        if ($cnx->xeq($req)->nb()) {
+            $_SESSION['id_user'] = $this->id_user;
+            return true;
+        }
+
+        return false;
     }
 
 }
