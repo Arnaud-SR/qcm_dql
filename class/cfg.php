@@ -3,11 +3,7 @@
 Cfg::init();
 
 class Cfg {
-
     private static $initDone = false;
-
-
-
 
     private function __construct() {
         // classe 100% statique

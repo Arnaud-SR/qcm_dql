@@ -10,7 +10,7 @@ require_once'class/Cfg.php';
 <body>
 <div class="row">
     <div class="col-3 mx-auto text-center">
-        <h4>Bienvenue dans cette application web fait par Natacha et Arnaud</h4>
+        <h2>Bienvenue</h2>
     </div>
 </div>
 <div class="row mt-5 mt">
