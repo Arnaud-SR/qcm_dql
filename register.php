@@ -22,7 +22,6 @@ if (filter_input(INPUT_POST, "submitRegister")) {
     } else {
         $tabErrorString = implode("</br>", $tabError);
     }
-
 }
 ?>
 
