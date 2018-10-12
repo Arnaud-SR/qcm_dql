@@ -16,14 +16,21 @@ require_once("class/cfg.php");
     </header>
     <main>
       <div class="container" style="border-style:dashed; width: 300px; height: 800px; position: fixed; left:0; right:auto;margin-top:80px;">
-          menu
+          <?php
+          $isTeacher = false;
+          if($isTeacher){
+            require('_teacherNav.html');
+          }else{
+            require('_studentNav.html');
+          }
+            ?>
+
       </div>
       <div class="container-fluid" style="border-style:dashed;margin-left:300px;height:100vh;position: fixed;margin-top:80px;margin-left:300px;">
         <header class="row" style="border-style:dashed;height:100px;position:fixed;width:100%;">
           <h2>Vous êtes l'enseignant/étudiant <?php  echo '$_SESSION[]'; ?></h2>
         </header>
         <div class="row" >
-
             <div class="card" style="width: 100%;margin-top:100px;">
               <div class="card-header">
                 <h3>Vos QCM</h3>
@@ -35,7 +42,6 @@ require_once("class/cfg.php");
               </ul>
             </div>
           </div>
-
         </div>
       </div>
 
