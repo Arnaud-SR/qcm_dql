@@ -8,7 +8,7 @@ require_once("class/cfg.php");
     <?php require_once 'head.php';
     $_SESSION['nom'] = 'Broisin';
     $_SESSION['prenom'] = 'Julien';
-    $_SESSION['isTeacher'] = 'true';
+    $_SESSION['isTeacher'] = 'false';
 
     ?>
     <title>Tableau de bord</title>
@@ -29,19 +29,12 @@ require_once("class/cfg.php");
     <main >
       <?php
         if($_SESSION['isTeacher']){
-          require('_teacherMain.html');
+          require('teacher/_teacherMain.php');
         }else{
-          require('_studentMain.html');
+          require('student/_studentMain.php');
         }
       ?>
-
     </main>
-    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-
-    <!-- Load our React component. -->
-    <script src="like_button.js"></script>
 
   </body>
 </html>
