@@ -11,7 +11,6 @@ require_once("class/cfg.php");
   <body>
     <header class="container-fluid navbar-nav" style="border-style: dashed;height:80px;width:100vw; ">
         <h2> Gestionnaire de QCM enseignant/étudiant <?php  echo '$_SESSION[]'; ?></h2>
-        <!-- <div id="like_button_container"></div> -->
     </header>
     <main >
       <?php
