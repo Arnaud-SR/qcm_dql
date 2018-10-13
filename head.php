@@ -4,4 +4,5 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/jQuery.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
 </head>
