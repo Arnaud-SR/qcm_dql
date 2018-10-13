@@ -5,48 +5,30 @@ require_once("class/cfg.php");
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <?php require_once 'head.php' ?>
+    <?php require_once 'head.php'; ?>
     <title>Tableau de bord</title>
   </head>
   <body>
-    <header>
-      <div class="container-fluid navbar-nav" style="border-style: dashed;position: fixed;height:80px;width:100vw; ">
-        logo<h1>Gestionnaire QCM</h1>
-      </div>
+    <header class="container-fluid navbar-nav" style="border-style: dashed;height:80px;width:100vw; ">
+        <h2> Gestionnaire de QCM enseignant/étudiant <?php  echo '$_SESSION[]'; ?></h2>
     </header>
-    <main>
-      <div class="container" style="border-style:dashed; width: 300px; height: 800px; position: fixed; left:0; right:auto;margin-top:80px;">
-          <?php
-          $isTeacher = false;
-          if($isTeacher){
-            require('_teacherNav.html');
-          }else{
-            require('_studentNav.html');
-          }
-            ?>
-
-      </div>
-      <div class="container-fluid" style="border-style:dashed;margin-left:300px;height:100vh;position: fixed;margin-top:80px;margin-left:300px;">
-        <header class="row" style="border-style:dashed;height:100px;position:fixed;width:100%;">
-          <h2>Vous êtes l'enseignant/étudiant <?php  echo '$_SESSION[]'; ?></h2>
-        </header>
-        <div class="row" >
-            <div class="card" style="width: 100%;margin-top:100px;">
-              <div class="card-header">
-                <h3>Vos QCM</h3>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+    <main >
+      <?php
+      $isTeacher = false;
+      if($isTeacher){
+        require('_teacherNav.html');
+      }else{
+        require('_studentNav.html');
+      }
+        ?>
 
     </main>
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 
+    <!-- Load our React component. -->
+    <script src="like_button.js"></script>
 
   </body>
 </html>
