@@ -8,7 +8,7 @@ class User {
     public $nom;
     public $prenom;
     public $is_teacher;
-    public $student_code;
+    public $user_code;
 
     /**
      * User constructor.
@@ -17,20 +17,20 @@ class User {
      * @param $password
      * @param $is_teacher
      */
-    public function __construct($id_user = null, $login = null, $password = null, $is_teacher = 0, $nom = null, $prenom = null, $student_code = null) {
+    public function __construct($id_user = null, $login = null, $password = null, $is_teacher = 0, $nom = null, $prenom = null, $user_code = null) {
         $this->id_user = $id_user;
         $this->login = $login;
         $this->password = $password;
         $this->is_teacher = $is_teacher;
         $this->prenom = $prenom;
         $this->nom = $nom;
-        $this->student_code = $student_code;
+        $this->user_code = $user_code;
     }
 
     public function register() {
         $cnx = Connexion::getInstance();
         $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
-        $req = "INSERT INTO user VALUES(DEFAULT, {$cnx->esc($this->login)}, '{$password_hash}', {$cnx->esc($this->nom)}, {$cnx->esc($this->prenom)}, NULL, {$cnx->esc($this->student_code)})";
+        $req = "INSERT INTO user VALUES(DEFAULT, {$cnx->esc($this->login)}, '{$password_hash}', {$cnx->esc($this->nom)}, {$cnx->esc($this->prenom)}, NULL, {$cnx->esc($this->user_code)})";
         $cnx->xeq($req);
 
         return true;
@@ -50,10 +50,22 @@ class User {
 
         if ($cnx->xeq($req)->nb()) {
             $_SESSION['id_user'] = $this->id_user;
+
             return true;
         }
 
         return false;
+    }
+
+    public function checkTeacherCode() {
+        $cnx = Connexion::getInstance();
+        $req = "SELECT * FROM code_teacher WHERE code = {$cnx->esc($this->user_code)}";
+
+        return (bool)$cnx->xeq($req)->nb();
+    }
+
+    public function getUser($id_user){
+
     }
 
 }

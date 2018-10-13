@@ -8,7 +8,7 @@ if (filter_input(INPUT_POST, "submitRegister")) {
     $user->password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
     $user->nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
     $user->prenom = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-    $user->student_code = filter_input(INPUT_POST,"user_code",FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+    $user->user_code = filter_input(INPUT_POST,"user_code",FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
     $password_verify = filter_input(INPUT_POST,'password_verify',FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
     if($user->password != $password_verify){
