@@ -64,8 +64,29 @@ class User {
         return $cnx->xeq($req)->nb();
     }
 
-    public function getUser($id_user){
+    public static function checkIfIsTeacher() {
+        $cnx = Connexion::getInstance();
+        $req = "SELECT * FROM user WHERE id_user = {$_SESSION['id_user']} AND is_teacher = 1 ";
 
+        if ($cnx->xeq($req)->nb()) {
+            $_SESSION['is_teacher'] = true;
+        }
+    }
+
+    public static function getUser() {
+        if (isset($_SESSION['id_user'])) {
+            $user = new User();
+            $user->id_user = $_SESSION['id_user'] ?? null;
+            return $user->chargerUser() ? $user : null;
+        }
+    }
+
+    public function chargerUser() {
+        if (!$this->id_user) {
+            return false;
+        }
+        $req = "SELECT * FROM user WHERE id_user={$this->id_user}";
+        return (bool)Connexion::getInstance()->xeq($req)->ins($this);
     }
 
 }
