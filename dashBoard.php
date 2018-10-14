@@ -17,7 +17,7 @@ User::checkIfIsTeacher();
       <title>Tableau de bord</title>
   </head>
   <body>
-    <header class="container-fluid" style="background-color: #b8d7e0;height:120px;width:100vw; ">
+  <header class="container-fluid" style="background-color: #b8d7e0;height:140px;width:100vw; ">
         <h1> Gestionnaire de QCM
           <?php
           if (isset($_SESSION['is_teacher'])) {
@@ -27,7 +27,12 @@ User::checkIfIsTeacher();
             }
           ?>
          </h1>
-        <h2 class="text-center"> Bienvenue, <?= $user->prenom ?> </h2>
+      <div class="row">
+          <div class="col">
+              <a href="disconnect.php" class="btn btn-danger">Se déconnecter</a>
+          </div>
+      </div>
+      <h2 class="text-center"> Bienvenue, <?= $user->prenom ?> </h2>
     </header>
     <main >
       <?php
