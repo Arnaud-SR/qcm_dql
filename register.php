@@ -10,13 +10,22 @@ if (filter_input(INPUT_POST, "submitRegister")) {
     $user->prenom = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
     $user->user_code = filter_input(INPUT_POST,"user_code",FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
     $password_verify = filter_input(INPUT_POST,'password_verify',FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+    $code_verif = filter_input(INPUT_POST, "user_code", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+    $value_select = filter_input(INPUT_POST, "select_role", FILTER_SANITIZE_NUMBER_INT, FILTER_FLAG_NO_ENCODE_QUOTES);
 
-    if($user->password != $password_verify){
-        $tabError[] = "* Les mot de passe ne sont pas identique";
+    if ($user->password != $password_verify) {
+        $tabError[] = "* Les mot de passe ne sont pas identiques";
     }
-
+    if ($value_select && !User::checkTeacherCode($code_verif)) {
+        $tabError[] = "* Il semble que votre identifiant professeur soit erroné, vérifiez le";
+    }
     if (!$tabError) {
-        $user->register();
+        if ($value_select && User::checkTeacherCode($code_verif)) {
+            $user->register(true);
+        }
+        if (!$value_select) {
+            $user->register();
+        }
         header('location: index.php');
         exit;
     } else {
@@ -90,7 +99,7 @@ if (filter_input(INPUT_POST, "submitRegister")) {
             <div class="form-group row">
               <label class="col-sm-3 col-form-label text-right">Status *</label>
               <div class="col-sm-5">
-                <select class="form-control " required title="status" id="select_role">
+                  <select class="form-control " required title="status" id="select_role" name="select_role">
                     <option value="" disabled selected>Vous êtes..</option>
                     <option value="0">Etudiant</option>
                     <option value="1">Enseignant</option>

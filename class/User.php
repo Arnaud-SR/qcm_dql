@@ -27,10 +27,10 @@ class User {
         $this->user_code = $user_code;
     }
 
-    public function register() {
+    public function register($asTeacher = 0) {
         $cnx = Connexion::getInstance();
         $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
-        $req = "INSERT INTO user VALUES(DEFAULT, {$cnx->esc($this->login)}, '{$password_hash}', {$cnx->esc($this->nom)}, {$cnx->esc($this->prenom)}, NULL, {$cnx->esc($this->user_code)})";
+        $req = "INSERT INTO user VALUES(DEFAULT, {$cnx->esc($this->login)}, '{$password_hash}', {$cnx->esc($this->nom)}, {$cnx->esc($this->prenom)}, $asTeacher, {$cnx->esc($this->user_code)})";
         $cnx->xeq($req);
 
         return true;
@@ -57,11 +57,11 @@ class User {
         return false;
     }
 
-    public function checkTeacherCode() {
+    public static function checkTeacherCode($code) {
         $cnx = Connexion::getInstance();
-        $req = "SELECT * FROM code_teacher WHERE code = {$cnx->esc($this->user_code)}";
+        $req = "SELECT * FROM code_teacher WHERE code = '$code'";
 
-        return (bool)$cnx->xeq($req)->nb();
+        return $cnx->xeq($req)->nb();
     }
 
     public function getUser($id_user){
