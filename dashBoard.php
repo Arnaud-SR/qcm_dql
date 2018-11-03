@@ -17,7 +17,7 @@ User::checkIfIsTeacher();
       <title>Tableau de bord</title>
   </head>
   <body>
-  <header class="container-fluid" style="background-color: #b8d7e0;height:140px;width:100vw; ">
+  <header class="d-flex container-fluid bg-info text-white" style="height:140px;padding: 20px 5vw;">
         <h1> Gestionnaire de QCM
           <?php
           if (isset($_SESSION['is_teacher'])) {
@@ -27,12 +27,12 @@ User::checkIfIsTeacher();
             }
           ?>
          </h1>
-      <div class="row">
-          <div class="col">
-              <a href="disconnect.php" class="btn btn-danger">Se déconnecter</a>
-          </div>
+      <h2 class="d-flex justify-self-center align-self-center" style="padding:185px;" > Bienvenue, <?= $user->prenom ?> </h2>
+      <div class="align-self-end"> <!-- bouton react -->                <!-- <img src="powerOff.png" alt=""> -->
+        <a href="disconnect.php" class="btn btn-danger" style="padding:10px 20px;">
+          Se déconnecter
+        </a>
       </div>
-      <h2 class="text-center"> Bienvenue, <?= $user->prenom ?> </h2>
     </header>
     <main >
       <?php
