@@ -44,3 +44,5 @@ function addOtherTheme(){
     select_theme.append(new Option(input_theme.val()));
   })
 }
+
+//gérer le cas de la création d'un thème existant déjà

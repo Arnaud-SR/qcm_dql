@@ -1,3 +1,45 @@
+<?php
+require_once("class/cfg.php");
+
+$tabError = [];
+if(filter_input(INPUT_POST, "submitQuestion" )){
+  $question = new Question();
+  $value_select = filter_input(INPUT_POST,"select_theme", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+  $question->theme = filter_input(INPUT_POST,"new_theme", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES); //TODO: pouvoir choisir un thème existant + ajout d'un nouveau thème + ajout value
+  $newTheme = filter_input(INPUT_POST,"new_theme", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+  $question->title = filter_input(INPUT_POST,"question_title", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+  $answer_A_title = filter_input(INPUT_POST,"answer_a_title", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+  $answer_B_title = filter_input(INPUT_POST,"answer_b_title", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+  $answer_C_title = filter_input(INPUT_POST,"answer_c_title", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+  $answer_D_title = filter_input(INPUT_POST,"answer_d_title", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+  $is_answer_A_right = filter_input(INPUT_POST,"answer_a_value", FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+  $is_answer_B_right = filter_input(INPUT_POST,"answer_b_value", FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+  $is_answer_C_right = filter_input(INPUT_POST,"answer_c_value", FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+  $is_answer_D_right = filter_input(INPUT_POST,"answer_d_value", FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+  $question-> $choices = array(
+    'A' => $answer_A_title,
+    'B' => $answer_B_title,
+    'C' => $answer_C_title,
+    'D' => $answer_D_title
+  );
+  $question-> $teacher_answers = array(
+    'A' => $is_answer_A_right,
+    'B' => $is_answer_B_right,
+    'C' => $is_answer_C_right,
+    'D' => $is_answer_D_right
+  );
+
+  if(!$tabError){
+    $question->putQuestion(true);
+  }
+  header('location: index.php');
+  exit;
+  } else {
+    $tabErrorString = implode("</br>", $tabError);
+  }
+}
+
+ ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
   <head>
@@ -83,7 +125,7 @@
               </tbody>
             </table>
           <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-outline-success btn-lg mt-5">Envoyer</button>
+            <button type="submit" class="btn btn-outline-success btn-lg mt-5" name="submitQuestion">Envoyer</button>
           </div>
         </div>
     </form>
