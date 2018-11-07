@@ -2,18 +2,17 @@
 <html>
     <head>
         <?php require_once 'head.php' ?>
-        <script src="assets/js/newQCM.js"></script>    
+        <script src="assets/js/newQCM.js"></script>
     </head>
     <body>
+      <div class="container mt-5" >
         <div >
-            <a id="link_newQuestion" class="btn btn-info">Déposer une question</a>
+          <button type="button" id="btn_new_question" class="btn btn-outline-primary btn-lg btn-block mb-5">Déposer une question</button>
         </div>
-        <div id="block_newQuestion" class="d-none">
-            <p>bloc pour créer une nouvelle question</p>
-            
+        <div id="block_newQuestion" class="container mb-5 d-none" >
+          <?php require('_newQuestion.php'); ?>
         </div>
-
-
-
+        </div>
+      </div>
     </body>
 </html>
