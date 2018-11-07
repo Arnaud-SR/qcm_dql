@@ -30,7 +30,7 @@ if(filter_input(INPUT_POST, "submitQuestion" )){
   );
 
   if(!$tabError){
-    $question->putQuestion(true);
+    $question->put();
     header('location: index.php');
     exit;
   } else {
