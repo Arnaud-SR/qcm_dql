@@ -31,9 +31,8 @@ if(filter_input(INPUT_POST, "submitQuestion" )){
 
   if(!$tabError){
     $question->putQuestion(true);
-  }
-  header('location: index.php');
-  exit;
+    header('location: index.php');
+    exit;
   } else {
     $tabErrorString = implode("</br>", $tabError);
   }
