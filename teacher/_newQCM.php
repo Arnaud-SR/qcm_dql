@@ -10,13 +10,13 @@
         <div class="form-group row">
           <label class="col-sm-3 col-form-label text-right">Titre du QCM</label>
           <div class="col-sm-9">
-            <input  class="form-control" name="qcm_title" required>
+            <input  class="form-control" name="qcm_title" >
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-3 col-form-label text-right">Date limite</label>
-          <div class="col-sm-9">
-            <input class="form-control" name="qcm_deadline" required>
+          <div class="col-sm-2">
+            <input class="form-control" name="qcm_deadline" placeholder="XX/XX/XXXX" required>
           </div>
         </div>
         <div class="d-flex justify-content-center">
