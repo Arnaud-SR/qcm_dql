@@ -1,6 +1,6 @@
 <?php
 
-class Questions {
+class Question {
     public $id_question;
     public $id_teacher;
     public $theme;
@@ -27,7 +27,13 @@ class Questions {
         return true;
     }
 
-    public function get_right_answers($answers){
+    public function loadQuestion() {
+        $req = "SELECT theme FROM questions WHERE id_question={$this->id_question}";
+        return (bool)Connexion::getInstance()->xeq($req)->ins($this);
+    }
+
+
+    private function get_right_answers($answers){
         $solution = "";
         foreach ($answers as $key => $value)
         {
