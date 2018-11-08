@@ -9,7 +9,7 @@
         <div >
           <button type="button" id="btn_buildQCM" class="btn btn-outline-primary btn-lg btn-block mb-5">Construire un QCM</button>
         </div>
-        <div id="block_buildNewQCM" class="container mb-5" >
+        <div id="block_buildNewQCM" class="container mb-5 d-none" >
           <?php require('_newQCM.php'); ?>
         </div>
         <div >

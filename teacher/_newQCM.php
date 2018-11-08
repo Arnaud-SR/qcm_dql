@@ -20,9 +20,9 @@
           </div>
         </div>
         <div class="d-flex justify-content-center">
-          <button type="button" class="btn btn-outline-info mt-5" name="btn_new_answers">Ajouter une question</button>
+          <button type="button" class="btn btn-outline-info mt-5" name="btn_add_questions">Ajouter une question</button>
         </div>
-        <div id="block_questions_list" class="container mb-5" >
+        <div id="block_questions_list" class="container mb-5 d-none" >
           <h3 class="col-sm-6 mt-5 mb-5">Sélection des questions à retenir</h3>
             <table class="table">
               <thead>
@@ -51,7 +51,7 @@
               </tbody>
             </table>
           <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-outline-success btn-lg mt-5" name="submitQuestion">Envoyer</button>
+            <button type="submit" class="btn btn-outline-success btn-lg mt-5" name="submitQCM">Envoyer</button>
           </div>
         </div>
     </form>
