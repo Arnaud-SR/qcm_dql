@@ -37,7 +37,6 @@ if(filter_input(INPUT_POST, "submitQuestion" )){
     $tabErrorString = implode("</br>", $tabError);
   }
 }
-
  ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
