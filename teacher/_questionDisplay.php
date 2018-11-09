@@ -8,6 +8,7 @@
   <label class="col-sm-3 col-form-label text-right">Intitulé de la question</label>
   <div class="col-sm-9">
     consectetur adipisicing elit
+  </div>
 </div>
 <div id="block_new_answers" class="container mb-5 d-none" >
     <h2 class="col-sm-3 mb-5">Réponses</h2>
@@ -58,3 +59,4 @@
         </tr>
       </tbody>
     </table>
+  </div>
