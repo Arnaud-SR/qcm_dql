@@ -10,13 +10,13 @@
         <div class="form-group row">
           <label class="col-sm-3 col-form-label text-right">Titre du QCM</label>
           <div class="col-sm-9">
-            <input  class="form-control" name="qcm_title" required>
+            <input  class="form-control" name="qcm_title" >
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-3 col-form-label text-right">Date limite</label>
-          <div class="col-sm-9">
-            <input class="form-control" name="qcm_deadline" required>
+          <div class="col-sm-2">
+            <input class="form-control" name="qcm_deadline" placeholder="XX/XX/XXXX" required>
           </div>
         </div>
         <div class="d-flex justify-content-center">
@@ -36,16 +36,39 @@
               <tbody>
                 <tr>
                   <th scope="row" class="col-sm-3">
-                    theme
+                    Programmation web
                   </th>
                   <th scope="row" class="col-sm-8">
-                    titre de la question
+                    Quelle fonction retourne le nombre de secondes écoulées depuis le 1er janvier 1970 ?  </div>
                   </th>
                   <th scope="row" class="form-check">
                     <input type="checkbox" name="" >
                   </th>
                   <th scope="row" >
-                    <button type="button" name="button" class="btn btn-info btn-sm">consulter</button>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#questionModal">
+                      consulter
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="questionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLabel">Consultation</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <?php require("_questionDisplayTeacher.php"); ?>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </th>
                 </tr>
               </tbody>

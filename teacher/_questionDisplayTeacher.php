@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <script src="assets/js/_questionDisplay.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="form-group row d-flex justify-content-between">
+      <h3>Question ##.</h3>
+      <i> Programmation web</i>
+    </div>
+    <div class="form-group row">
+      Quelle fonction retourne le nombre de secondes écoulées depuis le 1er janvier 1970 ?
+    </div>
+    <hr>
+    <h4>Réponses</h4>
+    <table class="table table-borderless">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Intitulé de la question</th>
+          <th scope="col">V/F</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">A.</th>
+          <th scope="row" class="col-sm-8">
+            time
+          </th>
+          <th scope="row" class="form-check">
+            <input id="cb_a" type="checkbox">
+          </th>
+        </tr>
+        <tr>
+          <th scope="row">B.</th>
+          <th scope="row" class="col-sm-8">
+            timestamp
+          </th>
+          <th scope="row" class="form-check">
+            <input type="checkbox" id="cb_b" >
+          </th>
+        </tr>
+        <tr>
+          <th scope="row">C.</th>
+          <th scope="row" class="col-sm-8">
+            mktim
+          </th>
+          <th scope="row" class="form-check">
+            <input  class="" type="checkbox" id="cb_c" >
+          </th>
+        </tr>
+        <tr>
+          <th scope="row">D.</th>
+          <th scope="row" class="col-sm-8">
+            microtime
+          </th>
+          <th scope="row" class="form-check">
+            <input  class="" type="checkbox" id="cb_d" >
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
