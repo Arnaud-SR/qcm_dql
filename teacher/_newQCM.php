@@ -36,10 +36,10 @@
               <tbody>
                 <tr>
                   <th scope="row" class="col-sm-3">
-                    theme
+                    Programmation web
                   </th>
                   <th scope="row" class="col-sm-8">
-                    titre de la question
+                    Quelle fonction retourne le nombre de secondes écoulées depuis le 1er janvier 1970 ?  </div>
                   </th>
                   <th scope="row" class="form-check">
                     <input type="checkbox" name="" >
@@ -55,13 +55,13 @@
                       <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="ModalLabel">Question #</h5>
+                            <h5 class="modal-title" id="ModalLabel">Consultation</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
                           <div class="modal-body">
-                            <?php require("_questionDisplay.php"); ?>
+                            <?php require("_questionDisplayTeacher.php"); ?>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
