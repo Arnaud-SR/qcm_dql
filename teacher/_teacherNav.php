@@ -10,8 +10,8 @@
     </div>
     <div class="col-9" style="height: 100vw;">
       <div class="tab-content" id="v-pills-tabContent">
-        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"> <?php require('_homePage.php') ?> </div>
-        <div class="tab-pane fade" id="v-pills-new" role="tabpanel" aria-labelledby="v-pills-new-tab"> new</div>
+        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"> <?php require('_teacherMain.php') ?> </div>
+        <div class="tab-pane fade" id="v-pills-new" role="tabpanel" aria-labelledby="v-pills-new-tab"> <?php require('_newPage.php'); ?></div>
       </div>
     </div>
   </div>
