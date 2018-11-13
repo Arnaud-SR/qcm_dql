@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <?php require_once 'head.php' ?>
         <script src="assets/js/newQCM.js"></script>
     </head>
     <body>

@@ -7,6 +7,7 @@ $(function() {
   toggleQuestionList();
 });
 
+
 function toggleNewAnswers() {
   let answersBlock = $('#block_new_answers');
   let displayAnswersBtn = $('[name=btn_new_answers]');

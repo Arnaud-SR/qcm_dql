@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <?php require_once 'head.php' ?>
-  <script src="assets/js/newQCM.js"></script>
 </head>
 <body>
   <form id="new_question_form" class="container mb-5" method="post">
