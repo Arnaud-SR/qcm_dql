@@ -16,7 +16,6 @@ function toggleNewAnswers() {
         answersBlock.find(displayAnswersBtn);
         answersBlock.toggleClass('d-none');
     })
-
 }
 
 function toggleQuestionList() {
