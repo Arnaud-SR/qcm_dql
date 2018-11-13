@@ -5,6 +5,10 @@ $(function() {
   addOtherTheme();
   toggleNewQCM();
   toggleQuestionList();
+  setQuestionTitle($('#A'));
+  setQuestionTitle($('#B'));
+  setQuestionTitle($('#C'));
+  setQuestionTitle($('#D'));
 });
 
 
@@ -67,5 +71,17 @@ function addOtherTheme(){
     select_theme.append(new Option(input_theme.val()));
   })
 }
+
+function setQuestionTitle(row) {
+  let cell = row.find($('.col-sm-8'));
+  let cb = row.find($('[type="checkbox"]'));
+
+  row.on('dblclick', function(){
+    cell.replaceWith('<th scope="row" class="col-sm-8"><input class="col-sm-11" type="text" value="bla"></th>');
+    cb.prop("disabled",false);
+
+  })
+}
+
 
 //gérer le cas de la création d'un thème existant déjà

@@ -24,40 +24,40 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr id="A">
           <th scope="row">A.</th>
           <th scope="row" class="col-sm-8">
             time
           </th>
           <th scope="row" class="form-check">
-            <input id="cb_a" type="checkbox">
+            <input name="cb_a" type="checkbox" disabled>
           </th>
-        </tr>
-        <tr>
+        </tr >
+        <tr id="B">
           <th scope="row">B.</th>
           <th scope="row" class="col-sm-8">
             timestamp
           </th>
           <th scope="row" class="form-check">
-            <input type="checkbox" id="cb_b" >
+            <input name="cb_b" type="checkbox" disabled>
           </th>
         </tr>
-        <tr>
+        <tr id="C">
           <th scope="row">C.</th>
           <th scope="row" class="col-sm-8">
             mktim
           </th>
           <th scope="row" class="form-check">
-            <input  class="" type="checkbox" id="cb_c" >
+            <input name="cb_c" type="checkbox" disabled>
           </th>
         </tr>
-        <tr>
+        <tr id="D">
           <th scope="row">D.</th>
           <th scope="row" class="col-sm-8">
             microtime
           </th>
           <th scope="row" class="form-check">
-            <input  class="" type="checkbox" id="cb_d" >
+            <input  name="cb_d" type="checkbox" disabled>
           </th>
         </tr>
       </tbody>

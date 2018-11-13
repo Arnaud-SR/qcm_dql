@@ -44,7 +44,7 @@
             <th scope="row" class="col-sm-3">
               Programmation web
             </th>
-            <th scope="row" class="col-sm-8">
+            <th scope="row" class="col-sm-9">
               Quelle fonction retourne le nombre de secondes écoulées depuis le 1er janvier 1970 ?  </div>
             </th>
             <th scope="row" class="form-check">
@@ -71,7 +71,6 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                      <button type="button" class="btn btn-primary" data-dismiss="modal">Modifier</button>
                     </div>
                   </div>
                 </div>
