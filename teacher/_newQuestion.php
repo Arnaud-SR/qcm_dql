@@ -1,5 +1,4 @@
 <?php
-// require("../class/cfg.php");
 
 $tabError = [];
 if(filter_input(INPUT_POST, "submitQuestion" )){

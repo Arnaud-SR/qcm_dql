@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="assets/js/newQCM.js"></script>
+        <script src="assets/js/newPage.js"></script>
     </head>
     <body>
       <div class="container mt-5" >
