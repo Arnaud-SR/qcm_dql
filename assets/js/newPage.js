@@ -77,9 +77,8 @@ function setQuestionTitle(row) {
   let cb = row.find($('[type="checkbox"]'));
 
   row.on('dblclick', function(){
-    cell.replaceWith('<th scope="row" class="col-sm-8"><input class="col-sm-11" type="text" value="bla"></th>');
+    cell.replaceWith('<th scope="row" class="col-sm-8"><input type="text" value=""></th>');
     cb.prop("disabled",false);
-
   })
 }
 
