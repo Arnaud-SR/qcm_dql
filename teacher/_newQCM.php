@@ -71,6 +71,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Modifier</button>
                     </div>
                   </div>
                 </div>
@@ -80,7 +81,8 @@
         </tbody>
       </table>
       <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-outline-success btn-lg mt-5" name="submitQCM">Envoyer</button>
+        <button type="submit" class="btn btn-outline-success btn-lg mt-5 mr-5" name="submitQCM">Envoyer</button>
+        <button type="button" class="btn btn-info btn-lg mt-5" name="previewQCM">Aperçu</button>
       </div>
     </div>
   </form>
