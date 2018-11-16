@@ -5,6 +5,8 @@
     <script src="assets/js/teacherMain.js"></script>
   </head>
   <body>
-    publish
+    <div class="question">
+      <?php require('_setQuestion.php'); ?>
+    </div>
   </body>
 </html>

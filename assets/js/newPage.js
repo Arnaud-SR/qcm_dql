@@ -5,10 +5,16 @@ $(function() {
   addOtherTheme();
   toggleNewQCM();
   toggleQuestionList();
-  setQuestionTitle($('#A'));
-  setQuestionTitle($('#B'));
-  setQuestionTitle($('#C'));
-  setQuestionTitle($('#D'));
+
+  // setQuestion();
+
+
+
+  // $('#question').find($("input")).focus(function () {
+  //   console.log("focus");
+  // });
+
+
 });
 
 
@@ -17,7 +23,7 @@ function toggleNewAnswers() {
   let displayAnswersBtn = $('[name=btn_new_answers]');
 
     displayAnswersBtn.on('click', function(){
-        answersBlock.find(displayAnswersBtn);
+        answersBlock.find(this);
         answersBlock.toggleClass('d-none');
     })
 }
@@ -27,7 +33,7 @@ function toggleQuestionList() {
   let displayQuestionsBtn = $('[name=btn_add_questions]');
 
   displayQuestionsBtn.on('click', function(){
-      blockQuestionsList.find(displayQuestionsBtn);
+      blockQuestionsList.find(this);
       blockQuestionsList.toggleClass('d-none');
   })
 }
@@ -37,7 +43,7 @@ function toggleNewQuestion() {
   let displayQuestionFormBtn = $('#btn_new_question');
 
   displayQuestionFormBtn.on('click', function(){
-      questionBlock.find(displayQuestionFormBtn);
+      questionBlock.find(this);
       questionBlock.toggleClass('d-none');
   })
 }
@@ -47,7 +53,7 @@ function toggleNewQCM() {
   let displayQCMForm = $('#btn_buildQCM');
 
   displayQCMForm.on('click', function(){
-      qcmBlock.find(displayQCMForm);
+      qcmBlock.find(this);
       qcmBlock.toggleClass('d-none');
   })
 }
@@ -72,15 +78,53 @@ function addOtherTheme(){
   })
 }
 
-function setQuestionTitle(row) {
-  let cell = row.find($('.col-sm-8'));
-  let cb = row.find($('[type="checkbox"]'));
+// function setQuestion() {
+//
+//   let title = $('#question');
+//
+//   title.on('dblclick', function(){
+//     this.replaceWith('<input id="new" type="text">');
+//     $('#new').attr('name','question_' + block.attr("id") );
+//
+//   }
+//
+//   let row = $('#A');
+//   let cb = row.find($('[type="checkbox"]'));
+//
+//   row.on('dblclick', function(){
+//     cb.prop("disabled",false);
+//     const block = row.find($('div'));
+//     block.replaceWith('<input id="new" type="text">');
+//     $('#new').attr('name','input_' + row.attr("id") );
+//     const input = row.find($('[name^="input"]'));
+//     input.removeAttr('id');
+//     input.attr('value', block.text());
+//   })
+//
+//   $('#questionModal').on('click', function(){
+//     let newVal = $('[name^="input"]').val();
+//     $('[name^="input"]').replaceWith('<div id="newDiv"></div>');
+//     $('#newDiv').html(newVal);
+//
+//   })
+//
+//   row.on('click',function (event) {
+//     event.stopPropagation();
+//   })
+//
+//
+// }
 
-  row.on('dblclick', function(){
-    cell.replaceWith('<th scope="row" class="col-sm-8"><input type="text" value=""></th>');
-    cb.prop("disabled",false);
-  })
-}
+// function setQuestion() {
+//   let title = $('#question_title');
+//   let qblock = $('[class=form-group row]')
+//
+//   qblock.on('dblclick', function(){
+//     title.replaceWith('<input id="new_question_title" type="text">');
+//     title.prop("disabled",false);
+//   })
+
+//}
 
 
 //gérer le cas de la création d'un thème existant déjà

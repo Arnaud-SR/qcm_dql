@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr id="A">
+        <tr>
           <th scope="row">A.</th>
           <th scope="row" class="col-sm-8">
             time
@@ -33,7 +33,7 @@
             <input name="cb_a" type="checkbox" disabled>
           </th>
         </tr >
-        <tr id="B">
+        <tr>
           <th scope="row">B.</th>
           <th scope="row" class="col-sm-8">
             timestamp
@@ -42,7 +42,7 @@
             <input name="cb_b" type="checkbox" disabled>
           </th>
         </tr>
-        <tr id="C">
+        <tr>
           <th scope="row">C.</th>
           <th scope="row" class="col-sm-8">
             mktim
@@ -51,7 +51,7 @@
             <input name="cb_c" type="checkbox" disabled>
           </th>
         </tr>
-        <tr id="D">
+        <tr>
           <th scope="row">D.</th>
           <th scope="row" class="col-sm-8">
             microtime

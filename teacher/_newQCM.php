@@ -21,14 +21,6 @@
       <button type="button" class="btn btn-outline-info mt-5" name="btn_add_questions">Ajouter des questions</button>
     </div>
     <div id="block_questions_list" class="container mb-5 d-none" >
-      <h3 class="col-sm-7 mt-5">Rechercher des questions par thème: </h3>
-      <div class="input-group mb-5 mt-5 d-flex justify-content-center">
-        <input type="text" class="form-control col-sm-3" placeholder="Rechercher" aria-label="rechercher" aria-describedby="button-addon2">
-        <div class="input-group-append">
-          <button class="btn btn-outline-info" type="button" id="button-addon2">OK</button>
-        </div>
-      </div>
-      <hr class= "mb-3 mt-2">
       <h3 class="col-sm-6 mt-5 mb-5">Sélection des questions à retenir</h3>
       <table class="table">
         <thead>
