@@ -1,6 +1,6 @@
 <div class="card" style="width: 100%;margin-top:100px;">
   <div class="card-header">
-    <h3>Vos QCM non publiés</h3>
+    <h3>Questions déposées</h3>
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">Cras justo odio</li>

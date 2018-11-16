@@ -37,9 +37,9 @@ User::checkIfIsTeacher();
     <main >
       <?php
       if (isset($_SESSION['is_teacher'])) {
-          require('teacher/_teacherMain.php');
+          require('teacher/_teacherNav.php');
         }else{
-          require('student/_studentMain.php');
+          require('student/_studentNav.php');
         }
       ?>
     </main>

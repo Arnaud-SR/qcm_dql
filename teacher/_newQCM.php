@@ -1,96 +1,89 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <?php require_once 'head.php' ?>
-        <script src="assets/js/newQCM.js"></script>
-    </head>
-    <body>
-      <div class="container mt-5" >
-        <div id="create_newQuestion" class="container mb-5" >
-          <div >
-              <button type="button" id="newQuestion_button" class="btn btn-outline-primary btn-lg btn-block mb-5">Déposer une question</button>
-          </div>
-          <form id="block_newQuestion" class="container mb-5" method="post">
-              <h2 class="col-sm-3 mb-5">Question</h2>
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label text-right">Thème de la question</label>
-                <div class="col-sm-3">
-                  <select class="form-control " required title="theme" id="select_theme" name="select_theme">
-                    <option value="" disabled selected>choisir un thème</option>
-                    <option value="0">Programmation web</option>
-                    <option value="1">Réseau</option>
-                    <option value="2">Autre</option>
-                  </select>
-                </div>
-                <label class="col-sm-1 col-form-label"> ou </label>
-                <input  class="col-sm-3 form-control mb-2 mr-sm-2" name="newTheme" placeholder="Nouveau thème" >
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label text-right">Intitulé de la question</label>
-                <div class="col-sm-9">
-                  <input  class="form-control" name="question_title" required>
-                </div>
-              </div>
-              <!-- TODO: insérer spinner -->
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label text-right">Nombre de réponses</label>
-                <div class="col-sm-1">
-                  <input  class="form-control" name="nb_answer" required>
-                </div>
-                <label class="col-sm-3 col-form-label font-italic" >Min 2 - Max 6</label>
-              </div>
-              <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-outline-info mt-5">Déposer mes réponses</button>
-              </div>
-          </form>
-          <form id="newAnswers" class="container mb-5" method="post">
-              <h2 class="col-sm-3 mb-5">Réponses</h2>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Intitulé de la réponse</th>
-                    <th scope="col">Bonne(s) réponse(s)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">A.</th>
-                    <th scope="row" class="col-sm-8">
-                      <input  class="form-control" name="answer_a_title" required>
-                    </th>
-                    <th scope="row" class="form-check">
-                      <input  class="" type="checkbox" name="answer_a_value" id="answer_a" >
-                    </th>
-                  </tr>
-                  <tr>
-                    <th scope="row">B.</th>
-                    <th scope="row" class="col-sm-8">
-                      <input  class="form-control" name="answer_a_title" required>
-                    </th>
-                    <th scope="row" class="form-check">
-                      <input  class="" type="checkbox" name="answer_b_value" id="answer_b" >
-                    </th>
-                  </tr>
-                </tbody>
-              </table>
-            <div class="d-flex justify-content-center">
-              <button type="submit" class="btn btn-outline-success btn-lg mt-5">Déposer ma question</button>
-            </div>
-          </form>
-        </div>
-
-
-        </div>
-
+<html lang="en" dir="ltr">
+<head>
+</head>
+<body>
+  <form id="new_question_form" class="container mb-5" method="post">
+    <h2 class="col-sm-3 mb-5">En-tête</h2>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label text-right">Titre du QCM</label>
+      <div class="col-sm-9">
+        <input  class="form-control" name="qcm_title" >
       </div>
+    </div>
+    <div class="form-group row mb-5">
+      <label class="col-sm-3 col-form-label text-right ">Date limite</label>
+      <div class="col-sm-2">
+        <input class="form-control" name="qcm_deadline" placeholder="XX/XX/XXXX" required>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button type="button" class="btn btn-outline-info mt-5" name="btn_add_questions">Ajouter des questions</button>
+    </div>
+    <div id="block_questions_list" class="container mb-5 d-none" >
+      <h3 class="col-sm-7 mt-5">Rechercher des questions par thème: </h3>
+      <div class="input-group mb-5 mt-5 d-flex justify-content-center">
+        <input type="text" class="form-control col-sm-3" placeholder="Rechercher" aria-label="rechercher" aria-describedby="button-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-outline-info" type="button" id="button-addon2">OK</button>
+        </div>
+      </div>
+      <hr class= "mb-3 mt-2">
+      <h3 class="col-sm-6 mt-5 mb-5">Sélection des questions à retenir</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Thème</th>
+            <th scope="col">Intitulé de la question</th>
+            <th scope="col">Question(s) ajoutée(s)</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" class="col-sm-3">
+              Programmation web
+            </th>
+            <th scope="row" class="col-sm-9">
+              Quelle fonction retourne le nombre de secondes écoulées depuis le 1er janvier 1970 ?  </div>
+            </th>
+            <th scope="row" class="form-check">
+              <input type="checkbox" name="" >
+            </th>
+            <th scope="row" >
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#questionModal">
+                consulter
+              </button>
 
-
-
-
-
-
-
-
-    </body>
+              <!-- Modal -->
+              <div class="modal fade" id="questionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="ModalLabel">Consultation</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <?php require("_questionDisplayTeacher.php"); ?>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-outline-success btn-lg mt-5 mr-5" name="submitQCM">Envoyer</button>
+        <button type="button" class="btn btn-info btn-lg mt-5" name="previewQCM">Aperçu</button>
+      </div>
+    </div>
+  </form>
+</body>
 </html>
