@@ -15,10 +15,7 @@
       <button type="button" class="btn btn-outline-primary mt-5" name="btn_add_questions">Ajouter des questions</button>
     </div>
     <div id="block_questions_list" class="container mb-5 d-none" >
-
       <h2 class="col-sm-6 mt-5 mb-5">Sélection des questions à retenir</h2>
-
-
       <div class="container" id="researchBlock" >
         <hr class= "mb-3 mt-2">
         <h4 class="col-sm-7 mt-5">Rechercher des questions par thème: </h4>

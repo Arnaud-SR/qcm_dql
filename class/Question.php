@@ -21,7 +21,7 @@ class Question {
     public function put(){
         $cnx = Connexion::getInstance();
         $right_answers = get_right_answers($this->teacher_answers);
-        $req = "INSERT INTO questions VALUES(DEFAULT, {$ncx->esc($this->theme)},DEFAULT, {$ncx->esc($this->title)},{$ncx->esc($this->$choices['A'])},{$ncx->esc($this->$choices['B'])},{$ncx->esc($this->$choices['C'])},{$ncx->esc($this->$choices['D'])},'{$right_answers}')";
+        $req = "INSERT INTO questions VALUES(DEFAULT, {$cnx->esc($this->theme)},DEFAULT, {$cnx->esc($this->title)},{$cnx->esc($this->choices['A'])},{$cnx->esc($this->choices['B'])},{$cnx->esc($this->choices['C'])},{$cnx->esc($this->choices['D'])},'{$right_answers}')";
         $cnx->xeq($req);
 
         return true;
