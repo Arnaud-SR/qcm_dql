@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css">
-    <script src="assets/js/teacherNav.js"></script>
+    <script src="assets/js/index.js"></script>
   </head>
   <body>
     <nav>

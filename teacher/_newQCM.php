@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-</head>
-<body>
   <form id="new_question_form" class="mb-5" method="post">
     <h2 class="col-sm-3 mb-5">En-tête</h2>
     <div class="form-group row">
@@ -107,5 +103,3 @@
       </div>
     </div>
   </form>
-</body>
-</html>

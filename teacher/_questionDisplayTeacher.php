@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="utf-8">
-  <!-- <script src="assets/js/_questionDisplay.js"></script> -->
 </head>
 <body>
   <div class="container">
