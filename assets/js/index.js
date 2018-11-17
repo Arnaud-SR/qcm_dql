@@ -2,12 +2,17 @@ $(function() {
   loadPageOnClick($('#v-pills-new-tab'),$('#v-pills-new'),'teacher/pages/_newPage.php');
   loadPageOnClick($('#v-pills-home-tab'),$('#v-pills-home'), 'teacher/pages/_teacherMainPage.php');
 
+  loadPageOnClick($('#btn_buildQCM'),$('#block_buildNewQCM'), 'teacher/forms/_newQCM.php');
+  toggleBlock($('#btn_buildQCM'),$('#block_buildNewQCM'));
+  toggleBlock($('[name=btn_add_questions]'),$('#block_questions_list'));
+
+  loadPageOnClick($('#btn_new_question'),$('#block_newQuestion'), 'teacher/forms/_newQuestion.php');
+  toggleBlock($('#btn_new_question'), $('#block_newQuestion'));
+
+  // loadPageOnClick(listenerSel,matchedElSel, pathname);
   toggleBlock($('#block_noPublished_QCM_list'), $('#btn_noPublished_QCM_list'));
   toggleBlock($('#block_published_QCM_list'), $('#btn_published_QCM_list'));
   toggleBlock($('#block_new_answers'),$('[name=btn_new_answers]'));
-  toggleBlock($('#block_questions_list'),$('[name=btn_add_questions]'));
-  toggleBlock($('#block_newQuestion'),$('#btn_new_question'));
-  toggleBlock($('#block_buildNewQCM'),$('#btn_buildQCM'));
 
   displayOtherThemeBlock();
   addOtherTheme();
@@ -17,18 +22,19 @@ $(function() {
   setQuestionTitle($('#D'));
 });
 
-function toggleBlock(blockID, displayBtnSel) {
+function toggleBlock(displayBtnSel, matchedElSel) {
     displayBtnSel.on('click', function(){
-        blockID.find(this);
-        blockID.toggleClass('d-none');
+        matchedElSel.find(this);
+        matchedElSel.toggleClass('d-none');
     })
 }
 
 function loadPageOnClick(listenerSel,matchedElSel, pathname) {
-  listenerSel.click(function(){
+  listenerSel.on('click',function(){
     matchedElSel.load(pathname);
-  });
-}
+    });
+  }
+
 
 function displayOtherThemeBlock(){
   let other_option = $('option#other');
