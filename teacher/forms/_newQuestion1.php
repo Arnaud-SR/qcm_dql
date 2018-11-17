@@ -40,6 +40,7 @@ if(filter_input(INPUT_POST, "submitQuestion" )){
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
+  <script src="assets/js/index.js"></script>
 </head>
 <body>
   <form id="new_question_form" class="container mb-5" method="post">

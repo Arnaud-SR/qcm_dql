@@ -1,18 +1,19 @@
 $(function() {
-  loadPageOnClick($('#v-pills-new-tab'),$('#v-pills-new'),'teacher/pages/_newPage.php');
-  loadPageOnClick($('#v-pills-home-tab'),$('#v-pills-home'), 'teacher/pages/_teacherMainPage.php');
+  loadPageOnClick($('#v-pills-new-tab'),$('#v-pills-new'),'teacher/main/_index_new1.php');
+  loadPageOnClick($('#v-pills-home-tab'),$('#v-pills-home'), 'teacher/main/_index_home1.php');
 
-  loadPageOnClick($('#btn_buildQCM'),$('#block_buildNewQCM'), 'teacher/forms/_newQCM.php');
+  loadPageOnClick($('#v-pills-new-tab'),$('#block_buildNewQCM'), 'teacher/forms/_newQCM.php');
   toggleBlock($('#btn_buildQCM'),$('#block_buildNewQCM'));
   toggleBlock($('[name=btn_add_questions]'),$('#block_questions_list'));
 
-  loadPageOnClick($('#btn_new_question'),$('#block_newQuestion'), 'teacher/forms/_newQuestion.php');
+  loadPageOnClick($('#v-pills-new-tab'),$('#block_newQuestion'), 'teacher/forms/_newQuestion.php');
   toggleBlock($('#btn_new_question'), $('#block_newQuestion'));
+  toggleBlock($('[name=btn_new_answers]'), $('#block_new_answers'));
+
 
   // loadPageOnClick(listenerSel,matchedElSel, pathname);
   toggleBlock($('#block_noPublished_QCM_list'), $('#btn_noPublished_QCM_list'));
   toggleBlock($('#block_published_QCM_list'), $('#btn_published_QCM_list'));
-  toggleBlock($('#block_new_answers'),$('[name=btn_new_answers]'));
 
   displayOtherThemeBlock();
   addOtherTheme();

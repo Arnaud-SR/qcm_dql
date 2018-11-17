@@ -5,4 +5,5 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/jQuery.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+    <script src="assets/js/index.js"></script>
 </head>
