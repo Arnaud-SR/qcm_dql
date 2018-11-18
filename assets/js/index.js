@@ -9,18 +9,9 @@ $(function() {
   toggleBlock($('#btn_load_display_question_form'), $('#block_question_form'));
 
 
-  // loadPageOnClick(listenerSel,matchedElSel, pathname);
-  toggleBlock($('#block_noPublished_QCM_list'), $('#btn_noPublished_QCM_list'));
-  toggleBlock($('#block_published_QCM_list'), $('#btn_published_QCM_list'));
-
+  // toggleBlock($('#block_noPublished_QCM_list'), $('#btn_noPublished_QCM_list'));
+  // toggleBlock($('#block_published_QCM_list'), $('#btn_published_QCM_list'));
 });
-
-function removeBlock(displayBtnSel, matchedElSel) {
-    displayBtnSel.on('click', function(){
-        matchedElSel.find(this);
-        matchedElSel.addClass('d-none');
-    })
-}
 
 function toggleBlock(displayBtnSel, matchedElSel) {
     displayBtnSel.on('click', function(){
