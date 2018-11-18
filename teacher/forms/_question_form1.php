@@ -65,10 +65,8 @@ if(filter_input(INPUT_POST, "submitQuestion" )){
       <input  class="form-control" name="question_title" required>
     </div>
   </div>
-  <div class="d-flex justify-content-center">
-    <button type="button" class="btn btn-outline-info mt-5" name="btn_new_answers">Déposer mes réponses</button>
-  </div>
-  <div id="block_new_answers" class="container mb-5 d-none" >
+  <div id="block_new_answers" class="container mb-5" >
+    <hr class="mb-5 mt-5">
     <h2 class="col-sm-3 mb-5">Réponses</h2>
     <table class="table">
       <thead>
