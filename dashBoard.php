@@ -7,7 +7,6 @@ if (!isset($_SESSION['id_user'])) {
 
 $user = User::getUser();
 User::checkIfIsTeacher();
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
