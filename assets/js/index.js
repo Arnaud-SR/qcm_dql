@@ -5,8 +5,9 @@ $(function() {
   loadPageOnClick($('#btn_display_qcm_form'),$('#block_qcm_form'), 'teacher/forms/_qcm_form1.php');
   toggleBlock($('#btn_display_qcm_form'), $('#block_qcm_form'));
 
-  // loadPageOnClick($('#btn_question_form'),$('#block_question_form'), 'teacher/forms/_question_form1.php');
-  // toggleBlock($('#btn_new_question'), $('#block_newQuestion'));
+
+  loadPageOnClick($('#btn_display_question_form'),$('#block_question_form'), 'teacher/forms/_question_form1.php');
+  toggleBlock($('#btn_display_question_form'), $('#block_question_form'));
   // toggleBlock($('[name=btn_new_answers]'), $('#block_new_answers'));
 
 
