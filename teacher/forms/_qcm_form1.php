@@ -54,52 +54,17 @@
                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#questionModal">
                   consulter
                 </button>
-
-                <!-- Modal -->
-                <!-- <div class="modal fade" id="questionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="ModalLabel">Consultation</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <?php //require("_questionDisplayTeacher.php"); ?>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
+                //_display_question_modal
               </th>
             </tr>
           </tbody>
         </table>
         <div class="d-flex justify-content-center">
           <button type="submit" class="btn btn-outline-success btn-lg mt-5 mr-5" name="submitQCM">Envoyer</button>
+          <!-- Button trigger modal -->
           <button type="button" class="btn btn-info btn-lg mt-5" name="previewQCM" data-toggle="modal" data-target="#previewModal">Aperçu</button>
         </div>
-        <!-- <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Aperçu</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                ...
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" >Publier</button>
-              </div>
-            </div>
-          </div>
-        </div> -->
+        //display_qcm_modal
       </div>
     </form>
 
