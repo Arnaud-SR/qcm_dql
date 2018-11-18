@@ -11,8 +11,8 @@ class Question {
     public  function __construct($id_question = null, $id_teacher = null, $theme = null, $title = null, $choices = null, $teacher_answers = null) {
         $this->id_question = $id_question;
         $this->id_teacher = $id_teacher;
-        $this->theme  = $theme ;
-        $this->title  = $title ;
+        $this->theme = $theme ;
+        $this->title = $title ;
         $this->choices = $choices;
         $this->teacher_answers = $teacher_answers;
 
