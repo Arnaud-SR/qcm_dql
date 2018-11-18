@@ -17,7 +17,7 @@ User::checkIfIsTeacher();
   <title>Tableau de bord</title>
 </head>
 <body>
-  <header class="d-flex container-fluid bg-info text-white" style="height:140px;padding: 20px 5vw;">
+  <header class="d-flex container-fluid bg-info text-white " style="height:140px;padding: 20px 5vw;">
     <h1> Gestionnaire de QCM
       <?php
       if (isset($_SESSION['is_teacher'])) {
@@ -34,8 +34,8 @@ User::checkIfIsTeacher();
       </a>
     </div>
   </header>
-  <main >
-    <div class="row" style="border-style: dashed;height: 100vw;">
+  <main style="height: 100vw;">
+    <div class="row" >
       <div id="nav" class="col-3" >
         <?php
         if (isset($_SESSION['is_teacher'])) {
