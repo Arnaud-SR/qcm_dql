@@ -1,11 +1,13 @@
 <?php
+require('class/Question.php');
+
 
 $tabError = [];
 if(filter_input(INPUT_POST, "submitQuestion" )){
   $question = new Question();
   $value_select = filter_input(INPUT_POST,"select_theme", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
   $question->theme = filter_input(INPUT_POST,"new_theme", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES); //TODO: pouvoir choisir un thème existant + ajout d'un nouveau thème + ajout value
-  $newTheme = filter_input(INPUT_POST,"new_theme", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+  //$newTheme = filter_input(INPUT_POST,"new_theme", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
   $question->title = filter_input(INPUT_POST,"question_title", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
   $answer_A_title = filter_input(INPUT_POST,"answer_a_title", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
   $answer_B_title = filter_input(INPUT_POST,"answer_b_title", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -28,13 +30,14 @@ if(filter_input(INPUT_POST, "submitQuestion" )){
     'D' => $is_answer_D_right
   );
 
+echo 'coucou',$question->id_question;
   if(!$tabError){
     $question->put();
     header('location: index.php');
     exit;
   } else {
     $tabErrorString = implode("</br>", $tabError);
-  }
+  } 
 }
 ?>
 <!DOCTYPE html>

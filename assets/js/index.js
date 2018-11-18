@@ -5,7 +5,7 @@ $(function() {
   loadPageOnClick($('#btn_load_display_qcm_form'),$('#block_qcm_form'), 'teacher/forms/_qcm_form1.php');
   toggleBlock($('#btn_load_display_qcm_form'), $('#block_qcm_form'));
 
-  loadPageOnClick($('#btn_load_display_question_form'),$('#block_question_form'), 'teacher/forms/_question_form1.php');
+  loadPageOnClick($('#btn_load_display_question_form'),$('#block_question_form'), '_question_form1.php');
   toggleBlock($('#btn_load_display_question_form'), $('#block_question_form'));
 
 
