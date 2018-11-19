@@ -1,6 +1,6 @@
 $(function() {
   loadPageOnClick($('#v-pills-new-tab'),$('#v-pills-new'),'teacher/pages/_new1.php');
-  loadPageOnClick($('#v-pills-home-tab'),$('#v-pills-home'), 'teacher/pages/_home1.php');
+  loadPageOnClick($('#v-pills-home1-tab'),$('#v-pills-home1'), 'teacher/pages/_home1.php');
 
   loadPageOnClick($('#btn_load_display_qcm_form'),$('#block_qcm_form'), 'teacher/forms/_qcm_form1.php');
   toggleBlock($('#btn_load_display_qcm_form'), $('#block_qcm_form'));
