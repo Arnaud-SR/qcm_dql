@@ -1,7 +1,7 @@
 <?php
 
 
-class Answers {
+class Response {
     private $id_response;
     private $id_question;
     private $content;
