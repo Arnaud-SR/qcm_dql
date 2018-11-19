@@ -12,6 +12,7 @@
           <input  class="form-control" name="qcm_title" >
         </div>
       </div>
+
       <div class="container" id="researchBlock" >
         <div class="input-group mb-5 mt-5 d-flex justify-content-center">
           <label class="col-sm-3 col-form-label text-right">Rechercher des questions:</label>
@@ -28,6 +29,7 @@
           </div>
       </div>
       </div>
+
       <div id="block_questions_list" class="container mb-5" >
         <table class="table">
           <thead>
@@ -50,22 +52,66 @@
                 <input type="checkbox" name="" >
               </th>
               <th scope="row" >
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#questionModal">
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#r_question_modal">
                   consulter
                 </button>
-                <?php require('../modals/_question_modal.php'); ?>
+                <div class="modal fade" id="r_question_modal" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLabel">Consultation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <?php require('../templates/_question_template.php'); ?>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </th>
             </tr>
           </tbody>
         </table>
+      </div>
+
+
         <div class="d-flex justify-content-center">
           <button type="submit" class="btn btn-outline-success btn-lg mt-5 mr-5" name="submitQCM">Envoyer</button>
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-info btn-lg mt-5" name="previewQCM" data-toggle="modal" data-target="#previewModal">Aperçu</button>
+          <button type="button" class="btn btn-info btn-lg mt-5" data-toggle="modal" data-target="#r_qcm_modal">Aperçu</button>
         </div>
-        <?php require('../modals/_qcm_modal.php'); ?>
-      </div>
+
+        <div class="modal fade" id="r_qcm_modal" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title">QCM ##</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="font-weight-bold d-flex justify-content-center mb-5">
+                  Date limite: XX/XX/XX
+                </div>
+                <?php // IDEA: //foreach ($question as $id => $template) {
+
+                     require('../templates/_question_template.php');
+
+                //} ?>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" >Publier</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
     </form>
 
   </body>
