@@ -4,6 +4,19 @@ if (!isset($_SESSION['id_user'])) {
   header("Location: index.php");
   exit;
 }
+$tabError = [];
+if (filter_input(INPUT_POST, "submitQuestion")) {
+    $question = new Question();
+
+    $question->title = filter_input(INPUT_POST, "question_title", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+    $question->id_teacher = $_SESSION['id_user'];
+    $question->theme = filter_input(INPUT_POST, "select_theme", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+    if ($tabError) {
+        $question->addQuestion();
+    }
+
+}
 
 $user = User::getUser();
 User::checkIfIsTeacher();
