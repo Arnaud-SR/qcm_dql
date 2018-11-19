@@ -12,8 +12,8 @@ require('class/cfg.php');
       <div class="form-group row">
         <label class="col-sm-3 col-form-label text-right">Thème de la question</label>
         <div class="col-sm-3">
-          <select class="form-control " title="theme" name="select_theme" required>
-            <option  disabled selected>choisir un thème</option>
+          <select class="form-control" title="theme" name="select_theme" required>
+            <option  disabled selected value="">choisir un thème</option>
             <option value="<?= Thematics::HIST ?>">Mathématiques</option>
             <option value="<?= Thematics::ENG ?>">Anglais</option>
             <option id="<?= Thematics::HIST ?>">Histoire</option>
@@ -48,7 +48,7 @@ require('class/cfg.php');
             <tr>
               <th scope="row">A.</th>
               <th scope="row" class="col-sm-8">
-                <input  class="form-control" name="answer_a_title" required>
+                <input  class="form-control" name="response_a_title" required>
               </th>
               <th scope="row" class="form-check">
                 <input  class="" type="checkbox" name="a_is_correct" >
@@ -57,7 +57,7 @@ require('class/cfg.php');
             <tr>
               <th scope="row">B.</th>
               <th scope="row" class="col-sm-8">
-                <input  class="form-control" name="answer_b_title" required>
+                <input  class="form-control" name="response_b_title" required>
               </th>
               <th scope="row" class="form-check">
                 <input  class="" type="checkbox" name="b_is_correct" >
@@ -66,7 +66,7 @@ require('class/cfg.php');
             <tr>
               <th scope="row">C.</th>
               <th scope="row" class="col-sm-8">
-                <input  class="form-control" name="answer_c_title" >
+                <input  class="form-control" name="response_c_title" >
               </th>
               <th scope="row" class="form-check">
                 <input  class="" type="checkbox" name="c_is_correct" >
@@ -75,7 +75,7 @@ require('class/cfg.php');
             <tr>
               <th scope="row">D.</th>
               <th scope="row" class="col-sm-8">
-                <input  class="form-control" name="answer_d_title" >
+                <input  class="form-control" name="response_d_title" >
               </th>
               <th scope="row" class="form-check">
                 <input  class="" type="checkbox" name="d_is_correct" >

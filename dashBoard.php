@@ -5,6 +5,7 @@ if (!isset($_SESSION['id_user'])) {
   exit;
 }
 $tabError = [];
+$cnx = Connexion::getInstance();
 if (filter_input(INPUT_POST, "submitQuestion")) {
     $question = new Question();
 
@@ -12,8 +13,66 @@ if (filter_input(INPUT_POST, "submitQuestion")) {
     $question->id_teacher = $_SESSION['id_user'];
     $question->theme = filter_input(INPUT_POST, "select_theme", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
-    if ($tabError) {
+    if (!$tabError) {
         $question->addQuestion();
+        //Recupère l'id de la question qui vient d'être enregistrée en base
+        $id_question = $cnx->pk();
+        if (isset($_POST['response_a_title'])) {
+            $responseA = new Response();
+            $responseA->content = filter_input(
+                INPUT_POST,
+                "response_a_title",
+                FILTER_SANITIZE_STRING,
+                FILTER_FLAG_NO_ENCODE_QUOTES
+            );
+            $responseA->addResponse($id_question);
+            if (isset($_POST['a_is_correct'])) {
+                $id_a = $cnx->pk();
+                Response::setIsCorrect($id_question, $id_a);
+            }
+        }
+        if (isset($_POST['response_b_title'])) {
+            $responseB = new Response();
+            $responseB->content = filter_input(
+                INPUT_POST,
+                "response_b_title",
+                FILTER_SANITIZE_STRING,
+                FILTER_FLAG_NO_ENCODE_QUOTES
+            );
+            $responseB->addResponse($id_question);
+            if (isset($_POST['b_is_correct'])) {
+                $id_b = $cnx->pk();
+                $responseB->setIsCorrect($id_question, $id_b);
+            }
+        }
+        if (isset($_POST['response_c_title'])) {
+            $responseC = new Response();
+            $responseC->content = filter_input(
+                INPUT_POST,
+                "response_c_title",
+                FILTER_SANITIZE_STRING,
+                FILTER_FLAG_NO_ENCODE_QUOTES
+            );
+            $responseC->addResponse($id_question);
+            if (isset($_POST['c_is_correct'])) {
+                $id_c = $cnx->pk();
+                $responseC->setIsCorrect($id_question, $id_c);
+            }
+        }
+        if (isset($_POST['response_d_title'])) {
+            $responseD = new Response();
+            $responseD->content = filter_input(
+                INPUT_POST,
+                "response_d_title",
+                FILTER_SANITIZE_STRING,
+                FILTER_FLAG_NO_ENCODE_QUOTES
+            );
+            $responseD->addResponse($id_question);
+            if (isset($_POST['d_is_correct'])) {
+                $id_d = $cnx->pk();
+                $responseD->setIsCorrect($id_question, $id_d);
+            }
+        }
     }
 
 }
