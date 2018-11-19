@@ -18,7 +18,7 @@ class Cfg {
         spl_autoload_register(function ($classe) {
             @include "class/{$classe}.php";
         });
-        Connexion::setDSN('qcm_dql2', 'root', '');
+        Connexion::setDSN('qcm_dql1', 'root', 'root');
         // session_set_save_handler(new Session(180));
         session_start();
         return self::$initDone = true;

@@ -54,7 +54,7 @@
                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#questionModal">
                   consulter
                 </button>
-                //_display_question_modal
+                <?php require('../modals/_question_modal.php'); ?>
               </th>
             </tr>
           </tbody>
@@ -64,7 +64,7 @@
           <!-- Button trigger modal -->
           <button type="button" class="btn btn-info btn-lg mt-5" name="previewQCM" data-toggle="modal" data-target="#previewModal">Aperçu</button>
         </div>
-        //display_qcm_modal
+        <?php require('../modals/_qcm_modal.php'); ?>
       </div>
     </form>
 
