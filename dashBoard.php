@@ -86,8 +86,7 @@ User::checkIfIsTeacher();
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <?php require_once 'head.php' ?>
+    <?php require_once 'head.php' ?>
   <title>Tableau de bord</title>
 </head>
 <body>
