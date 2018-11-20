@@ -73,6 +73,9 @@ if (filter_input(INPUT_POST, "submitQuestion")) {
                 $responseD->setIsCorrect($id_question, $id_d);
             }
         }
+
+        header('Location: dashboard.php');
+        exit();
     }
 
 }
