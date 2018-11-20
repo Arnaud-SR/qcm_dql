@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <script src="assets/js/index.js"></script>
-  </head>
-  <body>
     <div class="container mt-5">
       <div>
         <button type="button" id="btn_noPublished_QCM_list" class="btn btn-outline-primary btn-lg btn-block mb-5">Mes QCM non publiés</button>
@@ -70,5 +64,4 @@
         </table>
       </div>
     </div>
-  </body>
-</html>
+
