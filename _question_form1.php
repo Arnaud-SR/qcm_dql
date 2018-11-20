@@ -91,4 +91,4 @@ require('class/cfg.php');
   </body>
 </html>
 
-</html>
+
