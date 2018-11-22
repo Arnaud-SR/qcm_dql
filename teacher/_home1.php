@@ -1,9 +1,9 @@
     <div class="container mt-5">
-      <div>
-        <button type="button" id="btn_noPublished_QCM_list" class="btn btn-outline-primary btn-lg btn-block mb-5">Mes QCM non publiés</button>
+      <div class="d-flex justify-content-between mt-5 mb-5">
+        <h2 class="col-sm-6">Mes QCM non publiés</h2>
+        <button type="button" id="btn_noPublished_QCM_list" class="btn btn-outline-secondary btn-sm">-</button>
       </div>
-      <div id="block_noPublished_QCM_list" class="mb-5 d-none" >
-        <h2 class="col-sm-6 mt-5 mb-5">Mes QCM non publiés</h2>
+      <div id="block_noPublished_QCM_list" class="mb-5" >
         <table class="table table-hover">
           <thead>
             <tr>
@@ -24,16 +24,15 @@
             </tr>
           </tbody>
         </table>
-        <hr>
       </div>
+      <hr>
     </div>
-
     <div class="container mt-5">
-      <div>
-        <button type="button" id="btn_published_QCM_list" class="btn btn-outline-primary btn-lg btn-block mb-5">Mes QCM publiés</button>
+      <div class="d-flex justify-content-between mt-5 mb-5">
+        <h2 class="col-sm-6">Mes QCM publiés</h2>
+        <button type="button" id="btn_published_QCM_list" class="btn btn-outline-secondary btn-sm">-</button>
       </div>
-      <div class="d-none" id="block_published_QCM_list">
-        <h2 class="col-sm-6 mt-5 mb-5">Mes QCM publiés</h2>
+      <div id="block_published_QCM_list">
         <table class="table table-hover">
           <thead>
             <tr>
@@ -64,4 +63,3 @@
         </table>
       </div>
     </div>
-
