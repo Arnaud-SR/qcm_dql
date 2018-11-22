@@ -5,7 +5,6 @@
   </head>
   <body>
     <form id="_qcm_form" class="mb-5" method="post">
-      <h2 class="col-sm-6 mt-5 mb-5">Nouveau QCM</h2>
       <div class="form-group row">
         <label class="col-sm-3 col-form-label text-right">Titre du QCM</label>
         <div class="col-sm-9">
@@ -65,7 +64,7 @@
                         </button>
                       </div>
                       <div class="modal-body">
-                        <?php require('../templates/_question_template.php'); ?>
+                        <?php require('./templates/_question_template.php'); ?>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -89,20 +88,28 @@
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h3 class="modal-title">QCM ##</h3>
+                <h3 class="modal-title">#id</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <div class="font-weight-bold d-flex justify-content-center mb-5">
-                  Date limite: XX/XX/XX
+                <div class="card">
+                  <div class="card-header font-weight-bold d-flex text-center">
+                      <h3 class="card-title" >Titre du QCM </h3>
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text text-right">Date limite: XX/XX/XX</p>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">
+                        <?php require('./templates/_question_template.php'); ?>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-                <?php // IDEA: //foreach ($question as $id => $template) {
 
-                     require('../templates/_question_template.php');
 
-                //} ?>
+
 
               </div>
               <div class="modal-footer">
