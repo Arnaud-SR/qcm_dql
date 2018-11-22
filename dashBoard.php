@@ -5,7 +5,7 @@ if (!isset($_SESSION['id_user'])) {
   exit;
 }
 $tabError = [];
-$cnx = Connexion::getInstance();
+$manager = new Manager();
 if (filter_input(INPUT_POST, "submitQuestion")) {
     $question = new Question();
 
@@ -14,7 +14,7 @@ if (filter_input(INPUT_POST, "submitQuestion")) {
     $question->theme = filter_input(INPUT_POST, "select_theme", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
     if (!$tabError) {
-        $question->addQuestion();
+        $manager->addQuestion();
         //Recupère l'id de la question qui vient d'être enregistrée en base
         $id_question = $cnx->pk();
         if (isset($_POST['response_a_title'])) {

@@ -1,11 +1,3 @@
-
-<?php echo "coucou";
-require './class/Question.php';
-$question = Question::getQuestion();
-
-echo $question->title;
-?>
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
