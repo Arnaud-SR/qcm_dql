@@ -17,9 +17,12 @@
               <th scope="row">13/11/2018</th>
               <td>Controle PHP DUT 2ème année</td>
               <td>
-                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#previewQCMModal">
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#r_qcm_modal">
                   Aperçu
                 </button>
+                <?php
+                require('modals/_qcm_modal.php');
+               ?>
               </td>
             </tr>
           </tbody>
@@ -48,9 +51,12 @@
               <th scope="row">01/10/2018</th>
               <td>Controle bases réseau DUT 1ère année</td>
               <td>
-                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#previewQCMModal">
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#r_qcm_modal">
                   Aperçu
                 </button>
+                <?php
+                require('modals/_qcm_modal.php');
+               ?>
               </td>
               <td>23/11/2018</td>
               <td>

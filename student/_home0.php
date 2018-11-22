@@ -19,9 +19,12 @@
             <th scope="row">13/11/2018</th>
             <td>Controle PHP DUT 2ème année</td>
             <td>
-              <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#readQCMModal">
+              <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#r_qcm_modal">
                 Lire
               </button>
+              <?php
+              require('modals/_qcm_modal.php');
+             ?>
             </td>
           </tr>
         </tbody>
