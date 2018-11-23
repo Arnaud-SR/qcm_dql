@@ -1,6 +1,6 @@
 
 <?php echo "coucou";
-require './class/Question.php';
+require './class/cfg.php';
 $question = Question::getQuestion();
 
 echo $question->title;

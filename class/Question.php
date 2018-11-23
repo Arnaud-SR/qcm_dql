@@ -11,7 +11,7 @@ class Question {
         $this->setIdQuestion($id_question);
         $this->setIdTeacher($id_teacher);
         $this->setTheme($theme);
-        $this->setTitle($title); 
+        $this->setTitle($title);
     }
 
     public function idQuestion()
@@ -70,14 +70,15 @@ class Question {
 
     public static function getQuestion()
     {
-      $question = new Question(); //on admet que le constructeur de la classe appelle chaque setter
+      $question = new Question();
       return $question->chargerQuestion();
 
     }
 
-    public function chargerQuestion(int id)
+    public function chargerQuestion()
     {
-        $req = "SELECT * FROM questions WHERE id_question={$this->id_question}";
-        return (bool)Connexion::getInstance()->xeq($req)->ins($this);
+        $req = "SELECT * FROM questions";
+        $cnx = Connexion::getInstance();
+        return (bool) $cnx->xeq($req)->tab($this);
     }
 }

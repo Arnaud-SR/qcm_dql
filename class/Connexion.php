@@ -3,17 +3,17 @@
 class Connexion
 {
 
-    private static $instance;
-    private static $DSN;
-    private static $log;
-    private static $mdp;
-    private static $opt = [
+    public static $instance;
+    public static $DSN;
+    public static $log;
+    public static $mdp;
+    public static $opt = [
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'",
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     ];
-    private $db;
-    private $jeu;
-    private $nb;
+    public $db;
+    public $jeu;
+    public $nb;
 
     private function __construct()
     {
@@ -144,4 +144,3 @@ class Connexion
     }
 
 }
-

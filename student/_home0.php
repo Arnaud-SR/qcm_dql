@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <!-- <script src="assets/js/index0.js"></script> -->
   </head>
   <body>
     <div id="block_noPublished_QCM_list" class="mb-5" >
