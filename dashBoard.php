@@ -84,12 +84,12 @@ $user = User::getUser();
 User::checkIfIsTeacher();
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="h-100">
 <head>
     <?php require_once 'head.php' ?>
   <title>Tableau de bord</title>
 </head>
-<body>
+<body class="h-100 bg-dark">
   <header class="d-flex container-fluid bg-info text-white " style="height:140px;padding: 20px 5vw;">
     <h1> Gestionnaire de QCM
       <?php
@@ -107,9 +107,9 @@ User::checkIfIsTeacher();
       </a>
     </div>
   </header>
-  <main style="height: 100vw;">
-    <div class="row" >
-      <div id="nav" class="col-3" >
+  <main class="text-white h-100">
+    <div class="row h-100" >
+      <div id="nav" class="col-3 bg-info" >
         <?php
         if (isset($_SESSION['is_teacher'])) {
           require('teacher/_nav1.php');
@@ -118,7 +118,7 @@ User::checkIfIsTeacher();
         }
         ?>
       </div>
-      <div id="index" class="col-9">
+      <div id="index" class="col-9  ">
         <?php
         if (isset($_SESSION['is_teacher'])) {
           require('teacher/_index1.php');

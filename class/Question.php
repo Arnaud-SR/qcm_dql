@@ -11,7 +11,7 @@ class Question {
         $this->setIdQuestion($id_question);
         $this->setIdTeacher($id_teacher);
         $this->setTheme($theme);
-        $this->setTitle($title); 
+        $this->setTitle($title);
     }
 
     public function idQuestion()
@@ -51,6 +51,15 @@ class Question {
       return $this->_title;
     }
 
+    public function getTitle()
+    {
+      require 'Connexion.php';
+      $cnx = Connexion::getInstance();
+      $req = "SELECT title from question where $id_question = 1";
+
+      return $cnx->xeq($req)->nb();
+    }
+
     public function setTitle($title)
     {
       if (is_string($title) && strlen($title) <= 255) {
@@ -62,22 +71,10 @@ class Question {
     {
         $cnx = Connexion::getInstance();
 
-        $req = "INSERT INTO questions VALUES(DEFAULT, {$_SESSION['id_user']}, {$cnx->esc($this->theme)}, {$cnx->esc($this->title)})";
+        $req = "INSERT INTO questions VALUES(DEFAULT, {$_SESSION['id_user']}, {$cnx->esc($this->theme())}, {$cnx->esc($this->title())})";
         $cnx->xeq($req);
 
         return true;
     }
 
-    public static function getQuestion()
-    {
-      $question = new Question(); //on admet que le constructeur de la classe appelle chaque setter
-      return $question->chargerQuestion();
-
-    }
-
-    public function chargerQuestion(int id)
-    {
-        $req = "SELECT * FROM questions WHERE id_question={$this->id_question}";
-        return (bool)Connexion::getInstance()->xeq($req)->ins($this);
-    }
-}
+  }

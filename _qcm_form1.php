@@ -1,9 +1,11 @@
 
-<?php echo "coucou";
-require './class/Question.php';
-$question = Question::getQuestion();
+<?php
+// echo "coucou";
+// require './class/Question.php';
+// $question = new Question();
+// $title = $question->getTitle();
+// echo $title;
 
-echo $question->title;
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +13,7 @@ echo $question->title;
   <head>
     <script src="assets/js/form.js"></script>
   </head>
-  <body>
+  <body >
     <form id="_qcm_form" class="mb-5" method="post">
       <div class="form-group row">
         <label class="col-sm-3 col-form-label text-right">Titre du QCM</label>
@@ -32,7 +34,7 @@ echo $question->title;
           </div>
           <input type="text" class="form-control col-sm-3 ml-5" placeholder="Rechercher" aria-label="rechercher" aria-describedby="button-addon2">
           <div class="input-group-append">
-            <button class="btn btn-outline-info" type="button" id="button-addon21">OK</button>
+            <button class="btn btn-info" type="button" id="button-addon21">OK</button>
           </div>
       </div>
       </div>
@@ -73,7 +75,7 @@ echo $question->title;
 
 
         <div class="d-flex justify-content-center">
-          <button type="submit" class="btn btn-outline-success btn-lg mt-5 mr-5" name="submitQCM">Envoyer</button>
+          <button type="submit" class="btn btn-success btn-lg mt-5 mr-5" name="submitQCM">Envoyer</button>
           <button type="button" class="btn btn-info btn-lg mt-5" data-toggle="modal" data-target="#r_qcm_modal">Aperçu</button>
         </div>
 
