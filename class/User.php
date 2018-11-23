@@ -81,7 +81,7 @@ class User {
         }
     }
 
-    public function chargerUser() {
+    private function chargerUser() {
         if (!$this->id_user) {
             return false;
         }

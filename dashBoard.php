@@ -9,9 +9,9 @@ $cnx = Connexion::getInstance();
 if (filter_input(INPUT_POST, "submitQuestion")) {
     $question = new Question();
 
-    $question->title = filter_input(INPUT_POST, "question_title", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-    $question->id_teacher = $_SESSION['id_user'];
-    $question->theme = filter_input(INPUT_POST, "select_theme", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+    $question->setTitle(filter_input(INPUT_POST, "question_title", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
+    $question->setIdTeacher($_SESSION['id_user']);
+    $question->setTheme(filter_input(INPUT_POST, "select_theme", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
 
     if (!$tabError) {
         $question->addQuestion();
@@ -84,12 +84,12 @@ $user = User::getUser();
 User::checkIfIsTeacher();
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="h-100">
 <head>
     <?php require_once 'head.php' ?>
   <title>Tableau de bord</title>
 </head>
-<body>
+<body class="h-100 bg-dark">
   <header class="d-flex container-fluid bg-info text-white " style="height:140px;padding: 20px 5vw;">
     <h1> Gestionnaire de QCM
       <?php
@@ -101,15 +101,15 @@ User::checkIfIsTeacher();
       ?>
     </h1>
     <h2 class="d-flex justify-self-center align-self-center" style="padding:185px;" > Bienvenue, <?= $user->prenom ?> </h2>
-    <div class="align-self-end"> <!-- bouton react -->                <!-- <img src="powerOff.png" alt=""> -->
+    <div class="align-self-end">
       <a href="disconnect.php" class="btn btn-danger" style="padding:10px 20px;">
         Se déconnecter
       </a>
     </div>
   </header>
-  <main style="height: 100vw;">
-    <div class="row" >
-      <div id="nav" class="col-3" >
+  <main class="text-white h-100">
+    <div class="row h-100" >
+      <div id="nav" class="col-3 bg-info" >
         <?php
         if (isset($_SESSION['is_teacher'])) {
           require('teacher/_nav1.php');
@@ -118,7 +118,7 @@ User::checkIfIsTeacher();
         }
         ?>
       </div>
-      <div id="index" class="col-9">
+      <div id="index" class="col-9  ">
         <?php
         if (isset($_SESSION['is_teacher'])) {
           require('teacher/_index1.php');

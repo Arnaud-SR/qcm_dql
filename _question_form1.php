@@ -14,9 +14,9 @@ require('class/cfg.php');
         <div class="col-sm-3">
           <select class="form-control" title="theme" name="select_theme" required>
             <option  disabled selected value="">choisir un thème</option>
-            <option value="<?= Thematics::HIST ?>">Mathématiques</option>
+            <option value="<?= Thematics::MATH ?>">Mathématiques</option>
             <option value="<?= Thematics::ENG ?>">Anglais</option>
-            <option id="<?= Thematics::HIST ?>">Histoire</option>
+            <option value="<?= Thematics::HIST ?>">Histoire</option>
           </select>
         </div>
         <div class="col-sm-4 input-group mb-3 d-none" id="other_option_block">
@@ -90,5 +90,3 @@ require('class/cfg.php');
     </form>
   </body>
 </html>
-
-
