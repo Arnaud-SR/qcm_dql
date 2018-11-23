@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <script src="assets/js/question.js"></script>
 </head>
 <body>
   <div class="container p-4" style="background-color: #c2d2ce1a;">

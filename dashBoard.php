@@ -9,9 +9,9 @@ $cnx = Connexion::getInstance();
 if (filter_input(INPUT_POST, "submitQuestion")) {
     $question = new Question();
 
-    $question->title = filter_input(INPUT_POST, "question_title", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-    $question->id_teacher = $_SESSION['id_user'];
-    $question->theme = filter_input(INPUT_POST, "select_theme", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+    $question->setTitle(filter_input(INPUT_POST, "question_title", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
+    $question->setIdTeacher($_SESSION['id_user']);
+    $question->setTheme(filter_input(INPUT_POST, "select_theme", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
 
     if (!$tabError) {
         $question->addQuestion();
@@ -101,7 +101,7 @@ User::checkIfIsTeacher();
       ?>
     </h1>
     <h2 class="d-flex justify-self-center align-self-center" style="padding:185px;" > Bienvenue, <?= $user->prenom ?> </h2>
-    <div class="align-self-end"> <!-- bouton react -->                <!-- <img src="powerOff.png" alt=""> -->
+    <div class="align-self-end">
       <a href="disconnect.php" class="btn btn-danger" style="padding:10px 20px;">
         Se déconnecter
       </a>
