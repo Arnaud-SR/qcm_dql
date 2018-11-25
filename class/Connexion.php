@@ -77,16 +77,11 @@ class Connexion
     public function prepareAndExecute($reqStr, $array)
     {
         try {
-            $req =  $this->db->prepare($reqStr);
-            if (mb_stripos(trim($reqStr), "SELECT") === 0) {
-                $this->jeu = $this->db->query($reqStr);
-                $this->rowNb = $this->jeu->rowCount();
-            } else {
-                $this->jeu = null;
-                $req->execute($array);
-            }
-        } catch (PDOException $e) {
+            $this->jeu = $req = $this->db->prepare($reqStr);
+            $req->execute($array);
+            $this->rowNb = $req->rowCount();
 
+        } catch (PDOException $e) {
             exit(" : {$reqStr} ( {$e->getMessage()})");
         }
 
