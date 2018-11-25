@@ -54,7 +54,7 @@ class Connexion
 
         return $this->db->quote($val);
     }
-
+//TODO: modifier User et register
     // FONCTION PERMETTANT D'EXECUTER DIRECTEMENT LA REQUETE ET DETERMINE SI SELECT OU AUTRE
     public function xeq($req)
     {
@@ -78,13 +78,8 @@ class Connexion
     {
         try {
             $req =  $this->db->prepare($reqStr);
-            if (mb_stripos(trim($reqStr), "SELECT") === 0) {
-                $this->jeu = $this->db->query($reqStr);
-                $this->rowNb = $this->jeu->rowCount();
-            } else {
-                $this->jeu = null;
-                $req->execute($array);
-            }
+            $req->execute($array);
+
         } catch (PDOException $e) {
 
             exit(" : {$reqStr} ( {$e->getMessage()})");
