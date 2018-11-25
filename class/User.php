@@ -41,14 +41,14 @@ class User {
         $password = $this->password;
         $req = "SELECT * FROM user WHERE login = {$cnx->esc($this->login)}";
 
-        if ($cnx->xeq($req)->nb() && !$cnx->xeq($req)->ins($this)) {
+        if ($cnx->xeq($req)->rowNb() && !$cnx->xeq($req)->ins($this)) {
             return false;
         }
         if (!password_verify($password, $this->password)) {
             return false;
         }
 
-        if ($cnx->xeq($req)->nb()) {
+        if ($cnx->xeq($req)->rowNb()) {
             $_SESSION['id_user'] = $this->id_user;
 
             return true;
@@ -61,14 +61,14 @@ class User {
         $cnx = Connexion::getInstance();
         $req = "SELECT * FROM code_teacher WHERE code = '$code'";
 
-        return $cnx->xeq($req)->nb();
+        return $cnx->xeq($req)->rowNb();
     }
 
     public static function checkIfIsTeacher() {
         $cnx = Connexion::getInstance();
         $req = "SELECT * FROM user WHERE id_user = {$_SESSION['id_user']} AND is_teacher = 1 ";
 
-        if ($cnx->xeq($req)->nb()) {
+        if ($cnx->xeq($req)->rowNb()) {
             $_SESSION['is_teacher'] = true;
         }
     }

@@ -13,7 +13,7 @@ class Connexion
     ];
     private $db;
     private $jeu;
-    private $nb;
+    private $rowNb;
 
     private function __construct()
     {
@@ -61,10 +61,10 @@ class Connexion
         try {
             if (mb_stripos(trim($req), "SELECT") === 0) {
                 $this->jeu = $this->db->query($req);
-                $this->nb = $this->jeu->rowCount();
+                $this->rowNb = $this->jeu->rowCount();
             } else {
                 $this->jeu = null;
-                $this->nb = $this->db->exec($req);
+                $this->rowNb = $this->db->exec($req);
             }
         } catch (PDOException $e) {
 
@@ -74,9 +74,28 @@ class Connexion
         return $this;
     }
 
-    public function nb()
+    public function prepareAndExecute($reqStr, $array)
     {
-        return $this->nb;
+        try {
+            $req =  $this->db->prepare($reqStr);
+            if (mb_stripos(trim($reqStr), "SELECT") === 0) {
+                $this->jeu = $this->db->query($reqStr);
+                $this->rowNb = $this->jeu->rowCount();
+            } else {
+                $this->jeu = null;
+                $req->execute($array);
+            }
+        } catch (PDOException $e) {
+
+            exit(" : {$reqStr} ( {$e->getMessage()})");
+        }
+
+        return $this;
+    }
+
+    public function rowNb()
+    {
+        return $this->rowNb;
     }
 
 // RETOURNE UN ARRAY RELATIF A LA REQUETE
