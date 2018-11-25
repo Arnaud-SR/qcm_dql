@@ -133,30 +133,5 @@ class Connexion
         return $this->db->lastInsertId();
     }
 
-    public function start()
-    {
-        $req = "START TRANSACTION";
-        $this->xeq($req);
-    }
-
-    public function savepoint($label)
-    {
-        $req = "SAVEPOINT {$label}";
-        $this->xeq($req);
-    }
-
-    public function rollback($label = null)
-    {
-        $req = $label ? "ROLLBACK TO {$label}" : "ROLLBACK";
-        $this->xeq($req);
-    }
-
-    public function commit()
-    {
-        $req = "COMMIT";
-
-        return $this->xeq($req);
-    }
-
 }
 
