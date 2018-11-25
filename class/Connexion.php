@@ -82,6 +82,7 @@ class Connexion
             $this->rowNb = $req->rowCount();
 
         } catch (PDOException $e) {
+
             exit(" : {$reqStr} ( {$e->getMessage()})");
         }
 
