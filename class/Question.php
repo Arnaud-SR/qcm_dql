@@ -18,9 +18,29 @@ class Question {
     {
         $cnx = Connexion::getInstance();
 
+<<<<<<< Updated upstream
         $req = "INSERT INTO questions VALUES(DEFAULT, {$_SESSION['id_user']}, {$cnx->esc($this->getTheme())}, {$cnx->esc($this->getTitle())})";
         $cnx->xeq($req);
 
+=======
+        $query = "INSERT INTO questions VALUES(:id_question, :id_teacher, :theme, :content)";
+        $cnx->prepareAndExecute($query,array('id_question' => $this->id_question,
+                                            'id_teacher' => $_SESSION['id_user'],
+                                            'theme' => $this->theme,
+                                            'content' => $this->title));
+        return true;
+    }
+
+    public function getQuestion()
+    {
+        $cnx = Connexion::getInstance();
+
+        $query = "SELECT theme, title FROM questions";
+        $cnx->prepareAndExecute($query,array('id_question' => $this->id_question,
+                                            'id_teacher' => $_SESSION['id_user'],
+                                            'theme' => $this->theme,
+                                            'content' => $this->title));
+>>>>>>> Stashed changes
         return true;
     }
 

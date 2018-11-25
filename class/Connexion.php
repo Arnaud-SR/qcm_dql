@@ -54,7 +54,7 @@ class Connexion
 
         return $this->db->quote($val);
     }
-
+//TODO: modifier User et register
     // FONCTION PERMETTANT D'EXECUTER DIRECTEMENT LA REQUETE ET DETERMINE SI SELECT OU AUTRE
     public function xeq($req)
     {
