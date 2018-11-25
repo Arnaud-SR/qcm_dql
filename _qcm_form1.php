@@ -51,23 +51,23 @@
           </thead>
           <tbody>
             <tr>
-              <th scope="row" class="col-sm-3">
+              <td scope="row" class="col-sm-3">
                 Programmation web
-              </th>
-              <th scope="row" class="col-sm-9">
-                Quelle fonction retourne le nombre de secondes écoulées depuis le 1er janvier 1970 ?  </div>
-              </th>
-              <th scope="row" class="form-check">
+              </td>
+              <td scope="row" class="col-sm-9">
+                Quelle fonction retourne le nombre de secondes écoulées depuis le 1er janvier 1970 ?
+              </td>
+              <td scope="row" class="form-check">
                 <input type="checkbox" name="" >
-              </th>
-              <th scope="row" >
+              </td>
+              <td scope="row" >
                 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#r_question_modal">
                   consulter
                 </button>
                 <?php
                 require('modals/_question_modal.php');
                ?>
-              </th>
+              </td>
             </tr>
           </tbody>
         </table>
