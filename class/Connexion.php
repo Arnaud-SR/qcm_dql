@@ -78,13 +78,8 @@ class Connexion
     {
         try {
             $req =  $this->db->prepare($reqStr);
-            if (mb_stripos(trim($reqStr), "SELECT") === 0) {
-                $this->jeu = $this->db->query($reqStr);
-                $this->rowNb = $this->jeu->rowCount();
-            } else {
-                $this->jeu = null;
-                $req->execute($array);
-            }
+            $req->execute($array);
+
         } catch (PDOException $e) {
 
             exit(" : {$reqStr} ( {$e->getMessage()})");
