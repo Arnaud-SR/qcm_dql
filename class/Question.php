@@ -18,9 +18,12 @@ class Question {
     {
         $cnx = Connexion::getInstance();
 
-        $req = "INSERT INTO questions VALUES(DEFAULT, {$_SESSION['id_user']}, {$cnx->esc($this->getTheme())}, {$cnx->esc($this->getTitle())})";
-        $cnx->xeq($req);
-
+        $query = "INSERT INTO questions VALUES(:id_question, :id_teacher, :theme, :content)";
+        echo $this->id_question;
+        $cnx->prepareAndExecute($query,array('id_question' => $this->id_question,
+                                            'id_teacher' => $_SESSION['id_user'],
+                                            'theme' => $this->theme,
+                                            'content' => $this->title));
         return true;
     }
 
