@@ -132,6 +132,5 @@ class Connexion
     {
         return $this->db->lastInsertId();
     }
-
 }
 

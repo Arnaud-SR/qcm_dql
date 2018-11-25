@@ -39,7 +39,7 @@ class User {
                 'password_hash' => $password_hash,
                 'nom' => $this->nom,
                 'prenom' => $this->prenom,
-                'is_teacher' => 0,
+                'is_teacher' => $is_teacher,
                 'user_code' => $this->user_code,
             ]
         );
