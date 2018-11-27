@@ -82,7 +82,7 @@ User::checkIfIsTeacher();
   <title>Tableau de bord</title>
 </head>
 <body class="h-100 bg-dark">
-  <header class="d-flex container-fluid bg-info text-white " style="height:140px;padding: 20px 5vw;">
+  <header class="d-flex container-fluid text-white " style="height:140px;padding: 20px 5vw;background-color:#153456;">
     <h1> Gestionnaire de QCM
       <?php
       if (isset($_SESSION['is_teacher'])) {
@@ -99,9 +99,9 @@ User::checkIfIsTeacher();
       </a>
     </div>
   </header>
-  <main class="text-white h-100">
+  <main class="h-100">
     <div class="row h-100" >
-      <div id="nav" class="col-3 bg-info" >
+      <div id="nav" class="col-3" style="background-color:#153456;">
         <?php
         if (isset($_SESSION['is_teacher'])) {
           require('teacher/_nav1.php');
@@ -110,7 +110,7 @@ User::checkIfIsTeacher();
         }
         ?>
       </div>
-      <div id="index" class="col-9  ">
+      <div id="index" class="col-9 card  ">
         <?php
         if (isset($_SESSION['is_teacher'])) {
           require('teacher/_index1.php');
