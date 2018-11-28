@@ -9,6 +9,7 @@ class User {
     public $prenom;
     public $is_teacher;
     public $user_code;
+    public $questions;
 
     /**
      * User constructor.
@@ -130,5 +131,12 @@ class User {
             ]
         )->ins($this);
     }
+///TODO: fonction qui retourne le nom et le prénom d'un prof à partir de son id
+/*     public function getQuestionAutor($id_autor = 0)
+    {
+        $question = new Question();
+
+          return " Bruce Batman".$id  ;
+    } */
 
 }

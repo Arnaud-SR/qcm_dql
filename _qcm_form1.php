@@ -1,11 +1,8 @@
 
 <?php
-// echo "coucou";
-// require './class/Question.php';
-// $question = new Question();
-// $title = $question->getTitle();
-// echo $title;
-
+ require './class/cfg.php';
+ $question = new Question();
+ $questionArray = $question->getQuestionList();
 ?>
 
 <!DOCTYPE html>
@@ -50,30 +47,29 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td scope="row" class="col-sm-3">
-                Programmation web
+          <?php
+          foreach ($questionArray as $q) {
+            echo "<tr>
+              <td scope='row' class='col-sm-3'>
+                {$q->theme}
               </td>
-              <td scope="row" class="col-sm-9">
-                Quelle fonction retourne le nombre de secondes écoulées depuis le 1er janvier 1970 ?
+              <td scope='row' class='col-sm-9'>
+                {$q->content}
               </td>
-              <td scope="row" class="form-check">
-                <input type="checkbox" name="" >
+              <td scope='row' class='form-check'>
+                <input type='checkbox' name='' >
               </td>
-              <td scope="row" >
-                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#r_question_modal">
+              <td scope='row' >
+                <button type='button' class='btn btn-info btn-sm' data-toggle='modal' data-target='#r_question_modal'>
                   consulter
-                </button>
-                <?php
+                </button>";
                 require('modals/_question_modal.php');
-               ?>
-              </td>
-            </tr>
+              "</td>
+            </tr>";
+            } ?>
           </tbody>
         </table>
       </div>
-
-
         <div class="d-flex justify-content-center">
           <button type="submit" class="btn btn-success btn-lg mt-5 mr-5" name="submitQCM">Envoyer</button>
           <button type="button" class="btn btn-info btn-lg mt-5" data-toggle="modal" data-target="#r_qcm_modal">Aperçu</button>
