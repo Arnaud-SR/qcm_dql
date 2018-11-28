@@ -1,9 +1,9 @@
 <?php
  $question = new Question();
- $questionArray = $question->getQuestion();
+ $questionArray = $question->getAllQuestions();
   foreach ($questionArray as $q) {
- } 
- 
+ }
+
 ?>
  <div class="container p-4" style="background-color: #c2d2ce1a;">
     <header>

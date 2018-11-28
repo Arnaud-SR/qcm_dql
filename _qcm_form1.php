@@ -1,16 +1,8 @@
-
 <?php
- require './class/cfg.php';
- $question = new Question();
- $questionArray = $question->getQuestionList();
+require './class/cfg.php';
+$questionArray = Question::getAllQuestions();
 ?>
 
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <script src="assets/js/form.js"></script>
-  </head>
-  <body >
     <form id="_qcm_form" class="mb-5" method="post">
       <div class="form-group row">
         <label class="col-sm-3 col-form-label text-right">Titre du QCM</label>
@@ -19,7 +11,7 @@
         </div>
       </div>
 
-      <div class="container" id="researchBlock" >
+        <div class="container" id="researchBlock">
         <div class="input-group mb-5 mt-5 d-flex justify-content-center">
           <label class="col-sm-3 col-form-label text-right">Rechercher des questions:</label>
           <div class="col-sm-3">
@@ -49,8 +41,11 @@
           <tbody>
           <?php
           foreach ($questionArray as $q) {
+              $responses = Response::getResponses($q->id_question);
+              $author = Question::getAutor($q->id_teacher);
+              $authorName = $author[0]->prenom." ".$author[0]->nom;
             echo "<tr>
-              <td scope='row' class='col-sm-3'>
+              <td scope='row' class='col-auto'>
                 {$q->theme}
               </td>
               <td scope='row' class='col-sm-9'>
@@ -60,13 +55,14 @@
                 <input type='checkbox' name='' >
               </td>
               <td scope='row' >
-                <button type='button' class='btn btn-info btn-sm' data-toggle='modal' data-target='#r_question_modal'>
+                <button type='button' class='btn btn-info btn-sm modal_question' data-toggle='modal' data-target='#r_question_modal' data-question_id='$q->id_question' data-title='$q->content' data-id_teacher='$q->id_teacher' data-author_name='$authorName'>
                   consulter
                 </button>";
-                require('modals/_question_modal.php');
+              include_once('modals/_question_modal.php');
               "</td>
             </tr>";
             } ?>
+
           </tbody>
         </table>
       </div>
@@ -80,6 +76,13 @@
        ?>
 
     </form>
+<script>
+    $(document).ready(function () {
+        $('.modal_question').on('click', function () {
+            var teacher_fullName = $(this).data('author_name');
 
-  </body>
-</html>
+            $('#question_teacher_modal').html(teacher_fullName);
+            $('#question_content_modal').html($(this).data('title'));
+        })
+    })
+</script>
