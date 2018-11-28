@@ -2,10 +2,11 @@
 /**
  * Created by PhpStorm.
  * User: Arnaud
- * Date: 12/10/2018
- * Time: 16:42
+ * Date: 23/11/2018
+ * Time: 22:08
  */
 
-class Answers {
+class Qcm_questions
+{
 
 }

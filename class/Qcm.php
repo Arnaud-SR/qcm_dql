@@ -1,11 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Arnaud
- * Date: 12/10/2018
- * Time: 16:42
- */
 
 class Qcm {
-
+    public $id_qcm;
+    public $id_teacher;
+    public $created_at;
+    public $is_visible;
+    public $date_limite;
 }
