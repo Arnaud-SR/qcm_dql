@@ -1,6 +1,6 @@
 <div class="container mt-5 d-flex align-items-start justify-content-center">
   <div class="card list-group bg-info p-3 mr-5" id="todo">
-    <h2 class="text-center">Nouveau</h2>
+    <h2 class="text-center text-white">Nouveau</h2>
     <div class="card">
       <div class="card-body">
         <h5 class="card-title text-dark">Controle PHP DUT 2ème année</h5>
@@ -17,7 +17,7 @@
 
   </div>
   <div class="card list-group bg-info p-3 mr-5" id="done">
-    <h2 class="text-center">À rendre</h2>
+    <h2 class="text-center text-white">À rendre</h2>
     <div class="card">
       <div class="card-body">
         <h5 class="card-title text-dark">Controle PHP DUT 2ème année</h5>
@@ -34,7 +34,7 @@
   </div>
 
   <div class="card list-group bg-secondary p-3" id="on_file">
-    <h2 class="text-center">Mes résultats</h2>
+    <h2 class="text-center text-white">Mes résultats</h2>
     <div class="card">
       <div class="card-body">
         <h5 class="card-title text-dark">Controle PHP DUT 2ème année</h5>
