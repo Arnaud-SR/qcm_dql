@@ -18,11 +18,43 @@ class Question {
     {
         $cnx = Connexion::getInstance();
 
-        $req = "INSERT INTO questions VALUES(DEFAULT, {$_SESSION['id_user']}, {$cnx->esc($this->getTheme())}, {$cnx->esc($this->getTitle())})";
-        $cnx->xeq($req);
-
+        $query = "INSERT INTO questions VALUES(:id_question, :id_teacher, :theme, :content)";
+        $cnx->prepareAndExecute($query,array('id_question' => $this->id_question,
+                                             'id_teacher'  => $_SESSION['id_user'],
+                                             'theme'       => $this->theme,
+                                             'content'     => $this->title));
         return true;
     }
+
+    public function getQuestionList()
+    {
+        $cnx = Connexion::getInstance();
+        $query = "SELECT theme, content FROM questions";
+        $q = $cnx->prepareAndExecute($query,array(
+                                            'theme' => $this->theme,
+                                            'content' => $this->title));
+        return $q->tab();
+    }
+
+    public function getQuestion()
+    {
+        $cnx = Connexion::getInstance();
+        $query = "SELECT * FROM questions WHERE id_question = 1";
+        $questionArray = array(
+            'id_question' => $_GET['id_question'],
+            'id_teacher' => $this->id_teacher,
+            'theme' => $this->theme,
+            'content' => $this->title);
+        $q = $cnx->prepareAndExecute($query,$questionArray);
+        print_r(array_values($questionArray));
+    //TODO: utiliser prem()
+        return $q->tab(); 
+    }
+
+    public function getAuthor()
+    {
+        return 'id='.$this->id_teacher;
+    } 
 
     /**
      * @return null
@@ -87,5 +119,6 @@ class Question {
     {
         $this->title = $title;
     }
+
 
 }

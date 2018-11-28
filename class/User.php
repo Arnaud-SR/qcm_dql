@@ -9,6 +9,7 @@ class User {
     public $prenom;
     public $is_teacher;
     public $user_code;
+    public $questions;
 
     /**
      * User constructor.
@@ -27,11 +28,22 @@ class User {
         $this->user_code = $user_code;
     }
 
-    public function register($asTeacher = 0) {
+    public function register($is_teacher = 0)
+    {
         $cnx = Connexion::getInstance();
         $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
-        $req = "INSERT INTO user VALUES(DEFAULT, {$cnx->esc($this->login)}, '{$password_hash}', {$cnx->esc($this->nom)}, {$cnx->esc($this->prenom)}, $asTeacher, {$cnx->esc($this->user_code)})";
-        $cnx->xeq($req);
+        $query = "INSERT INTO user VALUES(DEFAULT, :login, :password_hash, :nom, :prenom, :is_teacher, :user_code)";
+        $cnx->prepareAndExecute(
+            $query,
+            [
+                'login' => $this->login,
+                'password_hash' => $password_hash,
+                'nom' => $this->nom,
+                'prenom' => $this->prenom,
+                'is_teacher' => $is_teacher,
+                'user_code' => $this->user_code,
+            ]
+        );
 
         return true;
     }
@@ -39,16 +51,31 @@ class User {
     public function loguer() {
         $cnx = Connexion::getInstance();
         $password = $this->password;
-        $req = "SELECT * FROM user WHERE login = {$cnx->esc($this->login)}";
+        $query = "SELECT * FROM user WHERE login = :login";
 
-        if ($cnx->xeq($req)->nb() && !$cnx->xeq($req)->ins($this)) {
+        if ($cnx->prepareAndExecute(
+                $query,
+                [
+                    'login' => $this->login,
+                ]
+            )->rowNb() && !$cnx->prepareAndExecute(
+                $query,
+                [
+                    'login' => $this->login,
+                ]
+            )->ins($this)) {
             return false;
         }
         if (!password_verify($password, $this->password)) {
             return false;
         }
 
-        if ($cnx->xeq($req)->nb()) {
+        if ($cnx->prepareAndExecute(
+            $query,
+            [
+                'login' => $this->login,
+            ]
+        )->rowNb()) {
             $_SESSION['id_user'] = $this->id_user;
 
             return true;
@@ -59,16 +86,26 @@ class User {
 
     public static function checkTeacherCode($code) {
         $cnx = Connexion::getInstance();
-        $req = "SELECT * FROM code_teacher WHERE code = '$code'";
+        $query = "SELECT * FROM code_teacher WHERE code = :code";
 
-        return $cnx->xeq($req)->nb();
+        return $cnx->prepareAndExecute(
+            $query,
+            [
+                'login' => $code,
+            ]
+        )->rowNb();
     }
 
     public static function checkIfIsTeacher() {
         $cnx = Connexion::getInstance();
-        $req = "SELECT * FROM user WHERE id_user = {$_SESSION['id_user']} AND is_teacher = 1 ";
+        $query = "SELECT * FROM user WHERE id_user = :id_user AND is_teacher = 1 ";
 
-        if ($cnx->xeq($req)->nb()) {
+        if ($cnx->prepareAndExecute(
+            $query,
+            [
+                'id_user' => $_SESSION['id_user'],
+            ]
+        )->rowNb()) {
             $_SESSION['is_teacher'] = true;
         }
     }
@@ -85,8 +122,21 @@ class User {
         if (!$this->id_user) {
             return false;
         }
-        $req = "SELECT * FROM user WHERE id_user={$this->id_user}";
-        return (bool)Connexion::getInstance()->xeq($req)->ins($this);
+        $query = "SELECT * FROM user WHERE id_user = :id_user";
+
+        return (bool)Connexion::getInstance()->prepareAndExecute(
+            $query,
+            [
+                'id_user' => $this->id_user,
+            ]
+        )->ins($this);
     }
+///TODO: fonction qui retourne le nom et le prénom d'un prof à partir de son id
+/*     public function getQuestionAutor($id_autor = 0)
+    {
+        $question = new Question();
+
+          return " Bruce Batman".$id  ;
+    } */
 
 }
