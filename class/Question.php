@@ -41,7 +41,7 @@ class Question {
         $cnx = Connexion::getInstance();
         $query = "SELECT * FROM questions WHERE id_question = 1";
         $questionArray = array(
-            'id_question' => $_GET['id_question'],
+            'id_question' => $this->id_question,
             'id_teacher' => $this->id_teacher,
             'theme' => $this->theme,
             'content' => $this->title);
