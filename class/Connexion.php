@@ -83,7 +83,7 @@ class Connexion
 
         return $this->jeu->fetchAll();
     }
-
+// retourne la première ligne du jeu retourné
     public function prem($classe = 'stdClass')
     {
         if (!$this->jeu) {
@@ -93,7 +93,7 @@ class Connexion
 
         return $this->jeu->fetch();
     }
-
+//insère les données reçu dans une variable
     public function ins($obj)
     {
 
@@ -106,7 +106,7 @@ class Connexion
 
 
     }
-
+//retourne la dernière clé inséré en bdd
     public function pk()
     {
         return $this->db->lastInsertId();

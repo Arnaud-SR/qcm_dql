@@ -26,16 +26,35 @@ class Question {
         return true;
     }
 
-    public function getQuestion()
+    public function getQuestionList()
     {
-        $questions = [];
         $cnx = Connexion::getInstance();
         $query = "SELECT theme, content FROM questions";
-        $q = $cnx->prepareAndExecute($query,array('theme' => $this->theme,
+        $q = $cnx->prepareAndExecute($query,array(
+                                            'theme' => $this->theme,
                                             'content' => $this->title));
-
         return $q->tab();
     }
+
+    public function getQuestion()
+    {
+        $cnx = Connexion::getInstance();
+        $query = "SELECT * FROM questions WHERE id_question = 1";
+        $questionArray = array(
+            'id_question' => $_GET['id_question'],
+            'id_teacher' => $this->id_teacher,
+            'theme' => $this->theme,
+            'content' => $this->title);
+        $q = $cnx->prepareAndExecute($query,$questionArray);
+        print_r(array_values($questionArray));
+    //TODO: utiliser prem()
+        return $q->tab(); 
+    }
+
+    public function getAuthor()
+    {
+        return 'id='.$this->id_teacher;
+    } 
 
     /**
      * @return null
@@ -74,7 +93,6 @@ class Question {
      */
     public function getTheme()
     {
-        echo "getTheme";
         return $this->theme;
     }
 
@@ -101,5 +119,6 @@ class Question {
     {
         $this->title = $title;
     }
+
 
 }

@@ -2,7 +2,7 @@
 <?php
  require './class/cfg.php';
  $question = new Question();
- $questionArray = $question->getQuestion();
+ $questionArray = $question->getQuestionList();
 ?>
 
 <!DOCTYPE html>
