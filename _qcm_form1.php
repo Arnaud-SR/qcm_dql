@@ -57,7 +57,7 @@ $questionArray = Question::getAllQuestions();
                 <input type='checkbox' name='' >
               </td>
               <td scope='row'>
-                <button type='button' class='btn btn-info btn-sm modal_question' data-toggle='modal' data-target='#r_question_modal' data-question_id='$q->id_question' data-title='$q->content' data-id_teacher='$q->id_teacher' data-theme='$q->theme' data-author_name='$authorName' data-responses='$responsesJson'>
+                <button type='button' class='btn btn-info btn-sm modal_question' data-toggle='modal' data-target='#r_question_modal' data-title='$q->content' data-id_teacher='$q->id_teacher' data-theme='$q->theme' data-author_name='$authorName' data-responses='$responsesJson'>
                   consulter
                 </button>";
               include('modals/_r_question_modal.php');
@@ -85,7 +85,6 @@ $questionArray = Question::getAllQuestions();
             let questionTheme = $(this).data('theme')
             let responsesArray = $(this).data('responses');
             let questionTitle = $(this).data('title');
-            let questionId = $(this).data('question_id');
             let html = '';
 
             // En gros, au click, on charge toutes les données en data-attribute et pour les réponses on fait une boucle dessus
@@ -106,7 +105,11 @@ $questionArray = Question::getAllQuestions();
                     default:
                         break;
                 }
-                html += answerIndex + " " + e.response + "</br>"
+                html += "<tr> <th scope='row'>" +
+                        answerIndex +
+                        "</th><th scope='row' class='col-sm-8'>" +
+                        e.response +
+                        "</th><th scope='row' class='form-check'><input type='checkbox' disabled></th></tr >"
             });
 
             $('#table-response').html(html);
