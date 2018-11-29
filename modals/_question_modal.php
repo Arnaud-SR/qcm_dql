@@ -1,5 +1,4 @@
 <div class="modal fade" id="r_question_modal" tabindex="-1" role="dialog" aria-hidden="true">
-
     <div class="modal-dialog modal-lg text-dark" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -17,17 +16,16 @@
                         <th scope="col" id="question_content_modal" class="text-center"></th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="table-response">
                     <?php
-                    foreach ($responses as $key => $response) {
-
-                        echo "<tr id='A'>
-                        <th scope='row'>$key</th>
-                        <th scope='row' class='col-sm-8'>
-                            $response->response
-                        </th>
-                    </tr>";
-                    }
+                    /*  foreach ($array as $key => $response) {
+                         echo "<tr>
+                         <th scope='row'>$key</th>
+                         <th scope='row' class='col-sm-8'>
+                             $response->response
+                         </th>
+                     </tr>";
+                     } */
                     ?>
                     </tbody>
                 </table>
