@@ -36,25 +36,27 @@ class Question {
         return $q->tab();
     }
 
-    public function getQuestion()
+    public static function getAllQuestions()
     {
         $cnx = Connexion::getInstance();
-        $query = "SELECT * FROM questions WHERE id_question = 1";
-        $questionArray = array(
-            'id_question' => $this->id_question,
-            'id_teacher' => $this->id_teacher,
-            'theme' => $this->theme,
-            'content' => $this->title);
-        $q = $cnx->prepareAndExecute($query,$questionArray);
-        print_r(array_values($questionArray));
-    //TODO: utiliser prem()
-        return $q->tab(); 
+
+        $query = "SELECT * FROM questions";
+
+        $q = $cnx->prepareAndExecute($query);
+
+        return $q->tab();
     }
 
-    public function getAuthor()
+    public static function getAutor($id_autor)
     {
-        return 'id='.$this->id_teacher;
-    } 
+        $cnx = Connexion::getInstance();
+
+        $req = "SELECT prenom, nom FROM user WHERE id_user = :id_author";
+
+        $result = $cnx->prepareAndExecute($req, ['id_author' => $id_autor])->tab();
+
+        return $result;
+    }
 
     /**
      * @return null

@@ -32,7 +32,7 @@ class User {
     {
         $cnx = Connexion::getInstance();
         $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
-        $query = "INSERT INTO user VALUES(DEFAULT, :login, :password_hash, :nom, :prenom, :is_teacher, :user_code)";
+        $query = "INSERT INTO user VALUES(DEFAULT, :login, :password_hash, :nom, :prenom, :is_teacher, :code)";
         $cnx->prepareAndExecute(
             $query,
             [
@@ -41,7 +41,7 @@ class User {
                 'nom' => $this->nom,
                 'prenom' => $this->prenom,
                 'is_teacher' => $is_teacher,
-                'user_code' => $this->user_code,
+                'code' => $this->user_code
             ]
         );
 
@@ -84,14 +84,14 @@ class User {
         return false;
     }
 
-    public static function checkTeacherCode($code) {
+    public function checkTeacherCode() {
         $cnx = Connexion::getInstance();
         $query = "SELECT * FROM code_teacher WHERE code = :code";
 
         return $cnx->prepareAndExecute(
             $query,
             [
-                'login' => $code,
+                'code' => $this->user_code,
             ]
         )->rowNb();
     }
@@ -131,12 +131,4 @@ class User {
             ]
         )->ins($this);
     }
-///TODO: fonction qui retourne le nom et le prénom d'un prof à partir de son id
-/*     public function getQuestionAutor($id_autor = 0)
-    {
-        $question = new Question();
-
-          return " Bruce Batman".$id  ;
-    } */
-
 }

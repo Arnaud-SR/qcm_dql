@@ -55,11 +55,12 @@ class Connexion
         return $this->db->quote($val);
     }
 
-    public function prepareAndExecute($reqStr, $array)
+    public function prepareAndExecute($reqStr, $array = null)
     {
         try {
             $this->jeu = $req = $this->db->prepare($reqStr);
             $req->execute($array);
+            $this->rowNb = $this->jeu->rowCount();
         } catch (PDOException $e) {
 
             exit(" : {$reqStr} ( {$e->getMessage()})");
