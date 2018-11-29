@@ -41,10 +41,12 @@ $questionArray = Question::getAllQuestions();
           <tbody>
           <?php
           foreach ($questionArray as $q) {
-              $responses = Response::getResponses($q->id_question);
+              $responses = $q->getResponses();
               $author = Question::getAutor($q->id_teacher);
               $authorName = $author[0]->prenom." ".$author[0]->nom;
-            echo "<tr>
+              //On JSONise le tableau pour qu'il soit passable à la modal via la JS
+              $responsesJson = json_encode($responses);
+              echo "<tr>
               <td scope='row' class='col-auto'>
                 {$q->theme}
               </td>
@@ -54,14 +56,14 @@ $questionArray = Question::getAllQuestions();
               <td scope='row' class='form-check'>
                 <input type='checkbox' name='' >
               </td>
-              <td scope='row' >
-                <button type='button' class='btn btn-info btn-sm modal_question' data-toggle='modal' data-target='#r_question_modal' data-question_id='$q->id_question' data-title='$q->content' data-id_teacher='$q->id_teacher' data-author_name='$authorName'>
+              <td scope='row'>
+                <button type='button' class='btn btn-info btn-sm modal_question' data-toggle='modal' data-target='#r_question_modal' data-question_id='$q->id_question' data-title='$q->content' data-id_teacher='$q->id_teacher' data-author_name='$authorName' data-responses='$responsesJson'>
                   consulter
                 </button>";
-              include_once('modals/_question_modal.php');
+              include('modals/_question_modal.php');
               "</td>
             </tr>";
-            } ?>
+          } ?>
 
           </tbody>
         </table>
@@ -80,9 +82,35 @@ $questionArray = Question::getAllQuestions();
     $(document).ready(function () {
         $('.modal_question').on('click', function () {
             var teacher_fullName = $(this).data('author_name');
+            var responsesArray = $(this).data('responses');
+            var questionTitle = $(this).data('title');
+            var html = '';
 
+            // En gros, au click, on charge toutes les données en data-attribute et pour les réponses on fait une boucle dessus
+            responsesArray.forEach(function (e, i) {
+                switch (i){
+                    case 0:
+                        i = 'A.';
+                        break;
+                    case 1:
+                        i = 'B.';
+                        break;
+                    case 2:
+                        i = 'C.';
+                        break;
+                    case 3:
+                        i = 'D.';
+                        break;
+                    default:
+                        break;
+                }
+                console.log(i);
+                html += i + " " + e.response + "</br>"
+            });
+
+            $('#table-response').html(html);
             $('#question_teacher_modal').html(teacher_fullName);
-            $('#question_content_modal').html($(this).data('title'));
+            $('#question_content_modal').html(questionTitle);
         })
     })
 </script>

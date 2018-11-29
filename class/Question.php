@@ -1,10 +1,10 @@
 <?php
 
 class Question {
-    private $id_question;
-    private $id_teacher;
-    private $theme;
-    private $title;
+    public $id_question;
+    public $id_teacher;
+    public $theme;
+    public $title;
 
     public function __construct($id_question = null, $id_teacher = null, $theme = null, $title = null)
     {
@@ -44,7 +44,15 @@ class Question {
 
         $q = $cnx->prepareAndExecute($query);
 
-        return $q->tab();
+        return $q->tab(Question::class);
+    }
+
+    public function getResponses()
+    {
+        $cnx = Connexion::getInstance();
+        $req = "SELECT * FROM response WHERE id_question = :id_question";
+
+        return $cnx->prepareAndExecute($req, ['id_question' => $this->id_question])->tab();
     }
 
     public static function getAutor($id_autor)
