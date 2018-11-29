@@ -57,10 +57,10 @@ $questionArray = Question::getAllQuestions();
                 <input type='checkbox' name='' >
               </td>
               <td scope='row'>
-                <button type='button' class='btn btn-info btn-sm modal_question' data-toggle='modal' data-target='#r_question_modal' data-question_id='$q->id_question' data-title='$q->content' data-id_teacher='$q->id_teacher' data-author_name='$authorName' data-responses='$responsesJson'>
+                <button type='button' class='btn btn-info btn-sm modal_question' data-toggle='modal' data-target='#r_question_modal' data-question_id='$q->id_question' data-title='$q->content' data-id_teacher='$q->id_teacher' data-theme='$q->theme' data-author_name='$authorName' data-responses='$responsesJson'>
                   consulter
                 </button>";
-              include('modals/_question_modal.php');
+              include('modals/_r_question_modal.php');
               "</td>
             </tr>";
           } ?>
@@ -81,36 +81,39 @@ $questionArray = Question::getAllQuestions();
 <script>
     $(document).ready(function () {
         $('.modal_question').on('click', function () {
-            var teacher_fullName = $(this).data('author_name');
-            var responsesArray = $(this).data('responses');
-            var questionTitle = $(this).data('title');
-            var html = '';
+            let teacher_fullName = $(this).data('author_name');
+            let questionTheme = $(this).data('theme')
+            let responsesArray = $(this).data('responses');
+            let questionTitle = $(this).data('title');
+            let questionId = $(this).data('question_id');
+            let html = '';
 
             // En gros, au click, on charge toutes les données en data-attribute et pour les réponses on fait une boucle dessus
-            responsesArray.forEach(function (e, i) {
-                switch (i){
+            responsesArray.forEach(function (e, answerIndex) {
+                switch (answerIndex){
                     case 0:
-                        i = 'A.';
+                        answerIndex = 'A.';
                         break;
                     case 1:
-                        i = 'B.';
+                        answerIndex = 'B.';
                         break;
                     case 2:
-                        i = 'C.';
+                        answerIndex = 'C.';
                         break;
                     case 3:
-                        i = 'D.';
+                        answerIndex = 'D.';
                         break;
                     default:
                         break;
                 }
-                console.log(i);
-                html += i + " " + e.response + "</br>"
+                html += answerIndex + " " + e.response + "</br>"
             });
 
             $('#table-response').html(html);
             $('#question_teacher_modal').html(teacher_fullName);
             $('#question_content_modal').html(questionTitle);
+            $('#question_theme_modal').html(questionTheme);
+
         })
     })
 </script>
