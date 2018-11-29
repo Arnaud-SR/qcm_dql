@@ -1,19 +1,8 @@
-
 <?php
-// echo "coucou";
-// require './class/Question.php';
-// $question = new Question();
-// $title = $question->getTitle();
-// echo $title;
-
+require './class/cfg.php';
+$questionArray = Question::getAllQuestions();
 ?>
 
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <script src="assets/js/form.js"></script>
-  </head>
-  <body >
     <form id="_qcm_form" class="mb-5" method="post">
       <div class="form-group row">
         <label class="col-sm-3 col-form-label text-right">Titre du QCM</label>
@@ -22,7 +11,7 @@
         </div>
       </div>
 
-      <div class="container" id="researchBlock" >
+        <div class="container" id="researchBlock">
         <div class="input-group mb-5 mt-5 d-flex justify-content-center">
           <label class="col-sm-3 col-form-label text-right">Rechercher des questions:</label>
           <div class="col-sm-3">
@@ -50,30 +39,33 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td scope="row" class="col-sm-3">
-                Programmation web
+          <?php
+          foreach ($questionArray as $q) {
+              $responses = Response::getResponses($q->id_question);
+              $author = Question::getAutor($q->id_teacher);
+              $authorName = $author[0]->prenom." ".$author[0]->nom;
+            echo "<tr>
+              <td scope='row' class='col-auto'>
+                {$q->theme}
               </td>
-              <td scope="row" class="col-sm-9">
-                Quelle fonction retourne le nombre de secondes écoulées depuis le 1er janvier 1970 ?
+              <td scope='row' class='col-sm-9'>
+                {$q->content}
               </td>
-              <td scope="row" class="form-check">
-                <input type="checkbox" name="" >
+              <td scope='row' class='form-check'>
+                <input type='checkbox' name='' >
               </td>
-              <td scope="row" >
-                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#r_question_modal">
+              <td scope='row' >
+                <button type='button' class='btn btn-info btn-sm modal_question' data-toggle='modal' data-target='#r_question_modal' data-question_id='$q->id_question' data-title='$q->content' data-id_teacher='$q->id_teacher' data-author_name='$authorName'>
                   consulter
-                </button>
-                <?php
-                require('modals/_question_modal.php');
-               ?>
-              </td>
-            </tr>
+                </button>";
+              include_once('modals/_question_modal.php');
+              "</td>
+            </tr>";
+            } ?>
+
           </tbody>
         </table>
       </div>
-
-
         <div class="d-flex justify-content-center">
           <button type="submit" class="btn btn-success btn-lg mt-5 mr-5" name="submitQCM">Envoyer</button>
           <button type="button" class="btn btn-info btn-lg mt-5" data-toggle="modal" data-target="#r_qcm_modal">Aperçu</button>
@@ -84,6 +76,13 @@
        ?>
 
     </form>
+<script>
+    $(document).ready(function () {
+        $('.modal_question').on('click', function () {
+            var teacher_fullName = $(this).data('author_name');
 
-  </body>
-</html>
+            $('#question_teacher_modal').html(teacher_fullName);
+            $('#question_content_modal').html($(this).data('title'));
+        })
+    })
+</script>

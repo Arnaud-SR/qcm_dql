@@ -19,12 +19,43 @@ class Question {
         $cnx = Connexion::getInstance();
 
         $query = "INSERT INTO questions VALUES(:id_question, :id_teacher, :theme, :content)";
-        echo $this->id_question;
         $cnx->prepareAndExecute($query,array('id_question' => $this->id_question,
-                                            'id_teacher' => $_SESSION['id_user'],
+                                             'id_teacher'  => $_SESSION['id_user'],
+                                             'theme'       => $this->theme,
+                                             'content'     => $this->title));
+        return true;
+    }
+
+    public function getQuestionList()
+    {
+        $cnx = Connexion::getInstance();
+        $query = "SELECT theme, content FROM questions";
+        $q = $cnx->prepareAndExecute($query,array(
                                             'theme' => $this->theme,
                                             'content' => $this->title));
-        return true;
+        return $q->tab();
+    }
+
+    public static function getAllQuestions()
+    {
+        $cnx = Connexion::getInstance();
+
+        $query = "SELECT * FROM questions";
+
+        $q = $cnx->prepareAndExecute($query);
+
+        return $q->tab();
+    }
+
+    public static function getAutor($id_autor)
+    {
+        $cnx = Connexion::getInstance();
+
+        $req = "SELECT prenom, nom FROM user WHERE id_user = :id_author";
+
+        $result = $cnx->prepareAndExecute($req, ['id_author' => $id_autor])->tab();
+
+        return $result;
     }
 
     /**
@@ -90,5 +121,6 @@ class Question {
     {
         $this->title = $title;
     }
+
 
 }

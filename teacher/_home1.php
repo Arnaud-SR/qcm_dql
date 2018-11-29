@@ -33,8 +33,7 @@
   </div>
 
   <div class="card list-group bg-secondary p-3" id="on_file">
-    <h2 class="text-center text-white
-    ">QCM archivés</h2>
+    <h2 class="text-center text-white">QCM archivés</h2>
     <div class="card">
       <div class="card-body">
         <h5 class="card-title text-dark">Controle PHP DUT 2ème année</h5>

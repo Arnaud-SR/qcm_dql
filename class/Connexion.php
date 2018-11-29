@@ -55,32 +55,12 @@ class Connexion
         return $this->db->quote($val);
     }
 
-    // FONCTION PERMETTANT D'EXECUTER DIRECTEMENT LA REQUETE ET DETERMINE SI SELECT OU AUTRE
-    public function xeq($req)
-    {
-        try {
-            if (mb_stripos(trim($req), "SELECT") === 0) {
-                $this->jeu = $this->db->query($req);
-                $this->rowNb = $this->jeu->rowCount();
-            } else {
-                $this->jeu = null;
-                $this->rowNb = $this->db->exec($req);
-            }
-        } catch (PDOException $e) {
-
-            exit(" : {$req} ( {$e->getMessage()})");
-        }
-
-        return $this;
-    }
-
-    public function prepareAndExecute($reqStr, $array)
+    public function prepareAndExecute($reqStr, $array = null)
     {
         try {
             $this->jeu = $req = $this->db->prepare($reqStr);
             $req->execute($array);
-            $this->rowNb = $req->rowCount();
-
+            $this->rowNb = $this->jeu->rowCount();
         } catch (PDOException $e) {
 
             exit(" : {$reqStr} ( {$e->getMessage()})");
@@ -104,7 +84,7 @@ class Connexion
 
         return $this->jeu->fetchAll();
     }
-
+// retourne la première ligne du jeu retourné
     public function prem($classe = 'stdClass')
     {
         if (!$this->jeu) {
@@ -114,7 +94,7 @@ class Connexion
 
         return $this->jeu->fetch();
     }
-
+//insère les données reçu dans une variable
     public function ins($obj)
     {
 
@@ -127,7 +107,7 @@ class Connexion
 
 
     }
-
+//retourne la dernière clé inséré en bdd
     public function pk()
     {
         return $this->db->lastInsertId();

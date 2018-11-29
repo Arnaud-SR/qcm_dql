@@ -26,9 +26,22 @@ class Response {
     {
         $cnx = Connexion::getInstance();
 
-        $req = "INSERT INTO response VALUES(DEFAULT, {$id_question}, {$cnx->esc($this->getContent())}, {$is_correct})";
-        $cnx->xeq($req);
+        $req = "INSERT INTO response VALUES(DEFAULT, :id_question, :content , :is_correct )";
+        $cnx->prepareAndExecute($req, [
+            'id_question' => $id_question,
+            'content' => $this->getContent(),
+            'is_correct' => $is_correct
+        ]);
     }
+
+    public static function getResponses($id_question)
+    {
+        $cnx = Connexion::getInstance();
+        $req = "SELECT * FROM response WHERE id_question = :id_question";
+
+        return $cnx->prepareAndExecute($req, ['id_question' => $id_question])->tab();
+    }
+
 
     /**
      * @return null
