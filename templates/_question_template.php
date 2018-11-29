@@ -1,25 +1,16 @@
-<?php
- $question = new Question();
- $questionArray = $question->getAllQuestions();
-  foreach ($questionArray as $q) {
- }
 
-?>
  <div class="container p-4" style="background-color: #c2d2ce1a;">
     <header>
       <div class="form-group row d-flex justify-content-between font-italic">
         <div >
-        <?php echo $q->id_teacher;?>
         </div>
         <div >
-        <?=$q->theme?>
         </div>
       </div>
     </header>
     <main>
       <span class="form-group row">
-        <h5 class="mb-5">#<?=$q->id_question?> - </h5>
-        <?=$q->content?>
+        <h5 class="mb-5"># - </h5>
       </span>
       <hr>
       <h4>Réponses</h4>
@@ -72,4 +63,3 @@
       </table>
     </main>
   </div>
-
