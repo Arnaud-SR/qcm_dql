@@ -33,7 +33,7 @@ class Question {
         $q = $cnx->prepareAndExecute($query,array(
                                             'theme' => $this->theme,
                                             'content' => $this->title));
-        return $q->tab();
+        return $q->to_array_query();
     }
 
     public static function getAllQuestions()
@@ -44,7 +44,7 @@ class Question {
 
         $q = $cnx->prepareAndExecute($query);
 
-        return $q->tab();
+        return $q->to_array_query();
     }
 
     public static function getAutor($id_autor)
@@ -53,7 +53,7 @@ class Question {
 
         $req = "SELECT prenom, nom FROM user WHERE id_user = :id_author";
 
-        $result = $cnx->prepareAndExecute($req, ['id_author' => $id_autor])->tab();
+        $result = $cnx->prepareAndExecute($req, ['id_author' => $id_autor])->to_array_query();
 
         return $result;
     }

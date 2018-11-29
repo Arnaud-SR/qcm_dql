@@ -39,7 +39,7 @@ class Response {
         $cnx = Connexion::getInstance();
         $req = "SELECT * FROM response WHERE id_question = :id_question";
 
-        return $cnx->prepareAndExecute($req, ['id_question' => $id_question])->tab();
+        return $cnx->prepareAndExecute($req, ['id_question' => $id_question])->to_array_query();
     }
 
 

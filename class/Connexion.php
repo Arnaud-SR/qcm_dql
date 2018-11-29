@@ -74,8 +74,7 @@ class Connexion
         return $this->rowNb;
     }
 
-// RETOURNE UN ARRAY RELATIF A LA REQUETE
-    public function tab($classe = 'stdClass')
+    public function to_array_query($classe = 'stdClass')
     {
         if (!$this->jeu) {
             return [];
@@ -113,4 +112,3 @@ class Connexion
         return $this->db->lastInsertId();
     }
 }
-
