@@ -1,23 +1,25 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-</head>
-<body>
-  <div class="container p-4" style="background-color: #c2d2ce1a;">
+<?php
+ $question = new Question();
+ $questionArray = $question->getAllQuestions();
+  foreach ($questionArray as $q) {
+ }
+
+?>
+ <div class="container p-4" style="background-color: #c2d2ce1a;">
     <header>
       <div class="form-group row d-flex justify-content-between font-italic">
         <div >
-          Broisin Julien
+        <?php echo $q->id_teacher;?>
         </div>
         <div >
-          Programmation web
+        <?=$q->theme?>
         </div>
       </div>
     </header>
     <main>
       <span class="form-group row">
-        <h5 class="mb-5">Question ##. </h5>
-        Quelle fonction retourne le nombre de secondes écoulées depuis le 1er janvier 1970 ?
+        <h5 class="mb-5">#<?=$q->id_question?> - </h5>
+        <?=$q->content?>
       </span>
       <hr>
       <h4>Réponses</h4>
@@ -69,10 +71,5 @@
         </tbody>
       </table>
     </main>
-    <footer>
-
-    </footer>
   </div>
 
-</body>
-</html>

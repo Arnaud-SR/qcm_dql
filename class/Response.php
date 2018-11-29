@@ -2,13 +2,13 @@
 
 
 class Response {
-    public $id_response;
-    public $id_question;
-    public $content;
-    public $is_correct;
+    private $id_response;
+    private $id_question;
+    private $content;
+    private $is_correct;
 
     /**
-     * Answers constructor.
+     * Response constructor.
      * @param $id_answer
      * @param $id_question
      * @param $content
@@ -22,21 +22,79 @@ class Response {
         $this->is_correct = $is_correct;
     }
 
-    public function addResponse($id_question)
+    public function addResponse($id_question, $is_correct)
     {
         $cnx = Connexion::getInstance();
 
-        $req = "INSERT INTO response VALUES(DEFAULT, {$id_question}, {$cnx->esc($this->content)}, false)";
-        $cnx->xeq($req);
+        $req = "INSERT INTO response VALUES(DEFAULT, :id_question, :content , :is_correct )";
+        $cnx->prepareAndExecute($req, [
+            'id_question' => $id_question,
+            'content' => $this->getContent(),
+            'is_correct' => $is_correct
+        ]);
     }
 
-    public static function setIsCorrect($id_question, $id_response)
+    /**
+     * @return null
+     */
+    public function getIdResponse()
     {
-        $cnx = Connexion::getInstance();
-
-        $req = "UPDATE response SET is_correct = true WHERE id_question = {$id_question} AND id_response = {$id_response}";
-        $cnx->xeq($req);
+        return $this->id_response;
     }
 
+    /**
+     * @param null $id_response
+     */
+    public function setIdResponse($id_response): void
+    {
+        $this->id_response = $id_response;
+    }
 
+    /**
+     * @return null
+     */
+    public function getIdQuestion()
+    {
+        return $this->id_question;
+    }
+
+    /**
+     * @param null $id_question
+     */
+    public function setIdQuestion($id_question): void
+    {
+        $this->id_question = $id_question;
+    }
+
+    /**
+     * @return null
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param null $content
+     */
+    public function setContent($content): void
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * @return null
+     */
+    public function getisCorrect()
+    {
+        return $this->is_correct;
+    }
+
+    /**
+     * @param null $is_correct
+     */
+    public function setIsCorrect($is_correct): void
+    {
+        $this->is_correct = $is_correct;
+    }
 }

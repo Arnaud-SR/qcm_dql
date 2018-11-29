@@ -1,84 +1,134 @@
 <?php
 
 class Question {
-    private $_id_question;
-    private $_id_teacher;
-    private $_theme;
-    private $_title;
+    public $id_question;
+    public $id_teacher;
+    public $theme;
+    public $title;
 
     public function __construct($id_question = null, $id_teacher = null, $theme = null, $title = null)
     {
-        $this->setIdQuestion($id_question);
-        $this->setIdTeacher($id_teacher);
-        $this->setTheme($theme);
-        $this->setTitle($title);
-    }
-
-    public function idQuestion()
-    {
-      return $this->_id_question;
-    }
-
-    public function setIdQuestion($id_question)
-    {
-      $this->_id_question = (int) $id_question;
-    }
-
-    public function idTeacher()
-    {
-      return $this->_id_teacher;
-    }
-
-    public function setIdTeacher($id_teacher)
-    {
-      $this->_id_teacher = (int) $id_teacher;
-    }
-
-    public function theme()
-    {
-      return $this->_theme;
-    }
-
-    public function setTheme($theme)
-    {
-      if (is_string($theme) && strlen($theme) <= 255) {
-        $this->_theme = $theme;
-      }
-    }
-
-    public function title()
-    {
-      return $this->_title;
-    }
-
-    public function setTitle($title)
-    {
-      if (is_string($title) && strlen($title) <= 255) {
-        $this->_title = $title;
-      }
+        $this->id_question = $id_question;
+        $this->id_teacher = $id_teacher;
+        $this->theme = $theme;
+        $this->title = $title;
     }
 
     public function addQuestion()
     {
         $cnx = Connexion::getInstance();
 
-        $req = "INSERT INTO questions VALUES(DEFAULT, {$_SESSION['id_user']}, {$cnx->esc($this->theme)}, {$cnx->esc($this->title)})";
-        $cnx->xeq($req);
-
+        $query = "INSERT INTO questions VALUES(:id_question, :id_teacher, :theme, :content)";
+        $cnx->prepareAndExecute($query,array('id_question' => $this->id_question,
+                                             'id_teacher'  => $_SESSION['id_user'],
+                                             'theme'       => $this->theme,
+                                             'content'     => $this->title));
         return true;
     }
 
-    public static function getQuestion()
+    public function getQuestionList()
     {
-      $question = new Question();
-      return $question->chargerQuestion();
-
-    }
-
-    public function chargerQuestion()
-    {
-        $req = "SELECT * FROM questions";
         $cnx = Connexion::getInstance();
-        return (bool) $cnx->xeq($req)->tab($this);
+        $query = "SELECT theme, content FROM questions";
+        $q = $cnx->prepareAndExecute($query,array(
+                                            'theme' => $this->theme,
+                                            'content' => $this->title));
+        return $q->tab();
     }
+
+    public static function getAllQuestions()
+    {
+        $cnx = Connexion::getInstance();
+
+        $query = "SELECT * FROM questions";
+
+        $q = $cnx->prepareAndExecute($query);
+
+        return $q->tab(Question::class);
+    }
+
+    public function getResponses()
+    {
+        $cnx = Connexion::getInstance();
+        $req = "SELECT * FROM response WHERE id_question = :id_question";
+
+        return $cnx->prepareAndExecute($req, ['id_question' => $this->id_question])->tab();
+    }
+
+    public static function getAutor($id_autor)
+    {
+        $cnx = Connexion::getInstance();
+
+        $req = "SELECT prenom, nom FROM user WHERE id_user = :id_author";
+
+        $result = $cnx->prepareAndExecute($req, ['id_author' => $id_autor])->tab();
+
+        return $result;
+    }
+
+    /**
+     * @return null
+     */
+    public function getIdQuestion()
+    {
+        return $this->id_question;
+    }
+
+    /**
+     * @param null $id_question
+     */
+    public function setIdQuestion($id_question): void
+    {
+        $this->id_question = $id_question;
+    }
+
+    /**
+     * @return null
+     */
+    public function getIdTeacher()
+    {
+        return $this->id_teacher;
+    }
+
+    /**
+     * @param null $id_teacher
+     */
+    public function setIdTeacher($id_teacher): void
+    {
+        $this->id_teacher = $id_teacher;
+    }
+
+    /**
+     * @return null
+     */
+    public function getTheme()
+    {
+        return $this->theme;
+    }
+
+    /**
+     * @param null $theme
+     */
+    public function setTheme($theme): void
+    {
+        $this->theme = $theme;
+    }
+
+    /**
+     * @return null
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param null $title
+     */
+    public function setTitle($title): void
+    {
+        $this->title = $title;
+    }
+
+
 }

@@ -11,4 +11,6 @@ class Results {
     public $id_qcm;
     public $id_student;
     public $result;
+
+
 }

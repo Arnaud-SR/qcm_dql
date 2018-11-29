@@ -11,9 +11,9 @@ class Connexion
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'",
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     ];
-    public $db;
-    public $jeu;
-    public $nb;
+    private $db;
+    private $jeu;
+    private $rowNb;
 
     private function __construct()
     {
@@ -55,28 +55,23 @@ class Connexion
         return $this->db->quote($val);
     }
 
-    // FONCTION PERMETTANT D'EXECUTER DIRECTEMENT LA REQUETE ET DETERMINE SI SELECT OU AUTRE
-    public function xeq($req)
+    public function prepareAndExecute($reqStr, $array = null)
     {
         try {
-            if (mb_stripos(trim($req), "SELECT") === 0) {
-                $this->jeu = $this->db->query($req);
-                $this->nb = $this->jeu->rowCount();
-            } else {
-                $this->jeu = null;
-                $this->nb = $this->db->exec($req);
-            }
+            $this->jeu = $req = $this->db->prepare($reqStr);
+            $req->execute($array);
+            $this->rowNb = $this->jeu->rowCount();
         } catch (PDOException $e) {
 
-            exit(" : {$req} ( {$e->getMessage()})");
+            exit(" : {$reqStr} ( {$e->getMessage()})");
         }
 
         return $this;
     }
 
-    public function nb()
+    public function rowNb()
     {
-        return $this->nb;
+        return $this->rowNb;
     }
 
 // RETOURNE UN ARRAY RELATIF A LA REQUETE
@@ -89,7 +84,7 @@ class Connexion
 
         return $this->jeu->fetchAll();
     }
-
+// retourne la première ligne du jeu retourné
     public function prem($classe = 'stdClass')
     {
         if (!$this->jeu) {
@@ -99,7 +94,7 @@ class Connexion
 
         return $this->jeu->fetch();
     }
-
+//insère les données reçu dans une variable
     public function ins($obj)
     {
 
@@ -112,35 +107,9 @@ class Connexion
 
 
     }
-
+//retourne la dernière clé inséré en bdd
     public function pk()
     {
         return $this->db->lastInsertId();
     }
-
-    public function start()
-    {
-        $req = "START TRANSACTION";
-        $this->xeq($req);
-    }
-
-    public function savepoint($label)
-    {
-        $req = "SAVEPOINT {$label}";
-        $this->xeq($req);
-    }
-
-    public function rollback($label = null)
-    {
-        $req = $label ? "ROLLBACK TO {$label}" : "ROLLBACK";
-        $this->xeq($req);
-    }
-
-    public function commit()
-    {
-        $req = "COMMIT";
-
-        return $this->xeq($req);
-    }
-
 }
