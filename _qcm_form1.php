@@ -109,13 +109,15 @@ $questionArray = Question::getAllQuestions();
                         answerIndex +
                         "</th><th scope='row' class='col-sm-8'>" +
                         e.response +
-                        "</th><th scope='row' class='form-check'><input type='checkbox' disabled></th></tr >"
+                        "</th><th scope='row' class='form-check'><input type='checkbox' disabled>" +
+                        e.is_correct +
+                        "</th></tr >"
             });
 
-            $('#table-response').html(html);
             $('#question_teacher_modal').html(teacher_fullName);
             $('#question_content_modal').html(questionTitle);
             $('#question_theme_modal').html(questionTheme);
+            $('#table-response').html(html);
 
         })
     })
