@@ -7,7 +7,7 @@ require('class/cfg.php');
     <script src="assets/js/form.js"></script>
   </head>
   <body>
-    <form id="new_question_form" class="container mb-5 text-white" method="post">
+    <form id="new_question_form" class="container mb-5" method="post">
       <h2 class="col-sm-3 mb-5">Question</h2>
       <div class="form-group row">
         <label class="col-sm-3 col-form-label text-right">Thème de la question</label>
