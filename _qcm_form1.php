@@ -13,19 +13,24 @@ $questionArray = Question::getAllQuestions();
 
         <div class="container" id="researchBlock">
         <div class="input-group mb-5 mt-5 d-flex justify-content-center">
-          <label class="col-sm-3 col-form-label text-right">Rechercher des questions:</label>
-          <div class="col-sm-3">
-            <select class="form-control mr-5" title="theme" name="select_theme1" required>
-              <option  disabled selected>choisir un thème</option>
-              <option value="0">Programmation web</option>
-              <option value="1">Réseau</option>
-            </select>
-          </div>
-          <input type="text" class="form-control col-sm-3 ml-5" placeholder="Rechercher" aria-label="rechercher" aria-describedby="button-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-info" type="button" id="button-addon21">OK</button>
-          </div>
-      </div>
+            <form method="post" id="form_search_thematics">
+                <label class="col-sm-3 col-form-label text-right">Rechercher des questions:</label>
+                <div class="col-sm-3">
+                    <select class="form-control mr-5" title="theme" name="select_theme1" id="select_thematics" required>
+                        <option disabled selected>choisir un thème</option>
+                        <option value="0">Programmation web</option>
+                        <option value="1">Réseau</option>
+
+                    </select>
+                </div>
+                <input type="text" class="form-control col-sm-3 ml-5" placeholder="Rechercher" aria-label="rechercher"
+                       aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-info" type="button" id="button-addon21">OK</button>
+                </div>
+                <input type="submit" value="Rechercher">
+            </form>
+        </div>
       </div>
 
       <div id="block_questions_list" class="container mb-5" >
@@ -119,6 +124,9 @@ $questionArray = Question::getAllQuestions();
             $('#question_theme_modal').html(questionTheme);
             $('#table-response').html(html);
 
+        })
+        $('#select_thematics').on('change', function () {
+            $('#form_search_thematics').submit();
         })
     })
 </script>
