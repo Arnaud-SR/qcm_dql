@@ -17,6 +17,7 @@ require('class/cfg.php');
             <option value="<?= Thematics::MATH ?>">Mathématiques</option>
             <option value="<?= Thematics::ENG ?>">Anglais</option>
             <option value="<?= Thematics::HIST ?>">Histoire</option>
+              <option value="other" id="other">Autre</option>
           </select>
         </div>
         <div class="col-sm-4 input-group mb-3 d-none" id="other_option_block">
