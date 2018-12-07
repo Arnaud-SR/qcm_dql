@@ -42,7 +42,7 @@ $questionArray = Question::getAllQuestions();
           <?php
           foreach ($questionArray as $q) {
               $responses = $q->getResponses();
-              $author = Question::getAutor($q->id_teacher);
+              $author = Question::getauthor($q->id_teacher);
               $authorName = $author[0]->prenom." ".$author[0]->nom;
               //On JSONise le tableau pour qu'il soit passable à la modal via la JS
               $responsesJson = json_encode($responses);
@@ -87,8 +87,8 @@ $questionArray = Question::getAllQuestions();
             var html = '';
 
             // En gros, au click, on charge toutes les données en data-attribute et pour les réponses on fait une boucle dessus
-            responsesArray.forEach(function (e, i) {
-                switch (i){
+             responsesArray.forEach(function (e, i) {
+                switch (answerIndex){
                     case 0:
                         i = 'A.';
                         break;
@@ -104,9 +104,14 @@ $questionArray = Question::getAllQuestions();
                     default:
                         break;
                 }
-                console.log(i);
-                html += i + " " + e.response + "</br>"
-            });
+                html += "<tr> <th scope='row'>" +
+                        answerIndex +
+                        "</th><th scope='row' class='col-sm-8'>" +
+                        e.response +
+                        "</th><th scope='row' class='form-check'><input type='checkbox' disabled>" +
+                        e.is_correct +
+                        "</th></tr >"
+            }); 
 
             $('#table-response').html(html);
             $('#question_teacher_modal').html(teacher_fullName);

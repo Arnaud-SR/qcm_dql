@@ -55,13 +55,13 @@ class Question {
         return $cnx->prepareAndExecute($req, ['id_question' => $this->id_question])->tab();
     }
 
-    public static function getAutor($id_autor)
+    public static function getAuthor($id_author)
     {
         $cnx = Connexion::getInstance();
 
         $req = "SELECT prenom, nom FROM user WHERE id_user = :id_author";
 
-        $result = $cnx->prepareAndExecute($req, ['id_author' => $id_autor])->tab();
+        $result = $cnx->prepareAndExecute($req, ['id_author' => $id_author])->tab();
 
         return $result;
     }
