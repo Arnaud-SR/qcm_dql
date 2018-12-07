@@ -71,6 +71,16 @@ if (filter_input(INPUT_POST, "submitQuestion")) {
     }
 
 }
+if (filter_input(INPUT_POST, 'submitQCM')) {
+    $qcm = new Qcm();
+    // ICI METTRE LE TITLE ETC ETC
+    foreach ($_POST['add_question'] as $id_question) {
+        $qcm_q = new Qcm_questions();
+        $qcm_q->addQuestionToQCM($id_qcm, $id_question);
+    }
+    $qcm->buildQcm();
+    die();
+}
 
 $user = User::getUser();
 User::checkIfIsTeacher();
