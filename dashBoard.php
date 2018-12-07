@@ -99,7 +99,7 @@ User::checkIfIsTeacher();
       </a>
     </div>
   </header>
-  <main>
+  <main class="h-100">
     <div class="row h-100" >
       <div id="nav" class="col-3" style="background-color:#153456;">
         <?php

@@ -69,10 +69,12 @@ $thematics = Question::getAllThematics();
                 <button type='button' class='btn btn-info btn-sm modal_question' data-toggle='modal' data-target='#r_question_modal' data-title='$q->content' data-id_teacher='$q->id_teacher' data-theme='$q->theme' data-author_name='$authorName' data-responses='$responsesJson'>
                   consulter
                 </button>";
-              include('modals/_r_question_modal.php');
               "</td>
             </tr>";
-          } ?>
+          } 
+          include('modals/_r_question_modal.php');
+
+          ?>
 
           </tbody>
         </table>
