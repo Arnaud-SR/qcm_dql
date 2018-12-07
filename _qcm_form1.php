@@ -1,6 +1,7 @@
 <?php
 require './class/cfg.php';
 $questionArray = Question::getAllQuestions();
+$thematics = Question::getAllThematics();
 ?>
 
     <form id="_qcm_form" class="mb-5" method="post">
@@ -17,10 +18,12 @@ $questionArray = Question::getAllQuestions();
                 <label class="col-sm-3 col-form-label text-right">Rechercher des questions:</label>
                 <div class="col-sm-3">
                     <select class="form-control mr-5" title="theme" name="select_theme1" id="select_thematics" required>
-                        <option disabled selected>choisir un thème</option>
-                        <option value="0">Programmation web</option>
-                        <option value="1">Réseau</option>
-
+                        <option value="all" selected>Tous</option>
+                        <?php
+                        foreach ($thematics as $thematic) {
+                            echo "<option value='$thematic->theme'>$thematic</option>";
+                        }
+                        ?>
                     </select>
                 </div>
                 <input type="text" class="form-control col-sm-3 ml-5" placeholder="Rechercher" aria-label="rechercher"
@@ -49,9 +52,10 @@ $questionArray = Question::getAllQuestions();
               $responses = $q->getResponses();
               $author = Question::getAutor($q->id_teacher);
               $authorName = $author[0]->prenom." ".$author[0]->nom;
+
               //On JSONise le tableau pour qu'il soit passable à la modal via la JS
               $responsesJson = json_encode($responses);
-              echo "<tr>
+              echo "<tr class='$q->theme tr_theme'>
               <td scope='row' class='col-auto'>
                 {$q->theme}
               </td>
@@ -85,6 +89,7 @@ $questionArray = Question::getAllQuestions();
     </form>
 <script>
     $(document).ready(function () {
+        displayByThematics();
         $('.modal_question').on('click', function () {
             let teacher_fullName = $(this).data('author_name');
             let questionTheme = $(this).data('theme')
@@ -124,9 +129,35 @@ $questionArray = Question::getAllQuestions();
             $('#question_theme_modal').html(questionTheme);
             $('#table-response').html(html);
 
-        })
+        });
         $('#select_thematics').on('change', function () {
             $('#form_search_thematics').submit();
         })
-    })
+    });
+
+    function hideQuestion(selectedOption, matchedQuestion) {
+        selectedOption.on('click', function () {
+            matchedQuestion.find(this);
+            matchedQuestion.addClass('d-none');
+        })
+    }
+
+    function displayByThematics() {
+        var select = $('#select_thematics');
+        var block = $('#tbody_list_questions');
+        var theme = $('.tr_theme');
+        select.on('change', function () {
+            var selected = $('#select_thematics option:selected').text();
+            $('.tr_theme').removeClass('d-none');
+            theme.each(function (i, b) {
+                var content_class = $(this).attr('class');
+                if (selected == "Tous") {
+                    $(this).removeClass('d-none');
+                } else if (!(content_class.includes(selected))) {
+                    $(this).addClass('d-none');
+                }
+            });
+
+        })
+    }
 </script>
