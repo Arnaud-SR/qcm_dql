@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="ModalLabel">Question mise en ligne par <span
-                            id="question_teacher_modal"></span></h5>
+                            ></span></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,10 +13,10 @@
                     <thead>
                     <tr>
                         <th scope="col"></th>
-                        <th scope="col" id="question_content_modal" class="text-center"></th>
+                        <th scope="col"  class="text-center"></th>
                     </tr>
                     </thead>
-                    <tbody id="table-response">
+                    <tbody ">
                     <?php
                     /*  foreach ($array as $key => $response) {
                          echo "<tr>

@@ -1,4 +1,4 @@
-$(function() {
+$(document).ready(function () {
   displayOtherThemeBlock();
   addOtherTheme();
   setQuestionTitle($('#A'));
@@ -8,13 +8,15 @@ $(function() {
 });
 
 function displayOtherThemeBlock(){
-  let other_option = $('option#other');
   let other_option_block = $('#other_option_block');
+    let select_thematics = $("[name='select_theme']");
 
-  other_option.on('click', function(){
-    other_option_block.find(this);
-    other_option_block.removeClass('d-none');
-  })
+    select_thematics.on('change', function (e) {
+        if (this.value === 'other') {
+            other_option_block.removeClass('d-none');
+        }
+    });
+
 }
 
 function addOtherTheme(){
@@ -23,9 +25,8 @@ function addOtherTheme(){
   let select_theme = $('[title=theme]');
   let input_theme = $('#new_theme');
 
-  btn_ok.on('click', function(){
-    alert('aie');
-    select_theme.append(new Option(input_theme.val()));
+    btn_ok.on('click', function(){
+        select_theme.append(new Option(input_theme.val()));
   })
 }
 

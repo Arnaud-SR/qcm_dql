@@ -7,7 +7,7 @@ require('class/cfg.php');
     <script src="assets/js/form.js"></script>
   </head>
   <body>
-    <form id="new_question_form" class="container mb-5 text-white" method="post">
+    <form id="new_question_form" class="container mb-5" method="post">
       <h2 class="col-sm-3 mb-5">Question</h2>
       <div class="form-group row">
         <label class="col-sm-3 col-form-label text-right">Thème de la question</label>
@@ -17,6 +17,7 @@ require('class/cfg.php');
             <option value="<?= Thematics::MATH ?>">Mathématiques</option>
             <option value="<?= Thematics::ENG ?>">Anglais</option>
             <option value="<?= Thematics::HIST ?>">Histoire</option>
+              <option value="other" id="other">Autre</option>
           </select>
         </div>
         <div class="col-sm-4 input-group mb-3 d-none" id="other_option_block">

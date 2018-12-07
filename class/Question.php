@@ -26,14 +26,21 @@ class Question {
         return true;
     }
 
-    public function getQuestionList()
+    public static function getAllThematics()
     {
         $cnx = Connexion::getInstance();
-        $query = "SELECT theme, content FROM questions";
-        $q = $cnx->prepareAndExecute($query,array(
-                                            'theme' => $this->theme,
-                                            'content' => $this->title));
-        return $q->tab();
+        $query = "SELECT theme FROM questions";
+        $q = $cnx->prepareAndExecute($query);
+        $result = $q->tab();
+        $tab = [];
+
+        foreach($result as $r){
+            $tab[] = $r->theme;
+        }
+
+        $tab = array_unique($tab);
+
+        return $tab;
     }
 
     public static function getAllQuestions()

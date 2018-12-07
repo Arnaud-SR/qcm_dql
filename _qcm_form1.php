@@ -1,6 +1,7 @@
 <?php
 require './class/cfg.php';
 $questionArray = Question::getAllQuestions();
+$thematics = Question::getAllThematics();
 ?>
 
     <form id="_qcm_form" class="mb-5" method="post">
@@ -13,19 +14,26 @@ $questionArray = Question::getAllQuestions();
 
         <div class="container" id="researchBlock">
         <div class="input-group mb-5 mt-5 d-flex justify-content-center">
-          <label class="col-sm-3 col-form-label text-right">Rechercher des questions:</label>
-          <div class="col-sm-3">
-            <select class="form-control mr-5" title="theme" name="select_theme1" required>
-              <option  disabled selected>choisir un thème</option>
-              <option value="0">Programmation web</option>
-              <option value="1">Réseau</option>
-            </select>
-          </div>
-          <input type="text" class="form-control col-sm-3 ml-5" placeholder="Rechercher" aria-label="rechercher" aria-describedby="button-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-info" type="button" id="button-addon21">OK</button>
-          </div>
-      </div>
+            <form method="post" id="form_search_thematics">
+                <label class="col-sm-3 col-form-label text-right">Rechercher des questions:</label>
+                <div class="col-sm-3">
+                    <select class="form-control mr-5" title="theme" name="select_theme1" id="select_thematics" required>
+                        <option value="all" selected>Tous</option>
+                        <?php
+                        foreach ($thematics as $thematic) {
+                            echo "<option value='$thematic->theme'>$thematic</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <input type="text" class="form-control col-sm-3 ml-5" placeholder="Rechercher" aria-label="rechercher"
+                       aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-info" type="button" id="button-addon21">OK</button>
+                </div>
+                <input type="submit" value="Rechercher">
+            </form>
+        </div>
       </div>
 
       <div id="block_questions_list" class="container mb-5" >
@@ -44,9 +52,10 @@ $questionArray = Question::getAllQuestions();
               $responses = $q->getResponses();
               $author = Question::getauthor($q->id_teacher);
               $authorName = $author[0]->prenom." ".$author[0]->nom;
+
               //On JSONise le tableau pour qu'il soit passable à la modal via la JS
               $responsesJson = json_encode($responses);
-              echo "<tr>
+              echo "<tr class='$q->theme tr_theme'>
               <td scope='row' class='col-auto'>
                 {$q->theme}
               </td>
@@ -57,13 +66,15 @@ $questionArray = Question::getAllQuestions();
                 <input type='checkbox' name='' >
               </td>
               <td scope='row'>
-                <button type='button' class='btn btn-info btn-sm modal_question' data-toggle='modal' data-target='#r_question_modal' data-question_id='$q->id_question' data-title='$q->content' data-id_teacher='$q->id_teacher' data-author_name='$authorName' data-responses='$responsesJson'>
+                <button type='button' class='btn btn-info btn-sm modal_question' data-toggle='modal' data-target='#r_question_modal' data-title='$q->content' data-id_teacher='$q->id_teacher' data-theme='$q->theme' data-author_name='$authorName' data-responses='$responsesJson'>
                   consulter
                 </button>";
-              include('modals/_question_modal.php');
               "</td>
             </tr>";
-          } ?>
+          } 
+          include('modals/_r_question_modal.php');
+
+          ?>
 
           </tbody>
         </table>
@@ -80,26 +91,28 @@ $questionArray = Question::getAllQuestions();
     </form>
 <script>
     $(document).ready(function () {
+        displayByThematics();
         $('.modal_question').on('click', function () {
-            var teacher_fullName = $(this).data('author_name');
-            var responsesArray = $(this).data('responses');
-            var questionTitle = $(this).data('title');
-            var html = '';
+            let teacher_fullName = $(this).data('author_name');
+            let questionTheme = $(this).data('theme')
+            let responsesArray = $(this).data('responses');
+            let questionTitle = $(this).data('title');
+            let html = '';
 
             // En gros, au click, on charge toutes les données en data-attribute et pour les réponses on fait une boucle dessus
-             responsesArray.forEach(function (e, i) {
+            responsesArray.forEach(function (e, answerIndex) {
                 switch (answerIndex){
                     case 0:
-                        i = 'A.';
+                        answerIndex = 'A.';
                         break;
                     case 1:
-                        i = 'B.';
+                        answerIndex = 'B.';
                         break;
                     case 2:
-                        i = 'C.';
+                        answerIndex = 'C.';
                         break;
                     case 3:
-                        i = 'D.';
+                        answerIndex = 'D.';
                         break;
                     default:
                         break;
@@ -111,11 +124,42 @@ $questionArray = Question::getAllQuestions();
                         "</th><th scope='row' class='form-check'><input type='checkbox' disabled>" +
                         e.is_correct +
                         "</th></tr >"
-            }); 
+            });
 
-            $('#table-response').html(html);
             $('#question_teacher_modal').html(teacher_fullName);
             $('#question_content_modal').html(questionTitle);
+            $('#question_theme_modal').html(questionTheme);
+            $('#table-response').html(html);
+
+        });
+        $('#select_thematics').on('change', function () {
+            $('#form_search_thematics').submit();
         })
-    })
+    });
+
+    function hideQuestion(selectedOption, matchedQuestion) {
+        selectedOption.on('click', function () {
+            matchedQuestion.find(this);
+            matchedQuestion.addClass('d-none');
+        })
+    }
+
+    function displayByThematics() {
+        var select = $('#select_thematics');
+        var block = $('#tbody_list_questions');
+        var theme = $('.tr_theme');
+        select.on('change', function () {
+            var selected = $('#select_thematics option:selected').text();
+            $('.tr_theme').removeClass('d-none');
+            theme.each(function (i, b) {
+                var content_class = $(this).attr('class');
+                if (selected == "Tous") {
+                    $(this).removeClass('d-none');
+                } else if (!(content_class.includes(selected))) {
+                    $(this).addClass('d-none');
+                }
+            });
+
+        })
+    }
 </script>
