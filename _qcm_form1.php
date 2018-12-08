@@ -47,23 +47,23 @@ $thematics = Question::getAllThematics();
           <?php
           foreach ($questionArray as $q) {
               $responses = $q->getResponses();
-              $author = Question::getAutor($q->id_teacher);
+              $author = Question::getAutor($q->getIdTeacher());
               $authorName = $author[0]->prenom." ".$author[0]->nom;
 
               //On JSONise le tableau pour qu'il soit passable à la modal via la JS
               $responsesJson = json_encode($responses);
-              echo "<tr class='$q->theme tr_theme'>
+              echo "<tr class='{$q->getTheme()} tr_theme'>
               <td scope='row' class='col-auto'>
-                {$q->theme}
+                {$q->getTheme()}
               </td>
               <td scope='row' class='col-sm-9'>
                 {$q->content}
               </td>
               <td scope='row' class='form-check'>
-                <input type='checkbox' name='add_question[]' value='$q->id_question'>
+                <input type='checkbox' name='add_question[]' value='{$q->getIdQuestion()}'>
               </td>
               <td scope='row'>
-                <button type='button' class='btn btn-info btn-sm modal_question' data-toggle='modal' data-target='#r_question_modal' data-title='$q->content' data-id_teacher='$q->id_teacher' data-theme='$q->theme' data-author_name='$authorName' data-responses='$responsesJson'>
+                <button type='button' class='btn btn-info btn-sm modal_question' data-toggle='modal' data-target='#r_question_modal' data-title='{$q->content}' data-id_teacher='{$q->getIdTeacher()}' data-theme='{$q->getTheme()}' data-author_name='$authorName' data-responses='$responsesJson'>
                   consulter
                 </button>";
               include('modals/_r_question_modal.php');
@@ -76,7 +76,7 @@ $thematics = Question::getAllThematics();
       </div>
     <div class="row">
         <div class="col-12">
-            <label>A rendre avant le : <input type="date"></label>
+            <label>A rendre avant le : <input type="date" name="date_limit_qcm"></label>
         </div>
     </div>
         <div class="d-flex justify-content-center">
