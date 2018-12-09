@@ -136,17 +136,12 @@ $thematics = Question::getAllThematics();
         $('#select_thematics').on('change', function () {
             $('#form_search_thematics').submit();
         })
-        let setQuestionButton = $('.modal-footer').find('button');
-        setQuestionButton.on('click', function () {
-            let questionTitle = $('#question_content_modal');
-            let answersTitle = $('#table-response').find('th.col-sm-8');
-            let cb = $('#table-response').find('th.form-check');
-            questionTitle.replaceWith('<textarea class="form-control col-sm-11 mb-5 mx-auto" type="text" rows="2" value="bla">');
-            answersTitle.html('<input class="form-control col-sm-11" type="text" value="bla">');
-            cb.html('<input class="form-control" type="checkbox">');  
-            setQuestionButton.html('Envoyer');
-            setQuestionButton.attr('disabled');         
+        $('.modal-footer').find('button').on('click', function () {
+            $('#question_content_modal').replaceWith('<textarea class="form-control col-sm-11 mb-5 mx-auto" type="text" rows="2" value="bla">');
+            $('#table-response').find('th.col-sm-8').html('<input class="form-control col-sm-11" type="text" value="bla">');
+            $('#table-response').find('th.form-check').html('<input class="form-control" type="checkbox">');
         })
+        
         
 
 
