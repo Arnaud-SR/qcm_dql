@@ -19,21 +19,12 @@
            </header>
            <main>
              <span class="form-group row">
-               <h5 class="mb-5" id="question_content_modal"></h5>
+               <h3 class="mb-5 mx-auto" id="question_content_modal"></h3>
              </span>
              <hr>
-             <h4>Réponses</h4>
-             <table class="table table-borderless">
-               <thead>
-                 <tr>
-                   <th scope="col">#</th>
-                   <th scope="col">Intitulé de la question</th>
-                   <th scope="col">V/F</th>
-                 </tr>
-               </thead>
-               <tbody id="table-response">
-               </tbody>
-             </table>
+               <table class="table table-striped">
+                   <tbody id="table-response"></tbody>
+               </table>
            </main>
          </div>
       </div>

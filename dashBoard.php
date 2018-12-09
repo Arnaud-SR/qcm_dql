@@ -71,6 +71,20 @@ if (filter_input(INPUT_POST, "submitQuestion")) {
     }
 
 }
+if (filter_input(INPUT_POST, 'submitQCM')) {
+    $qcm = new Qcm();
+    $qcm->setTitle(filter_input(INPUT_POST, "qcm_title", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
+    $qcm->setIdTeacher($_SESSION['id_user']);
+    $qcm->setDateLimit(
+        filter_input(INPUT_POST, "date_limit_qcm", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES)
+    );
+    $qcm->buildQcm();
+    $id_qcm = $cnx->pk();
+    foreach ($_POST['add_question'] as $id_question) {
+        $qcm_q = new LinkQuestionToQcm();
+        $qcm_q->addQuestionToQCM($id_qcm, $id_question);
+    }
+}
 
 $user = User::getUser();
 User::checkIfIsTeacher();

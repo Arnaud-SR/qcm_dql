@@ -4,7 +4,7 @@ $questionArray = Question::getAllQuestions();
 $thematics = Question::getAllThematics();
 ?>
 
-    <form id="_qcm_form" class="mb-5" method="post">
+<form method="post" id="_qcm_form" class="mb-5">
       <div class="form-group row">
         <label class="col-sm-3 col-form-label text-right">Titre du QCM</label>
         <div class="col-sm-9">
@@ -14,8 +14,7 @@ $thematics = Question::getAllThematics();
 
         <div class="container" id="researchBlock">
         <div class="input-group mb-5 mt-5 d-flex justify-content-center">
-            <form method="post" id="form_search_thematics">
-                <label class="col-sm-3 col-form-label text-right">Rechercher des questions:</label>
+            <label class="col-sm-3 col-form-label text-right">Rechercher des questions:</label>
                 <div class="col-sm-3">
                     <select class="form-control mr-5" title="theme" name="select_theme1" id="select_thematics" required>
                         <option value="all" selected>Tous</option>
@@ -31,12 +30,10 @@ $thematics = Question::getAllThematics();
                 <div class="input-group-append">
                     <button class="btn btn-info" type="button" id="button-addon21">OK</button>
                 </div>
-                <input type="submit" value="Rechercher">
-            </form>
         </div>
       </div>
 
-      <div id="block_questions_list" class="container mb-5" >
+    <div class="container mb-5">
         <table class="table">
           <thead>
             <tr>
@@ -46,7 +43,7 @@ $thematics = Question::getAllThematics();
               <th scope="col"></th>
             </tr>
           </thead>
-          <tbody>
+            <tbody id="block_questions_list">
           <?php
           foreach ($questionArray as $q) {
               $responses = $q->getResponses();
@@ -55,23 +52,23 @@ $thematics = Question::getAllThematics();
 
               //On JSONise le tableau pour qu'il soit passable à la modal via la JS
               $responsesJson = json_encode($responses);
-              echo "<tr class='$q->theme tr_theme'>
+              echo "<tr class='{$q->getTheme()} tr_theme'>
               <td scope='row' class='col-auto'>
-                {$q->theme}
+                {$q->getTheme()}
               </td>
               <td scope='row' class='col-sm-9'>
                 {$q->content}
               </td>
               <td scope='row' class='form-check'>
-                <input type='checkbox' name='' >
+                <input type='checkbox' name='add_question[]' value='{$q->getIdQuestion()}'>
               </td>
               <td scope='row'>
-                <button type='button' class='btn btn-info btn-sm modal_question' data-toggle='modal' data-target='#r_question_modal' data-title='$q->content' data-id_teacher='$q->id_teacher' data-theme='$q->theme' data-author_name='$authorName' data-responses='$responsesJson'>
+                <button type='button' class='btn btn-info btn-sm modal_question' data-toggle='modal' data-target='#r_question_modal' data-title='{$q->content}' data-id_teacher='{$q->getIdTeacher()}' data-theme='{$q->getTheme()}' data-author_name='$authorName' data-responses='$responsesJson'>
                   consulter
                 </button>";
               "</td>
             </tr>";
-          } 
+          }
           include('modals/_r_question_modal.php');
 
           ?>
@@ -79,28 +76,34 @@ $thematics = Question::getAllThematics();
           </tbody>
         </table>
       </div>
+    <div class="row">
+        <div class="col-12">
+            <label>A rendre avant le : <input type="date" name="date_limit_qcm"></label>
+        </div>
+    </div>
         <div class="d-flex justify-content-center">
-          <button type="submit" class="btn btn-success btn-lg mt-5 mr-5" name="submitQCM">Envoyer</button>
+            <input type="submit" value="envoyer" class="btn btn-success btn-lg mt-5 mr-5" name="submitQCM">
           <button type="button" class="btn btn-info btn-lg mt-5" data-toggle="modal" data-target="#r_qcm_modal">Aperçu</button>
         </div>
 
         <?php
         require('modals/_qcm_modal.php');
        ?>
-
     </form>
 <script>
     $(document).ready(function () {
         displayByThematics();
         $('.modal_question').on('click', function () {
             let teacher_fullName = $(this).data('author_name');
-            let questionTheme = $(this).data('theme')
+            let questionTheme = $(this).data('theme');
             let responsesArray = $(this).data('responses');
             let questionTitle = $(this).data('title');
             let html = '';
 
             // En gros, au click, on charge toutes les données en data-attribute et pour les réponses on fait une boucle dessus
             responsesArray.forEach(function (e, answerIndex) {
+                let is_correct = e.is_correct == 1 ? '✅' : '';
+
                 switch (answerIndex){
                     case 0:
                         answerIndex = 'A.';
@@ -117,13 +120,11 @@ $thematics = Question::getAllThematics();
                     default:
                         break;
                 }
-                html += "<tr> <th scope='row'>" +
+                html += "<tr ><th scope='row'>" +
                         answerIndex +
                         "</th><th scope='row' class='col-sm-8'>" +
                         e.response +
-                        "</th><th scope='row' class='form-check'><input type='checkbox' disabled>" +
-                        e.is_correct +
-                        "</th></tr >"
+                        "</th><th scope='row' class='form-check'>"+is_correct+"</th></tr>"
             });
 
             $('#question_teacher_modal').html(teacher_fullName);
@@ -137,16 +138,8 @@ $thematics = Question::getAllThematics();
         })
     });
 
-    function hideQuestion(selectedOption, matchedQuestion) {
-        selectedOption.on('click', function () {
-            matchedQuestion.find(this);
-            matchedQuestion.addClass('d-none');
-        })
-    }
-
     function displayByThematics() {
         var select = $('#select_thematics');
-        var block = $('#tbody_list_questions');
         var theme = $('.tr_theme');
         select.on('change', function () {
             var selected = $('#select_thematics option:selected').text();
