@@ -47,7 +47,7 @@ $thematics = Question::getAllThematics();
           <?php
           foreach ($questionArray as $q) {
               $responses = $q->getResponses();
-              $author = Question::getauthor($q->id_teacher);
+              $author = Question::getAuthor($q->getIdTeacher());
               $authorName = $author[0]->prenom." ".$author[0]->nom;
 
               //On JSONise le tableau pour qu'il soit passable à la modal via la JS
@@ -69,7 +69,7 @@ $thematics = Question::getAllThematics();
               "</td>
             </tr>";
           }
-          include('modals/_r_question_modal.php');
+          include('modals/_question_modal.php');
 
           ?>
 
@@ -136,6 +136,20 @@ $thematics = Question::getAllThematics();
         $('#select_thematics').on('change', function () {
             $('#form_search_thematics').submit();
         })
+        let setQuestionButton = $('.modal-footer').find('button');
+        setQuestionButton.on('click', function () {
+            let questionTitle = $('#question_content_modal');
+            let answersTitle = $('#table-response').find('th.col-sm-8');
+            let cb = $('#table-response').find('th.form-check');
+            questionTitle.replaceWith('<textarea class="form-control col-sm-11 mb-5 mx-auto" type="text" rows="2" value="bla">');
+            answersTitle.html('<input class="form-control col-sm-11" type="text" value="bla">');
+            cb.html('<input class="form-control" type="checkbox">');  
+            setQuestionButton.html('Envoyer');
+            setQuestionButton.attr('disabled');         
+        })
+        
+
+
     });
 
     function displayByThematics() {
