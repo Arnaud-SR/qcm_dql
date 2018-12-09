@@ -68,7 +68,7 @@ $thematics = Question::getAllThematics();
                 </button>";
               "</td>
             </tr>";
-          } 
+          }
           include('modals/_r_question_modal.php');
 
           ?>
@@ -95,13 +95,15 @@ $thematics = Question::getAllThematics();
         displayByThematics();
         $('.modal_question').on('click', function () {
             let teacher_fullName = $(this).data('author_name');
-            let questionTheme = $(this).data('theme')
+            let questionTheme = $(this).data('theme');
             let responsesArray = $(this).data('responses');
             let questionTitle = $(this).data('title');
             let html = '';
 
             // En gros, au click, on charge toutes les données en data-attribute et pour les réponses on fait une boucle dessus
             responsesArray.forEach(function (e, answerIndex) {
+                let is_correct = e.is_correct == 1 ? '✅' : '';
+
                 switch (answerIndex){
                     case 0:
                         answerIndex = 'A.';
@@ -118,13 +120,11 @@ $thematics = Question::getAllThematics();
                     default:
                         break;
                 }
-                html += "<tr> <th scope='row'>" +
+                html += "<tr ><th scope='row'>" +
                         answerIndex +
                         "</th><th scope='row' class='col-sm-8'>" +
                         e.response +
-                        "</th><th scope='row' class='form-check'><input type='checkbox' disabled>" +
-                        e.is_correct +
-                        "</th></tr >"
+                        "</th><th scope='row' class='form-check'>"+is_correct+"</th></tr>"
             });
 
             $('#question_teacher_modal').html(teacher_fullName);
