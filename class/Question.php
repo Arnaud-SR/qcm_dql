@@ -1,10 +1,10 @@
 <?php
 
 class Question {
-    public $id_question;
-    public $id_teacher;
-    public $theme;
-    public $title;
+    private $id_question;
+    private $id_teacher;
+    private $theme;
+    private $title;
 
     public function __construct($id_question = null, $id_teacher = null, $theme = null, $title = null)
     {
