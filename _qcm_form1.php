@@ -48,6 +48,7 @@ $thematics = Question::getAllThematics();
           foreach ($questionArray as $q) {
               $responses = $q->getResponses();
               $author = Question::getAuthor($q->getIdTeacher());
+
               $authorName = $author[0]->prenom." ".$author[0]->nom;
 
               //On JSONise le tableau pour qu'il soit passable à la modal via la JS
@@ -70,6 +71,7 @@ $thematics = Question::getAllThematics();
             </tr>";
           }
           include('modals/_question_modal.php');
+
 
           ?>
 
@@ -161,6 +163,7 @@ $thematics = Question::getAllThematics();
         })
 
     });
+
 
     function displayByThematics() {
         var select = $('#select_thematics');
