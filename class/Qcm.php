@@ -108,6 +108,17 @@ class Qcm {
         return true;
     }
 
+    public static function getTeacherName($id_teacher)
+    {
+        $cnx = Connexion::getInstance();
+
+        $req = "SELECT prenom, nom FROM user WHERE id_user = :id_teacher";
+
+        $result = $cnx->prepareAndExecute($req, ['id_teacher' => $id_teacher])->tab();
+
+        return $result;
+    }
+
     /**
      * @return null
      */

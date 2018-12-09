@@ -10,6 +10,7 @@ $qcmList = QCM::getAllQcm();
         <th>Crée le</th>
         <th>Enseignant</th>
         <th>Date limite</th>
+        <th style="width: 175px">Intitulé</th>
         <th class="text-center">Nombre de question</th>
         <th class="text-center">Résultats</th>
         <th class="text-center">Détails</th>
@@ -21,11 +22,15 @@ $qcmList = QCM::getAllQcm();
     foreach ($qcmList as $qcm) {
         $nbQuestions = QCM::countNbQuestions($qcm->id_qcm);
         $is_visible = $qcm->is_published ? 'fas fa-eye text-success' : 'fas fa-eye-slash text-danger';
+        $teacher = QCM::getTeacherName($qcm->id_teacher);
+        $teacherName = $teacher[0]->prenom." ".$teacher[0]->nom;
+
         echo "<tr>
     <td>$qcm->id_qcm</td>
     <td>{$qcm->created_at}</td>
-    <td>$qcm->id_teacher</td>
+    <td>{$teacherName}</td>
     <td>$qcm->date_limit</td>
+    <td>$qcm->title</td>
     <td class='text-center'>$nbQuestions</td>
     <td><span class='btn btn-primary'>Voir les résultats</span></td>
     <td><span class='btn btn-info'>Détail du QCM</span></td>
