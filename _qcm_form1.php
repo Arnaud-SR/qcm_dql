@@ -140,7 +140,8 @@ $thematics = Question::getAllThematics();
             let questionContentModal =  $('#question_content_modal').text();
             $('#question_content_modal').replaceWith('<textarea class="form-control col-sm-11 mb-5 mx-auto" name="question_title_set" type="text" rows="2">');
             $('textarea').attr('placeholder',questionContentModal);
-            let answerTitleTab = new Array();;
+            $(this).prop("disabled",true);
+            let answerTitleTab = new Array();
             $('#table-response').find('tr').each(function (index) {
                 answerTitleTab[index] = $('#table-response').find('tr:nth-child(' + (index+1) + ') > th:nth-child(2)').text();
             })
