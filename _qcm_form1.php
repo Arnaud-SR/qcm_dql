@@ -140,10 +140,11 @@ $thematics = Question::getAllThematics();
             $('#question_content_modal').replaceWith('<textarea class="form-control col-sm-11 mb-5 mx-auto" type="text" rows="2" value="bla">');
             $('#table-response').find('th.col-sm-8').html('<input class="form-control col-sm-11" type="text" value="bla">');
             $('#table-response').find('th.form-check').html('<input class="form-control" type="checkbox">');
+            $('.form-control').on('click', function () {
+                $('.modal-footer').html('<button type="submit" class="btn btn-success" >Envoyer</button>')
+            
         })
-        
-        
-
+        })
 
     });
 
