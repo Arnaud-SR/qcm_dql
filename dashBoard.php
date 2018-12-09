@@ -4,6 +4,8 @@ if (!isset($_SESSION['id_user'])) {
   header("Location: index.php");
   exit;
 }
+$qcmNoPublished = QCM::getQcmList();
+
 $tabError = [];
 $cnx = Connexion::getInstance();
 if (filter_input(INPUT_POST, "submitQuestion")) {

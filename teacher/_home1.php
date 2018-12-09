@@ -1,50 +1,40 @@
-<div class="container mt-5 d-flex align-items-start justify-content-center">
-  <div class="card list-group bg-info p-3 mr-5" id="todo">
-    <h2 class="text-center text-white">QCM à publier</h2>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title text-dark">Controle PHP DUT 2ème année</h5>
-        <h6 class="cad-subtitle mb-2 text-muted"> Date de création: 13/11/2018</h6>
-        <div class="d-flex justify-content-between mt-3">
-          <button type="button" class="btn btn-info btn-sm" data-target="#">Modifier</button>
-          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#r_qcm_modal">Aperçu</button>
-        </div>
-        <?php require 'modals/_qcm_modal.php'; ?>
-      </div>
+<?php
+$qcmNoPublished = QCM::getQcmList();
+$qcmPublished = QCM::getQcmList(1);
+$qcmList = QCM::getAllQcm();
+?>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Crée le</th>
+        <th>Enseignant</th>
+        <th>Date limite</th>
+        <th class="text-center">Nombre de question</th>
+        <th class="text-center">Résultats</th>
+        <th class="text-center">Détails</th>
+        <th>Visiblité</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    foreach ($qcmList as $qcm) {
+        $nbQuestions = QCM::countNbQuestions($qcm->id_qcm);
+        $is_visible = $qcm->is_published ? 'fas fa-eye text-success' : 'fas fa-eye-slash text-danger';
+        echo "<tr>
+    <td>$qcm->id_qcm</td>
+    <td>{$qcm->created_at}</td>
+    <td>$qcm->id_teacher</td>
+    <td>$qcm->date_limit</td>
+    <td class='text-center'>$nbQuestions</td>
+    <td><span class='btn btn-primary'>Voir les résultats</span></td>
+    <td><span class='btn btn-info'>Détail du QCM</span></td>
+    <td class='text-center'><a href=''><a href='published-qcm.php?qcm={$qcm->id_qcm}'><span class='{$is_visible}'></a></span>
+    </td>
+</tr>";
+    }
+    ?>
+    </tbody>
+</table>
 
-    </div>
 
-  </div>
-  <div class="card list-group bg-info p-3 mr-5" id="done">
-    <h2 class="text-center text-white">QCM publiés</h2>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title text-dark">Controle PHP DUT 2ème année</h5>
-        <h6 class="cad-subtitle mb-2 text-muted"> Date de publication: 23/11/2018</h6>
-        <h6 class="cad-subtitle mb-2 text-danger"> Date limite: 28/11/2018</h6>
-        <div class="d-flex justify-content-between mt-3">
-          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#r_results_modal">Résultats</button>
-          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#r_qcm_modal">Aperçu</button>
-        </div>
-      </div>
-      <?php require 'modals/_qcm_modal.php'; ?>
-      <?php require 'modals/_results_modal.php'; ?>
-    </div>
-  </div>
-
-  <div class="card list-group bg-secondary p-3" id="on_file">
-    <h2 class="text-center text-white">QCM archivés</h2>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title text-dark">Controle PHP DUT 2ème année</h5>
-        <h6 class="cad-subtitle mb-2 text-muted"> Date de publication: 13/11/2018</h6>
-        <h6 class="cad-subtitle mb-2 text-dark"> Date limite: 28/11/2018</h6>
-        <div class="d-flex justify-content-between mt-3">
-          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#r_qcm_modal">Aperçu</button>
-        </div>
-      </div>
-      <?php require 'modals/_qcm_modal.php'; ?>
-    </div>
-  </div>
-
-</div>
