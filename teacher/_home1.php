@@ -29,7 +29,7 @@ $qcmList = QCM::getAllQcm();
     <td class='text-center'>$nbQuestions</td>
     <td><span class='btn btn-primary'>Voir les résultats</span></td>
     <td><span class='btn btn-info'>Détail du QCM</span></td>
-    <td class='text-center'><a href=''><a href='published-qcm.php?qcm={$qcm->id_qcm}'><span class='{$is_visible}'></a></span>
+    <td class='text-center'><a href=''><a href='published-qcm.php?qcm={$qcm->id_qcm}'><span class='{$is_visible}' title='rendre ce QCM visible par les étudiants'></a></span>
     </td>
 </tr>";
     }
