@@ -54,6 +54,71 @@ class Qcm {
         );
     }
 
+    public static function getQcmList($is_published = 0)
+    {
+        $cnx = Connexion::getInstance();
+        $req = "SELECT * FROM qcm WHERE is_published = :is_published";
+
+        $result = $cnx->prepareAndExecute(
+            $req,
+            [
+                'is_published' => $is_published,
+            ]
+        );
+
+        return $result->tab();
+    }
+
+    public static function getAllQcm()
+    {
+        $cnx = Connexion::getInstance();
+        $req = "SELECT * FROM qcm";
+
+        $result = $cnx->prepareAndExecute(
+            $req
+        );
+
+        return $result->tab();
+    }
+
+    public static function countNbQuestions($id_qcm)
+    {
+        $cnx = Connexion::getInstance();
+        $req = "SELECT * FROM link_question_to_qcm WHERE id_qcm = :id_qcm";
+
+        $result = $cnx->prepareAndExecute(
+            $req,
+            [
+                'id_qcm' => $id_qcm,
+            ]
+        );
+
+        return $result->rowNb();
+    }
+
+    public static function publishedQcm($id_qcm)
+    {
+        $cnx = Connexion::getInstance();
+        $req = "UPDATE qcm SET is_published = 1 WHERE id_qcm = :id_qcm";
+
+        $cnx->prepareAndExecute($req, [
+            'id_qcm' => $id_qcm
+        ]);
+
+        return true;
+    }
+
+    public static function getTeacherName($id_teacher)
+    {
+        $cnx = Connexion::getInstance();
+
+        $req = "SELECT prenom, nom FROM user WHERE id_user = :id_teacher";
+
+        $result = $cnx->prepareAndExecute($req, ['id_teacher' => $id_teacher])->tab();
+
+        return $result;
+    }
+
     /**
      * @return null
      */
