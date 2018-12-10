@@ -1,7 +1,7 @@
 <?php
 
 
-class LinkQuestionToQcm
+class Contenir
 {
     private $id_qcm;
     private $id_question;
