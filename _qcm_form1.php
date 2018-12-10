@@ -138,7 +138,7 @@ $thematics = Question::getAllThematics();
             $('#form_search_thematics').submit();
         })
         $('.modal-footer').find('button').on('click', function () {
-            $('.modal-body').replaceWith( "<form class='modal-body' action='' method='post'>" + $('.modal-body').html() + "</form>" );
+            $('.modal-content').replaceWith( "<form class='modal-content' action='' method='post'>" + $('.modal-content').html() + "</form>" );
 
             let questionContentModal =  $('#question_content_modal').text();
             let answerTitleTab = new Array();
