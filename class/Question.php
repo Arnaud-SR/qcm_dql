@@ -26,6 +26,15 @@ class Question {
         return true;
     }
 
+    public function updateQuestion($id)
+    {
+        $cnx = Connexion::getInstance();
+
+        $query = "UPDATE questions SET content = :content WHERE id = :id_question";
+        $cnx->prepareAndExecute($query,array('content' => $this->title));
+        return true;
+    }
+
     public static function getAllThematics()
     {
         $cnx = Connexion::getInstance();
@@ -61,7 +70,7 @@ class Question {
 
         return $cnx->prepareAndExecute($req, ['id_question' => $this->id_question])->tab();
     }
-
+    
     public static function getAuthor($id_author)
     {
         $cnx = Connexion::getInstance();

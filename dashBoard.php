@@ -4,6 +4,8 @@ if (!isset($_SESSION['id_user'])) {
   header("Location: index.php");
   exit;
 }
+$qcmNoPublished = QCM::getQcmList();
+
 $tabError = [];
 $cnx = Connexion::getInstance();
 if (filter_input(INPUT_POST, "submitQuestion")) {
@@ -71,6 +73,13 @@ if (filter_input(INPUT_POST, "submitQuestion")) {
     }
 
 }
+
+
+// if (filter_input(INPUT_POST, 'submitSetQuestion')) {
+//   $u_question = new Question();
+//   $u_question->setTitle(filter_input(INPUT_POST, "question_title_u", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
+//   $u_question->
+// }
 if (filter_input(INPUT_POST, 'submitQCM')) {
     $qcm = new Qcm();
     $qcm->setTitle(filter_input(INPUT_POST, "qcm_title", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));

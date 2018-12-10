@@ -3,9 +3,6 @@ require('class/cfg.php');
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <script src="assets/js/form.js"></script>
-  </head>
   <body>
     <form id="new_question_form" class="container mb-5" method="post">
       <h2 class="col-sm-3 mb-5">Question</h2>
