@@ -47,7 +47,7 @@ $thematics = Question::getAllThematics();
           <?php
           foreach ($questionArray as $q) {
               $responses = $q->getResponses();
-              $author = Question::getAutor($q->getIdTeacher());
+              $author = Question::getAuthor($q->getIdTeacher());
               $authorName = $author[0]->prenom." ".$author[0]->nom;
 
               //On JSONise le tableau pour qu'il soit passable à la modal via la JS
@@ -63,13 +63,13 @@ $thematics = Question::getAllThematics();
                 <input type='checkbox' name='add_question[]' value='{$q->getIdQuestion()}'>
               </td>
               <td scope='row'>
-                <button type='button' class='btn btn-info btn-sm modal_question' data-toggle='modal' data-target='#r_question_modal' data-title='{$q->content}' data-id_teacher='{$q->getIdTeacher()}' data-theme='{$q->getTheme()}' data-author_name='$authorName' data-responses='$responsesJson'>
+                <button type='button' class='btn btn-info btn-sm modal_question' data-toggle='modal' data-target='#r_question_modal' data-id='{$q->getIdQuestion()}' data-title='{$q->content}' data-id_teacher='{$q->getIdTeacher()}' data-theme='{$q->getTheme()}' data-author_name='$authorName' data-responses='$responsesJson'>
                   consulter
                 </button>";
               "</td>
             </tr>";
+            include('modals/_question_modal.php');
           }
-          include('modals/_r_question_modal.php');
 
           ?>
 
@@ -94,12 +94,13 @@ $thematics = Question::getAllThematics();
     $(document).ready(function () {
         displayByThematics();
         $('.modal_question').on('click', function () {
+            let questionId = $(this).data('id');
             let teacher_fullName = $(this).data('author_name');
             let questionTheme = $(this).data('theme');
             let responsesArray = $(this).data('responses');
             let questionTitle = $(this).data('title');
             let html = '';
-
+            
             // En gros, au click, on charge toutes les données en data-attribute et pour les réponses on fait une boucle dessus
             responsesArray.forEach(function (e, answerIndex) {
                 let is_correct = e.is_correct == 1 ? '✅' : '';
@@ -126,7 +127,7 @@ $thematics = Question::getAllThematics();
                         e.response +
                         "</th><th scope='row' class='form-check'>"+is_correct+"</th></tr>"
             });
-
+            $('#question_label_modal').html('Question #' + questionId);
             $('#question_teacher_modal').html(teacher_fullName);
             $('#question_content_modal').html(questionTitle);
             $('#question_theme_modal').html(questionTheme);
@@ -136,6 +137,32 @@ $thematics = Question::getAllThematics();
         $('#select_thematics').on('change', function () {
             $('#form_search_thematics').submit();
         })
+        $('.modal-footer').find('button').on('click', function () {
+            $('.modal-content').replaceWith( "<form class='modal-content' action='' method='post'>" + $('.modal-content').html() + "</form>" );
+
+            let questionContentModal =  $('#question_content_modal').text();
+            let answerTitleTab = new Array();
+
+            $('#question_content_modal').replaceWith('<textarea class="form-control col-sm-11 mb-5 mx-auto" name="question_title_u" type="text" rows="2">');
+            $('textarea').attr('placeholder',questionContentModal);
+            $(this).prop("disabled",true);
+            $('#table-response').find('tr').each(function (index) {
+                answerTitleTab[index] = $('#table-response').find('tr:nth-child(' + (index+1) + ') > th:nth-child(2)').text();
+            })
+            $('#table-response').find('th.col-sm-8').html('<input class="form-control col-sm-11" value="" type="text" name="">');
+            $('#table-response').find('input').each(function(index){
+                this.name = 'response_title_' + (index+1) ;
+                this.value = answerTitleTab[index];
+            });
+            $('#table-response').find('th.form-check').html('<input class="form-control" name="" type="checkbox">');
+            $('#table-response').find('[type="checkbox"]').each(function(index){
+                this.name = 'response_cb_' + (index+1) ;
+            });           
+            $('.form-control').on('click', function () {
+                $('.modal-footer').html('<button type="submit"  name="submitSetQuestion" class="btn btn-success" >Envoyer</button>');       
+            })
+        })
+
     });
 
     function displayByThematics() {

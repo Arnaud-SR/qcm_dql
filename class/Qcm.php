@@ -84,7 +84,7 @@ class Qcm {
     public static function countNbQuestions($id_qcm)
     {
         $cnx = Connexion::getInstance();
-        $req = "SELECT * FROM link_question_to_qcm WHERE id_qcm = :id_qcm";
+        $req = "SELECT * FROM contenir WHERE id_qcm = :id_qcm";
 
         $result = $cnx->prepareAndExecute(
             $req,
