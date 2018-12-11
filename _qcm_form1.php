@@ -7,8 +7,9 @@ $thematics = Question::getAllThematics();
 <form method="post" id="_qcm_form" class="mb-5">
       <div class="form-group row">
         <label class="col-sm-3 col-form-label text-right">Titre du QCM</label>
+          <span class="text-danger font-weight-bold" id="qcm_no_questions"></span>
         <div class="col-sm-9">
-          <input  class="form-control" name="qcm_title" >
+            <input class="form-control" name="qcm_title">
         </div>
       </div>
 
@@ -60,7 +61,7 @@ $thematics = Question::getAllThematics();
                 {$q->content}
               </td>
               <td scope='row' class='form-check'>
-                <input type='checkbox' name='add_question[]' value='{$q->getIdQuestion()}'>
+                <input class='questions' type='checkbox' name='add_question[]' value='{$q->getIdQuestion()}'>
               </td>
               <td scope='row'>
                 <button type='button' class='btn btn-info btn-sm modal_question' data-toggle='modal' data-target='#r_question_modal' data-id='{$q->getIdQuestion()}' data-title='{$q->content}' data-id_teacher='{$q->getIdTeacher()}' data-theme='{$q->getTheme()}' data-author_name='$authorName' data-responses='$responsesJson'>
@@ -92,6 +93,7 @@ $thematics = Question::getAllThematics();
     </form>
 <script>
     $(document).ready(function () {
+        displayErrorQcm();
         displayByThematics();
         $('.modal_question').on('click', function () {
             let questionId = $(this).data('id');
@@ -100,7 +102,7 @@ $thematics = Question::getAllThematics();
             let responsesArray = $(this).data('responses');
             let questionTitle = $(this).data('title');
             let html = '';
-            
+
             // En gros, au click, on charge toutes les données en data-attribute et pour les réponses on fait une boucle dessus
             responsesArray.forEach(function (e, answerIndex) {
                 let is_correct = e.is_correct == 1 ? '✅' : '';
@@ -157,9 +159,9 @@ $thematics = Question::getAllThematics();
             $('#table-response').find('th.form-check').html('<input class="form-control" name="" type="checkbox">');
             $('#table-response').find('[type="checkbox"]').each(function(index){
                 this.name = 'response_cb_' + (index+1) ;
-            });           
+            });
             $('.form-control').on('click', function () {
-                $('.modal-footer').html('<button type="submit"  name="submitSetQuestion" class="btn btn-success" >Envoyer</button>');       
+                $('.modal-footer').html('<button type="submit"  name="submitSetQuestion" class="btn btn-success" >Envoyer</button>');
             })
         })
 
@@ -181,5 +183,16 @@ $thematics = Question::getAllThematics();
             });
 
         })
+    }
+
+    function displayErrorQcm() {
+        $('#_qcm_form').submit(function (e) {
+            if ($('.questions:checkbox:checked').length < 1) {
+                e.preventDefault();
+                alert('Veuillez séléctionnez au moins une question à ajouter au QCM !');
+            }
+        });
+
+        console.log((input.checked).length);
     }
 </script>
