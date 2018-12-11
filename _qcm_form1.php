@@ -7,8 +7,7 @@ $thematics = Question::getAllThematics();
 <form method="post" id="_qcm_form" class="mb-5">
       <div class="form-group row">
         <label class="col-sm-3 col-form-label text-right">Titre du QCM</label>
-          <span class="text-danger font-weight-bold" id="qcm_no_questions"></span>
-        <div class="col-sm-9">
+          <div class="col-sm-9">
             <input class="form-control" name="qcm_title" required>
         </div>
       </div>
