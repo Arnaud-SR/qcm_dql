@@ -9,7 +9,7 @@ $thematics = Question::getAllThematics();
         <label class="col-sm-3 col-form-label text-right">Titre du QCM</label>
           <span class="text-danger font-weight-bold" id="qcm_no_questions"></span>
         <div class="col-sm-9">
-            <input class="form-control" name="qcm_title">
+            <input class="form-control" name="qcm_title" required>
         </div>
       </div>
 
@@ -79,7 +79,7 @@ $thematics = Question::getAllThematics();
       </div>
     <div class="row">
         <div class="col-12">
-            <label>A rendre avant le : <input type="date" name="date_limit_qcm"></label>
+            <label>A rendre avant le : <input type="date" name="date_limit_qcm" required></label>
         </div>
     </div>
         <div class="d-flex justify-content-center">
@@ -192,7 +192,5 @@ $thematics = Question::getAllThematics();
                 alert('Veuillez séléctionnez au moins une question à ajouter au QCM !');
             }
         });
-
-        console.log((input.checked).length);
     }
 </script>
