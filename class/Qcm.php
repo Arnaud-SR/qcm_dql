@@ -78,7 +78,7 @@ class Qcm {
             $req
         );
 
-        return $result->tab();
+        return $result->tab(Qcm::class);
     }
 
     public static function countNbQuestions($id_qcm)
@@ -117,6 +117,30 @@ class Qcm {
         $result = $cnx->prepareAndExecute($req, ['id_teacher' => $id_teacher])->tab();
 
         return $result;
+    }
+
+    public function getQuestions()
+    {
+        $cnx = Connexion::getInstance();
+
+        $req = "SELECT response.* FROM questions INNER JOIN contenir ON questions.id_question = contenir.id_question INNER JOIN response ON response.id_question = questions.id_question WHERE contenir.id_qcm = :id_qcm";
+        $req2 = "SELECT * FROM questions INNER JOIN contenir ON questions.id_question = contenir.id_question WHERE contenir.id_qcm = :id_qcm";
+
+
+        return [
+            'responses' => $cnx->prepareAndExecute(
+                $req,
+                [
+                    'id_qcm' => $this->id_qcm,
+                ]
+            )->tab(),
+            'questions' => $cnx->prepareAndExecute(
+                $req2,
+                [
+                    'id_qcm' => $this->id_qcm,
+                ]
+            )->tab(),
+        ];
     }
 
     /**
