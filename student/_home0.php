@@ -25,11 +25,10 @@
         <h6 class="cad-subtitle mb-2 text-danger"> Date limite: 28/11/2018</h6>
         <div class="d-flex justify-content-between mt-3">
           <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#r_qcm_modal">Aperçu</button>
-          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#r_results_modal">Envoyer</button>
+          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="">Envoyer</button>
         </div>
       </div>
       <?php require 'modals/_qcm_modal.php'; ?>
-      <?php require 'modals/_results_modal.php'; ?>
     </div>
   </div>
 
