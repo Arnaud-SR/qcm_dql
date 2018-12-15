@@ -27,7 +27,6 @@ $qcmList = QCM::getAllQcm();
         foreach ($qcmList as $qcm) {
           $nbQuestions = QCM::countNbQuestions($qcm->id_qcm);
           $questions = $qcm->getQuestions();
-
           $questionsJson = json_encode($questions);
 
           $is_visible = $qcm->is_published ? 'fas fa-eye text-success' : 'fas fa-eye-slash text-danger';
