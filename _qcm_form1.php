@@ -1,5 +1,4 @@
 <?php
-require './class/cfg.php';
 $questionArray = Question::getAllQuestions();
 $thematics = Question::getAllThematics();
 ?>
@@ -11,7 +10,6 @@ $thematics = Question::getAllThematics();
             <input class="form-control" name="qcm_title" required>
         </div>
       </div>
-
         <div class="container" id="researchBlock">
         <div class="input-group mb-5 mt-5 d-flex justify-content-center">
             <label class="col-sm-3 col-form-label text-right">Rechercher des questions:</label>
@@ -102,6 +100,8 @@ $thematics = Question::getAllThematics();
             let questionTitle = $(this).data('title');
             let html = '';
 
+            $.get("dashBoard.php",{idQuestion: questionId});
+
             // En gros, au click, on charge toutes les données en data-attribute et pour les réponses on fait une boucle dessus
             responsesArray.forEach(function (e, answerIndex) {
                 let is_correct = e.is_correct == 1 ? '✅' : '';
@@ -139,12 +139,12 @@ $thematics = Question::getAllThematics();
             $('#form_search_thematics').submit();
         })
         $('.modal-footer').find('button').on('click', function () {
-            $('.modal-content').replaceWith( "<form class='modal-content' action='' method='post'>" + $('.modal-content').html() + "</form>" );
+            $('.modal-content').replaceWith("<form class='modal-content' action='' method='post' id='form_modify_question'>" + $('.modal-content').html() + "</form>");
 
             let questionContentModal =  $('#question_content_modal').text();
             let answerTitleTab = new Array();
 
-            $('#question_content_modal').replaceWith('<textarea class="form-control col-sm-11 mb-5 mx-auto" name="question_title_u" type="text" rows="2">');
+            $('#question_content_modal').replaceWith('<textarea class="form-control col-sm-11 mb-5 mx-auto" name="question_title_u" type="text" rows="2" id="modify_question_title_input">');
             $('textarea').attr('placeholder',questionContentModal);
             $(this).prop("disabled",true);
             $('#table-response').find('tr').each(function (index) {
@@ -161,6 +161,10 @@ $thematics = Question::getAllThematics();
             });
             $('.form-control').on('click', function () {
                 $('.modal-footer').html('<button type="submit"  name="submitSetQuestion" class="btn btn-success" >Envoyer</button>');
+            });
+            $('#form_modify_question').on('submit', function () {
+                let content = $('#modify_question_title_input').val();
+                $.get("dashBoard.php", {content_modify_question: content});
             })
         })
 
