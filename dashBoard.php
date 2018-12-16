@@ -6,6 +6,7 @@ if (!isset($_SESSION['id_user'])) {
   exit;
 }
 $qcmNoPublished = QCM::getQcmList();
+$qcmPublished = QCM::getQcmList(1);
 
 $tabError = [];
 $cnx = Connexion::getInstance();

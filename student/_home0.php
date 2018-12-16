@@ -1,52 +1,38 @@
-<div class="container mt-5 d-flex align-items-start justify-content-center">
-  <div class="card list-group bg-info p-3 mr-5" id="todo">
-    <h2 class="text-center text-white">Nouveau</h2>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title text-dark">Controle PHP DUT 2ème année</h5>
-        <h6 class="cad-subtitle mb-2 text-muted"> Date de publication: 23/11/2018</h6>
-        <h6 class="cad-subtitle mb-2 text-dark"> Date limite: 28/11/2018</h6>
-        <div class="d-flex justify-content-between mt-3">
-          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#r_qcm_modal">Aperçu</button>
-          <button type="button" class="btn btn-info btn-sm">Commencer</button>
-        </div>
-        <?php require 'modals/_qcm_modal.php'; ?>
-      </div>
+<?php ?>
 
-    </div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Crée le</th>
+        <th>Enseignant</th>
+        <th>Date limite</th>
+        <th style="width: 175px">Intitulé</th>
+        <th class="text-center">Nombre de question</th>
+        <th class="text-center">Répondre</th>
+        <th class="text-center">Détails</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    foreach ($qcmPublished as $qcm) {
+        $nbQuestions = QCM::countNbQuestions($qcm->id_qcm);
+        $is_visible = $qcm->is_published ? 'fas fa-eye text-success' : 'fas fa-eye-slash text-danger';
+        $teacher = QCM::getTeacherName($qcm->id_teacher);
+        $teacherName = $teacher[0]->prenom." ".$teacher[0]->nom;
 
-  </div>
-  <div class="card list-group bg-info p-3 mr-5" id="done">
-    <h2 class="text-center text-white">À rendre</h2>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title text-dark">Controle PHP DUT 2ème année</h5>
-        <h6 class="cad-subtitle mb-2 text-muted"> Date de publication: 23/11/2018</h6>
-        <h6 class="cad-subtitle mb-2 text-danger"> Date limite: 28/11/2018</h6>
-        <div class="d-flex justify-content-between mt-3">
-          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#r_qcm_modal">Aperçu</button>
-          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#r_results_modal">Envoyer</button>
-        </div>
-      </div>
-      <?php require 'modals/_qcm_modal.php'; ?>
-      <?php require 'modals/_results_modal.php'; ?>
-    </div>
-  </div>
-
-  <div class="card list-group bg-secondary p-3" id="on_file">
-    <h2 class="text-center text-white">Mes résultats</h2>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title text-dark">Controle PHP DUT 2ème année</h5>
-        <h6 class="cad-subtitle mb-2 text-muted"> Date de rendu: 13/11/2018</h6>
-        <h6 class="cad-subtitle mb-2 text-dark"> Note: 18/20</h6>
-        <div class="d-flex justify-content-between mt-3">
-          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#r_qcm_modal">Aperçu</button>
-          <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#r_qcm_modal">Feedback</button>
-        </div>
-      </div>
-      <?php require 'modals/_qcm_modal.php'; ?>
-    </div>
-  </div>
-
-</div>
+        echo "<tr>
+    <td>$qcm->id_qcm</td>
+    <td>{$qcm->created_at}</td>
+    <td>{$teacherName}</td>
+    <td>$qcm->date_limit</td>
+    <td>$qcm->title</td>
+    <td class='text-center'>$nbQuestions</td>
+    <td><a class='btn btn-warning' href='qcm-exam.php?id_qcm={$qcm->id_qcm}'>Répondre au QCM</a></td>
+    <td><span class='btn btn-info'>Détail du QCM</span></td>   
+    </td>
+</tr>";
+    }
+    ?>
+    </tbody>
+</table>
