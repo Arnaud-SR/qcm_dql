@@ -1,5 +1,4 @@
 <?php
-require './class/cfg.php';
 $questionArray = Question::getAllQuestions();
 $thematics = Question::getAllThematics();
 ?>
@@ -11,7 +10,6 @@ $thematics = Question::getAllThematics();
             <input class="form-control" name="qcm_title" required>
         </div>
       </div>
-
         <div class="container" id="researchBlock">
         <div class="input-group mb-5 mt-5 d-flex justify-content-center">
             <label class="col-sm-3 col-form-label text-right">Rechercher des questions:</label>
@@ -101,6 +99,8 @@ $thematics = Question::getAllThematics();
             let responsesArray = $(this).data('responses');
             let questionTitle = $(this).data('title');
             let html = '';
+
+            $.get("dashBoard.php",{idQuestion: questionId});
 
             // En gros, au click, on charge toutes les données en data-attribute et pour les réponses on fait une boucle dessus
             responsesArray.forEach(function (e, answerIndex) {
