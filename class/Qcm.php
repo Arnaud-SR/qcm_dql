@@ -66,7 +66,22 @@ class Qcm {
             ]
         );
 
-        return $result->tab();
+        return $result->tab(Qcm::class);
+    }
+
+    public static function getQuestionsByQcmId($id_qcm)
+    {
+        $cnx = Connexion::getInstance();
+        $req = "SELECT DISTINCT questions.* FROM questions INNER JOIN contenir ON contenir.id_question = questions.id_question INNER JOIN qcm ON contenir.id_qcm = qcm.id_qcm INNER JOIN response ON response.id_question = questions.id_question WHERE qcm.id_qcm = :id_qcm";
+
+        $result = $cnx->prepareAndExecute(
+            $req,
+            [
+                'id_qcm' => $id_qcm,
+            ]
+        );
+
+        return $result->tab(Question::class);
     }
 
     public static function getAllQcm()

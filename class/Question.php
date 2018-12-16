@@ -70,7 +70,7 @@ class Question {
 
         return $cnx->prepareAndExecute($req, ['id_question' => $this->id_question])->tab();
     }
-    
+
     public static function getAuthor($id_author)
     {
         $cnx = Connexion::getInstance();
