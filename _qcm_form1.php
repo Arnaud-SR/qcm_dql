@@ -67,7 +67,6 @@ $thematics = Question::getAllThematics();
               "</td>
             </tr>";
             include('modals/_question_modal.php');
-            //include('modals/_question_modal.php?id={$q->getIdQuestion()}');
           }
 
           ?>
@@ -102,8 +101,6 @@ $thematics = Question::getAllThematics();
             let html = '';
 
             $.get("dashBoard.php",{idQuestion: questionId});
-
-
 
             // En gros, au click, on charge toutes les données en data-attribute et pour les réponses on fait une boucle dessus
             responsesArray.forEach(function (e, answerIndex) {

@@ -73,12 +73,12 @@ if (filter_input(INPUT_POST, "submitQuestion")) {
           }
 
         }
-        //  Question::updateQuestion('1', 'la requête fonctionne');
-        //
+         Question::updateQuestion('1', 'la requête fonctionne');
+
         // if (!empty($_POST['question_title_u']) ) {
         //   $content= $_POST['question_title_u'];
         //   var_dump($content);
-        //   Question::updateQuestion(3);
+        //   Question::updateQuestion(3, $content);
         // }
 
         // if (!empty($_GET['idQuestion']) ) {

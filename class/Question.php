@@ -26,12 +26,12 @@ class Question {
         return true;
     }
 
-    public static function updateQuestion($id, $title)
+    public static function updateQuestion($id, $titleparam)
     {
         $cnx = Connexion::getInstance();
 
         $query = "UPDATE questions SET content = :title WHERE id_question = $id";
-        $cnx->prepareAndExecute($query,array('title' => $title));
+        $cnx->prepareAndExecute($query,array('title' => $titleparam));
         return true;
     }
 
