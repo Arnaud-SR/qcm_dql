@@ -30,8 +30,8 @@ class Question {
     {
         $cnx = Connexion::getInstance();
 
-        $query = "UPDATE questions SET content = :title WHERE id_question = $id";
-        $cnx->prepareAndExecute($query,array('title' => $titleparam));
+        $query = "UPDATE questions SET content = :title WHERE id_question = :id";
+        $cnx->prepareAndExecute($query,array('title' => $titleparam, 'id' => $id));
         return true;
     }
 
