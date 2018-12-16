@@ -1,5 +1,6 @@
 <?php
 require_once("class/cfg.php");
+
 if (!isset($_SESSION['id_user'])) {
   header("Location: index.php");
   exit;
@@ -73,9 +74,9 @@ if (filter_input(INPUT_POST, "submitQuestion")) {
           }
 
         }
-         Question::updateQuestion('1', 'la requête fonctionne');
 
-        // if (!empty($_POST['question_title_u']) ) {
+
+// if (!empty($_POST['question_title_u']) ) {
         //   $content= $_POST['question_title_u'];
         //   var_dump($content);
         //   Question::updateQuestion(3, $content);
@@ -89,14 +90,16 @@ if (filter_input(INPUT_POST, "submitQuestion")) {
         // }
 
 
-        if (!empty($_GET['idQuestion'])) {
-          $id = $_GET['idQuestion'];
-          $content = 'on a récupéré le bon id, mais sans contenu';
-          if (!empty($_POST['question_title_u']) ) {
-            $content = $_POST['question_title_u'];
-          }
-          Question::updateQuestion($id,$content);
-        }
+if (!empty($_GET['idQuestion'])) {
+    $id = $_GET['idQuestion'];
+    $_SESSION['id_question_modify'] = $id;
+    exit;
+}
+
+if (!empty($_SESSION['id_question_modify']) && !empty($_GET['content_modify_question'])) {
+    Question::updateQuestion($_SESSION['id_question_modify'], $_GET['content_modify_question']);
+    exit;
+}
 
         if (filter_input(INPUT_POST, 'submitQCM')) {
           $qcm = new Qcm();
