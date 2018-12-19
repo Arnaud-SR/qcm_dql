@@ -23,11 +23,6 @@ $thematics = Question::getAllThematics();
                         ?>
                     </select>
                 </div>
-                <input type="text" class="form-control col-sm-3 ml-5" placeholder="Rechercher" aria-label="rechercher"
-                       aria-describedby="button-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-info" type="button" id="button-addon21">OK</button>
-                </div>
         </div>
       </div>
 
