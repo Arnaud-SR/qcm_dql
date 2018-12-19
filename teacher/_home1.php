@@ -41,7 +41,7 @@ $qcmList = QCM::getAllQcm();
           <td>{$qcm->title}</td>
           <td class='text-center'>$nbQuestions</td>
           <td><span class='btn btn-primary' data-toggle='modal' data-target='#r_results_modal'>Voir les résultats</span></td>
-          <td><span class='btn btn-info modal_qcm_detail' data-toggle='modal' data-target='#_qcm_modal' data-questions='{$questionsJson}' data-title='{$qcm->title}' data-teacher-name='{$teacherName}'>Détail du QCM</span></td>
+          <td><button type='button' class='btn btn-info modal_qcm_detail' data-toggle='modal' data-target='#_qcm_modal' data-questions='{$questionsJson}' data-title='{$qcm->title}' data-teacher-name='{$teacherName}'>Détail du QCM</button></td>
           <td class='text-center'><a href=''><a href='published-qcm.php?qcm={$qcm->id_qcm}'><span class='{$is_visible}' title='rendre ce QCM visible par les étudiants'></a></span>
           </td>
           </tr>";
@@ -51,8 +51,10 @@ $qcmList = QCM::getAllQcm();
     </table>
   </div>
 </div>
-<?php require 'modals/_qcm_modal.php' ?>
-<?php require 'modals/_results_modal.php' ?>
+<?php
+include('modals/_qcm_modal.php');
+//require 'modals/_results_modal.php'
+?>
 
 <script>
 $(document).ready(function () {
