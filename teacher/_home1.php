@@ -37,8 +37,8 @@ $qcmList = QCM::getAllQcm();
           <td>$qcm->id_qcm</td>
           <td>{$qcm->created_at}</td>
           <td>{$teacherName}</td>
-          <td>$qcm->date_limit</td>
-          <td>$qcm->title</td>
+          <td>{$qcm->date_limit}</td>
+          <td>{$qcm->title}</td>
           <td class='text-center'>$nbQuestions</td>
           <td><span class='btn btn-primary' data-toggle='modal' data-target='#r_results_modal'>Voir les résultats</span></td>
           <td><span class='btn btn-info modal_qcm_detail' data-toggle='modal' data-target='#r_qcm_modal' data-questions='{$questionsJson}' data-title='{$qcm->title}' data-teacher-name='{$teacherName}'>Détail du QCM</span></td>

@@ -81,7 +81,6 @@ $thematics = Question::getAllThematics();
     </div>
         <div class="d-flex justify-content-center">
             <input type="submit" value="envoyer" class="btn btn-success btn-lg mt-5 mr-5" name="submitQCM">
-          <button type="button" class="btn btn-info btn-lg mt-5" data-toggle="modal" data-target="#r_qcm_modal">Aperçu</button>
         </div>
 
         <?php
