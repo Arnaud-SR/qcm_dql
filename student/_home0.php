@@ -33,7 +33,7 @@ $qcmPublished = QCM::getQcmList(1);
       <h6 class='cad-subtitle mb-2 text-muted'> Date de publication: {$qcm_waiting->created_at}</h6>
       <h6 class='cad-subtitle mb-2 text-danger'> Date limite: {$qcm_waiting->date_limit}</h6>
       <div class='d-flex justify-content-between mt-3'>
-      <button type='button' class='btn btn-info btn-sm '>Commencer</button>
+      <a class='btn btn-info btn-sm ' href='qcm-exam.php?id_qcm={$qcm_waiting->id_qcm}'>Commencer</a>
 
       </div>
       </div>
