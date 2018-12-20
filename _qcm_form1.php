@@ -23,11 +23,6 @@ $thematics = Question::getAllThematics();
                         ?>
                     </select>
                 </div>
-                <input type="text" class="form-control col-sm-3 ml-5" placeholder="Rechercher" aria-label="rechercher"
-                       aria-describedby="button-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-info" type="button" id="button-addon21">OK</button>
-                </div>
         </div>
       </div>
 
@@ -61,12 +56,13 @@ $thematics = Question::getAllThematics();
                 <input class='questions' type='checkbox' name='add_question[]' value='{$q->getIdQuestion()}'>
               </td>
               <td scope='row'>
-                <button type='button' class='btn btn-info btn-sm modal_question' data-toggle='modal' data-target='#r_question_modal' data-id='{$q->getIdQuestion()}' data-title='{$q->content}' data-id_teacher='{$q->getIdTeacher()}' data-theme='{$q->getTheme()}' data-author_name='$authorName' data-responses='$responsesJson'>
+                <button type='button' class='btn btn-info btn-sm modal_question' data-toggle='modal' data-target='#_question_modal' data-id='{$q->getIdQuestion()}' data-title='{$q->content}' data-id_teacher='{$q->getIdTeacher()}' data-theme='{$q->getTheme()}' data-author_name='$authorName' data-responses='$responsesJson'>
                   consulter
                 </button>";
               "</td>
             </tr>";
             include('modals/_question_modal.php');
+
           }
 
           ?>
@@ -81,11 +77,9 @@ $thematics = Question::getAllThematics();
     </div>
         <div class="d-flex justify-content-center">
             <input type="submit" value="envoyer" class="btn btn-success btn-lg mt-5 mr-5" name="submitQCM">
-          <button type="button" class="btn btn-info btn-lg mt-5" data-toggle="modal" data-target="#r_qcm_modal">Aperçu</button>
         </div>
 
         <?php
-        require('modals/_qcm_modal.php');
        ?>
     </form>
 <script>

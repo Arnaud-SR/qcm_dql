@@ -76,21 +76,6 @@ if (filter_input(INPUT_POST, "submitQuestion")) {
 
         }
 
-
-// if (!empty($_POST['question_title_u']) ) {
-        //   $content= $_POST['question_title_u'];
-        //   var_dump($content);
-        //   Question::updateQuestion(3, $content);
-        // }
-
-        // if (!empty($_GET['idQuestion']) ) {
-        //   echo "string";
-        //   $id = $_GET['idQuestion'];
-        //   var_dump($id);
-        //   Question::updateQuestion($id,'on a récupéré le bon id');
-        // }
-
-
 if (!empty($_GET['idQuestion'])) {
     $id = $_GET['idQuestion'];
     $_SESSION['id_question_modify'] = $id;
@@ -112,7 +97,7 @@ if (!empty($_SESSION['id_question_modify']) && !empty($_GET['content_modify_ques
           $qcm->buildQcm();
           $id_qcm = $cnx->pk();
           foreach ($_POST['add_question'] as $id_question) {
-            $qcm_q = new LinkQuestionToQcm();
+            $qcm_q = new Contenir();
             $qcm_q->addQuestionToQCM($id_qcm, $id_question);
           }
         }
