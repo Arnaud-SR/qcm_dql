@@ -106,12 +106,12 @@ if (!empty($_SESSION['id_question_modify']) && !empty($_GET['content_modify_ques
         User::checkIfIsTeacher();
         ?>
         <!DOCTYPE html>
-        <html lang="fr" class="h-100">
+        <html lang="fr">
         <head>
           <?php require_once 'head.php' ?>
           <title>Tableau de bord</title>
         </head>
-        <body class="h-100 bg-dark">
+        <body class=" bg-dark">
           <header class="d-flex container-fluid text-white " style="height:140px;padding: 20px 5vw;background-color:#153456;">
             <h1> Gestionnaire de QCM
               <?php
@@ -129,8 +129,8 @@ if (!empty($_SESSION['id_question_modify']) && !empty($_GET['content_modify_ques
               </a>
             </div>
           </header>
-          <main class="h-100">
-            <div class="row h-100" >
+          <main >
+            <div class="row " >
               <div id="nav" class="col-3" style="background-color:#153456;">
                 <?php
                 if (isset($_SESSION['is_teacher'])) {
