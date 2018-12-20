@@ -62,6 +62,7 @@ $thematics = Question::getAllThematics();
               "</td>
             </tr>";
             include('modals/_question_modal.php');
+
           }
 
           ?>
@@ -79,7 +80,6 @@ $thematics = Question::getAllThematics();
         </div>
 
         <?php
-        require('modals/_qcm_modal.php');
        ?>
     </form>
 <script>
