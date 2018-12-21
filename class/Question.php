@@ -71,6 +71,14 @@ class Question {
         return $cnx->prepareAndExecute($req, ['id_question' => $this->id_question])->tab();
     }
 
+    public static function getIdResponsesWithIdQuestion($id_question)
+    {
+        $cnx = Connexion::getInstance();
+        $req = "SELECT id_response FROM response WHERE id_question = :id_question AND is_correct = 1";
+
+        return $cnx->prepareAndExecute($req, ['id_question' => $id_question])->tab();
+    }
+
     public static function getAuthor($id_author)
     {
         $cnx = Connexion::getInstance();
@@ -80,6 +88,22 @@ class Question {
         $result = $cnx->prepareAndExecute($req, ['id_author' => $id_author])->tab();
 
         return $result;
+    }
+
+    public static function countNbCorrectQuestion($id_question)
+    {
+        $cnx = Connexion::getInstance();
+
+        $req = "SELECT * FROM response WHERE id_question = :id_question AND is_correct = 1";
+
+        $result = $cnx->prepareAndExecute(
+            $req,
+            [
+                'id_question' => $id_question,
+            ]
+        );
+
+        return $result->rowNb();
     }
 
     /**
