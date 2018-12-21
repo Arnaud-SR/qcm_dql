@@ -53,6 +53,13 @@ if (filter_input(INPUT_POST, "finish_qcm")) {
             }
         }
         $finalResult = $mark * (20 / $countQuestions);
+
+        if ($finalResult > 20) {
+            $finalResult = 20;
+        } elseif ($finalResult < 0) {
+            $finalResult = 0;
+        }
+
         $result->setResult($finalResult);
         $result->addResult();
     } else {
@@ -77,7 +84,7 @@ if (filter_input(INPUT_POST, "finish_qcm")) {
     <?php
     foreach ($qcm as $i => $q) {
         $responses = $q->getResponses();
-        // $hasManyResponses = Question::checkIfHasManyResponse($q->id_qcm);
+        
         echo "
 <p class='bg-light'>{$q->content}</p>
 <ul class='list-unstyled'>";
