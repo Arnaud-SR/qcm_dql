@@ -84,7 +84,7 @@ if (filter_input(INPUT_POST, "finish_qcm")) {
     <?php
     foreach ($qcm as $i => $q) {
         $responses = $q->getResponses();
-        
+
         echo "
 <p class='bg-light'>{$q->content}</p>
 <ul class='list-unstyled'>";

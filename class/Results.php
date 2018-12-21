@@ -45,6 +45,19 @@ class Results {
         );
     }
 
+    public static function isAlreadySubmittedByStudent($id_qcm)
+    {
+        $cnx = Connexion::getInstance();
+        $req = "SELECT * FROM results WHERE id_qcm = :id_qcm AND id_student = :id_student";
+
+        $result = $cnx->prepareAndExecute($req, [
+            'id_qcm' => $id_qcm,
+            'id_student' => $_SESSION['id_user']
+        ]);
+
+        return $result->rowNb() > 0;
+    }
+
     /**
      * @return null
      */

@@ -69,6 +69,22 @@ class Qcm {
         return $result->tab(Qcm::class);
     }
 
+    public static function getQcmFinished()
+    {
+        $cnx = Connexion::getInstance();
+
+        $req = "SELECT * FROM qcm INNER JOIN results ON results.id_qcm = qcm.id_qcm WHERE results.id_student = :id_student";
+
+        $result = $cnx->prepareAndExecute(
+            $req,
+            [
+                'id_student' => $_SESSION['id_user'],
+            ]
+        );
+
+        return $result->tab();
+    }
+
     public static function getQuestionsByQcmId($id_qcm)
     {
         $cnx = Connexion::getInstance();
