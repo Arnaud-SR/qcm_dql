@@ -8,17 +8,17 @@ $qcmFinished = QCM::getQcmFinished();
     <h2 class="text-center text-white">À rendre</h2>
     <?php
     foreach ($qcmToDo as $qcm_waiting) {
-        $is_publicated = Results::isAlreadySubmittedByStudent($qcm_waiting->id_qcm);
+        $is_publicated = Results::isAlreadySubmittedByStudent($qcm_waiting->getIdQcm());
         if ($is_publicated) {
             continue;
         } else {
             echo "<div class='card mb-5'>
       <div class='card-body'>
-      <h5 class='card-title text-dark'>{$qcm_waiting->title}</h5>
-      <h6 class='cad-subtitle mb-2 text-muted'> Date de publication: {$qcm_waiting->created_at}</h6>
-      <h6 class='cad-subtitle mb-2 text-danger'> Date limite: {$qcm_waiting->date_limit}</h6>
+      <h5 class='card-title text-dark'>{$qcm_waiting->getTitle()}</h5>
+      <h6 class='cad-subtitle mb-2 text-muted'> Date de publication: {$qcm_waiting->getCreatedAt()}</h6>
+      <h6 class='cad-subtitle mb-2 text-danger'> Date limite: {$qcm_waiting->getDateLimit()}</h6>
       <div class='d-flex justify-content-between mt-3'>
-      <a class='btn btn-info btn-sm ' href='qcm-exam.php?id_qcm={$qcm_waiting->id_qcm}'>Commencer</a>
+      <a class='btn btn-info btn-sm ' href='qcm-exam.php?uuid_qcm={$qcm_waiting->getUuidQcm()}&id_qcm={$qcm_waiting->getIdQcm()}'>Commencer</a>
 
       </div>
       </div>

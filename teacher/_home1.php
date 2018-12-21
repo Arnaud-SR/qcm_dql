@@ -25,24 +25,24 @@ $qcmList = QCM::getAllQcm();
       <tbody>
         <?php
         foreach ($qcmList as $qcm) {
-          $nbQuestions = QCM::countNbQuestions($qcm->id_qcm);
+          $nbQuestions = QCM::countNbQuestions($qcm->getIdQcm());
           $questions = $qcm->getQuestions();
           $questionsJson = json_encode($questions);
 
-          $is_visible = $qcm->is_published ? 'fas fa-eye text-success' : 'fas fa-eye-slash text-danger';
-          $teacher = QCM::getTeacherName($qcm->id_teacher);
+          $is_visible = $qcm->getIsPublished() ? 'fas fa-eye text-success' : 'fas fa-eye-slash text-danger';
+          $teacher = QCM::getTeacherName($qcm->getIdTeacher());
           $teacherName = $teacher[0]->prenom." ".$teacher[0]->nom;
 
           echo "<tr>
-          <td>$qcm->id_qcm</td>
-          <td>{$qcm->created_at}</td>
+          <td>{$qcm->getIdQcm()}</td>
+          <td>{$qcm->getCreatedAt()}</td>
           <td>{$teacherName}</td>
-          <td>{$qcm->date_limit}</td>
-          <td>{$qcm->title}</td>
+          <td>{$qcm->getDateLimit()}</td>
+          <td>{$qcm->getTitle()}</td>
           <td class='text-center'>$nbQuestions</td>
           <td><span class='btn btn-primary' data-toggle='modal' data-target='#_results_modal'>Voir les résultats</span></td>
-          <td><span class='btn btn-info modal_qcm_detail' data-toggle='modal' data-target='#_qcm_modal' data-questions='{$questionsJson}' data-title='{$qcm->title}' data-teacher-name='{$teacherName}'>Détail du QCM</span></td>
-          <td class='text-center'><a href=''><a href='published-qcm.php?qcm={$qcm->id_qcm}'><span class='{$is_visible}' title='rendre ce QCM visible par les étudiants'></a></span>
+          <td><span class='btn btn-info modal_qcm_detail' data-toggle='modal' data-target='#_qcm_modal' data-questions='{$questionsJson}' data-title='{$qcm->getTitle()}' data-teacher-name='{$teacherName}'>Détail du QCM</span></td>
+          <td class='text-center'><a href=''><a href='published-qcm.php?qcm={$qcm->getIdQcm()}'><span class='{$is_visible}' title='rendre ce QCM visible par les étudiants'></a></span>
           </td>
           </tr>";
         }
