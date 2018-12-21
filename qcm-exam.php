@@ -65,6 +65,8 @@ if (filter_input(INPUT_POST, "finish_qcm")) {
     } else {
         $tabErrorString = implode('', $tabError);
     }
+    header('Location: dashboard.php');
+    exit;
 }
 ?>
 
