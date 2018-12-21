@@ -7,7 +7,7 @@ class Qcm {
     private $created_at;
     private $date_limit;
     private $is_published;
-    private $uuid_qcm;
+    private $u_unique_id_qcm;
 
     /**
      * Qcm constructor.
@@ -25,7 +25,7 @@ class Qcm {
         $created_at = null,
         $date_limit = null,
         $is_published = null,
-        $uuid_qcm = null
+        $u_unique_id_qcm = null
     )
     {
         $this->id_qcm = $id_qcm;
@@ -34,7 +34,7 @@ class Qcm {
         $this->created_at = $created_at;
         $this->date_limit = $date_limit;
         $this->is_published = $is_published;
-        $this->uuid_qcm = $uuid_qcm;
+        $this->$u_unique_id_qcm = $uuid_qcm;
     }
 
     public function buildQcm()
@@ -53,7 +53,7 @@ class Qcm {
                 'createdAt' => $date,
                 'dateLimit' => $this->date_limit,
                 'is_published' => 0,
-                'uuid_qcm' => $this->uuid_qcm,
+                '$u_unique_id_qcm' => $this->uuid_qcm,
             ]
         );
     }
@@ -89,28 +89,28 @@ class Qcm {
         return $result->tab();
     }
 
-    public static function getQuestionsByQcmUuid($uuid_qcm)
+    public static function getQuestionsByQcmU_unique_id_qcm($uuid_qcm)
     {
         $cnx = Connexion::getInstance();
-        $req = "SELECT DISTINCT questions.* FROM questions INNER JOIN contenir ON contenir.id_question = questions.id_question INNER JOIN qcm ON contenir.id_qcm = qcm.id_qcm INNER JOIN response ON response.id_question = questions.id_question WHERE qcm.uuid_qcm = :uuid";
+        $req = "SELECT DISTINCT questions.* FROM questions INNER JOIN contenir ON contenir.id_question = questions.id_question INNER JOIN qcm ON contenir.id_qcm = qcm.id_qcm INNER JOIN response ON response.id_question = questions.id_question WHERE qcm.u_unique_id_qcm = :uuid";
 
         $result = $cnx->prepareAndExecute(
             $req,
             [
-                'uuid' => $uuid_qcm,
+                'u_unique_id_qcm' => $u_unique_id_qcm,
             ]
         );
 
         return $result->tab(Question::class);
     }
 
-    public static function checkIfQcmExist($uuid, $id_qcm)
+    public static function checkIfQcmExist($u_unique_id_qcm, $id_qcm)
     {
         $cnx = Connexion::getInstance();
-        $req = "SELECT * FROM qcm WHERE uuid_qcm = :uuid AND id_qcm = :id_qcm";
+        $req = "SELECT * FROM qcm WHERE uuid_qcm = :u_unique_id_qcm AND id_qcm = :id_qcm";
 
         $result = $cnx->prepareAndExecute($req, [
-            'uuid' => $uuid,
+            'u_unique_id_qcm' => $u_unique_id_qcm,
             'id_qcm' => $id_qcm
         ]);
 
@@ -290,17 +290,17 @@ class Qcm {
     /**
      * @return null
      */
-    public function getUuidQcm()
+    public function getU_unique_id_qcmQcm()
     {
-        return $this->uuid_qcm;
+        return $this->u_unique_id_qcm;
     }
 
     /**
      * @param null $uuid_qcm
      */
-    public function setUuidQcm($uuid_qcm): void
+    public function setUuniqueIdQcm($uuid_qcm): void
     {
-        $this->uuid_qcm = $uuid_qcm;
+        $this->uuid_qcm = $u_unique_id_qcm;
     }
 
 
