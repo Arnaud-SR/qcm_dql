@@ -111,7 +111,7 @@ if (!empty($_SESSION['id_question_modify']) && !empty($_GET['content_modify_ques
           <?php require_once 'head.php' ?>
           <title>Tableau de bord</title>
         </head>
-        <body class=" bg-dark">
+        <body style="background-color:#153456;">
           <header class="d-flex container-fluid text-white " style="height:140px;padding: 20px 5vw;background-color:#153456;">
             <h1> Gestionnaire de QCM
               <?php
