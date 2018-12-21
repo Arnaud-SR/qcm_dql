@@ -2,11 +2,13 @@
 require('class/cfg.php');
 $user = User::getUser();
 User::checkIfIsTeacher();
-if (isset($_SESSION['id_teacher'])) {
+
+if (isset($_SESSION['id_teacher']) || !QCM::checkIfQcmExist($_GET['uuid_qcm'], $_GET['id_qcm'])) {
     header('Location: index.php');
-    exit;
+    die('error');
 }
-$qcm = QCM::getQuestionsByQcmId($_GET['id_qcm']);
+$id_qcm = $_GET['id_qcm'];
+$qcm = QCM::getQuestionsByQcmUuid($_GET['uuid_qcm']);
 $countQuestions = count($qcm);
 if (filter_input(INPUT_POST, "finish_qcm")) {
     $tabError = [];
@@ -18,7 +20,7 @@ if (filter_input(INPUT_POST, "finish_qcm")) {
     if (!$tabError) {
         $result = new Results();
         $result->setIdStudent($_SESSION['id_user']);
-        $result->setIdQcm($_GET['id_qcm']);
+        $result->setIdQcm($id_qcm);
         $mark = 0;
         $tabIdQuestion = [];
         $tabIdResponse = [];
@@ -78,11 +80,12 @@ if (filter_input(INPUT_POST, "finish_qcm")) {
 </head>
 <body>
 <form action="" method="post" class="p-1">
-    <span class="text-danger"><?php
+        <span class="text-danger"><?php
         if (isset($tabErrorString)) {
             echo "<span class='text-danger'>$tabErrorString</span>";
         }
         ?></span>
+    <h6 class="text-primary">Barème : réponse juste +1 points, chaque réponses fausses cochées enlèvera -0.25, le tout sera ramener sur 20 à la fin (chaque question possède une ou plusieurs réponses possibles)</h6>
     <?php
     foreach ($qcm as $i => $q) {
         $responses = $q->getResponses();
