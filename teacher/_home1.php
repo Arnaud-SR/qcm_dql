@@ -66,9 +66,9 @@ $(document).ready(function () {
   let qcmResultsBtn = $('.btn-info');
 
   qcmDetailsBtn.click(function () {
-    let qcm_title = $(divis).data('title');
-    let questionsArray = $(divis).data('questions');
-    let authorName = $(divis).data('teacher-name');
+    let qcm_title = $(this).data('title');
+    let questionsArray = $(this).data('questions');
+    let authorName = $(this).data('teacher-name');
     let html = '';
     (questionsArray.questions).forEach(function (e, i) {
       var responsesHtml = '';
