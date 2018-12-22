@@ -86,5 +86,11 @@ require('class/cfg.php');
         </div>
       </div>
     </form>
+    <script>
+        $(document).ready(function () {
+            displayOtherThemeBlock();
+            addOtherTheme();
+        });
+    </script>
   </body>
 </html>

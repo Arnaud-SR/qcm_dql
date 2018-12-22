@@ -18,7 +18,7 @@ $thematics = Question::getAllThematics();
                         <option value="all" selected>Tous</option>
                         <?php
                         foreach ($thematics as $thematic) {
-                            echo "<option value='$thematic->theme'>$thematic</option>";
+                            echo "<option value='$thematic'>$thematic</option>";
                         }
                         ?>
                     </select>
