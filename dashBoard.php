@@ -116,14 +116,14 @@ if (filter_input(INPUT_POST, 'submitQCM')) {
           <header class="d-flex container-fluid text-white " style="height:140px;padding: 20px 5vw;background-color:#153456;">
             <h1> Gestionnaire de QCM
               <?php
+              //var_dump($user);
               if (isset($_SESSION['is_teacher'])) {
-                echo "pour les enseignants";
+                echo "pour l'enseignant ".$user->prenom." ".$user->nom;
               }else{
-                echo "pour les étudiants";
+                echo "pour l'étudiant ".$user->prenom." ".$user->nom;
               }
               ?>
             </h1>
-            <h2 class="d-flex justify-self-center align-self-center" style="padding:185px;" > Bienvenue, <?= $user->prenom ?> </h2>
             <div class="align-self-end">
               <a href="disconnect.php" class="btn btn-danger" style="padding:10px 20px;">
                 Se déconnecter
