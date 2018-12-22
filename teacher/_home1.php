@@ -35,7 +35,7 @@ $qcmList = QCM::getAllQcm();
             <div ><span class='btn btn-primary modal_qcm_detail' data-toggle='modal' data-target='#_qcm_modal' data-questions='{$questionsJson}' data-title='{$qcm->title}' data-teacher-name='{$teacherName}'>Détail du QCM</span></div>
           </div>
         </div>
-        <div id='result' class='' data-id='{$qcm->id_qcm}'>
+        <div id='qcmResults{$qcm->id_qcm}' class='d-none' '>
           <table class='table'>
             <thead>
               <tr>
@@ -82,20 +82,12 @@ $(document).ready(function () {
   $('#questions_modal_qcm').html(html);
 });
 qcmResultsBtn.on('click',function () {
-  let qcmResultTabId = $('#result').data('id');
-
-  console.log($('#result').find($('[data-id="' + qcmResultTabId + '"]')));
-
-
-  // matchedElSel.toggleClass('d-none');
+  let resultsBtnId = $(this).data('id');
+  let resultBlock = $('[id="qcmResults' + resultsBtnId + '"]');
+  resultBlock.toggleClass('d-none');
 })
 
 });
 
-function toggleBlock(displayBtnSel, matchedElSel) {
-  displayBtnSel.on('click', function(){
-    matchedElSel.find(this);
-    matchedElSel.toggleClass('d-none');
-  })
-}
+
 </script>
