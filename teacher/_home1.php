@@ -31,11 +31,11 @@ $qcmList = QCM::getAllQcm();
             <div class='text-center'>Date limite: {$qcm->date_limit}</div>
           </div>
           <div class='d-flex align-self-end justify-content-end mt-3'>
-            <div class=''><span class='btn btn-info modal_qcm_detail mr-4' data-id='{$qcm->id_qcm}'>Résultats</span></div>
+            <div><span class='btn btn-info modal_qcm_detail mr-4' data-id='{$qcm->id_qcm}'>Résultats</span></div>
             <div ><span class='btn btn-primary modal_qcm_detail' data-toggle='modal' data-target='#_qcm_modal' data-questions='{$questionsJson}' data-title='{$qcm->title}' data-teacher-name='{$teacherName}'>Détail du QCM</span></div>
           </div>
         </div>
-        <div id='result' class='d-none'>
+        <div id='result' class='' data-id='{$qcm->id_qcm}'>
           <table class='table'>
             <thead>
               <tr>
@@ -82,10 +82,12 @@ $(document).ready(function () {
   $('#questions_modal_qcm').html(html);
 });
 qcmResultsBtn.on('click',function () {
-  let qcmId = $(this).data('id');
-  let matchedElSel = $('#result')
-  matchedElSel.find(this);
-  matchedElSel.toggleClass('d-none');
+  let qcmResultTabId = $('#result').data('id');
+
+  console.log($('#result').find($('[data-id="' + qcmResultTabId + '"]')));
+
+
+  // matchedElSel.toggleClass('d-none');
 })
 
 });
