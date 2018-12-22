@@ -7,7 +7,7 @@ class Qcm {
     private $created_at;
     private $date_limit;
     private $is_published;
-    private $u_unique_id_qcm;
+    private $uuid_qcm;
 
     /**
      * Qcm constructor.
@@ -25,7 +25,7 @@ class Qcm {
         $created_at = null,
         $date_limit = null,
         $is_published = null,
-        $u_unique_id_qcm = null
+        $uuid_qcm = null
     )
     {
         $this->id_qcm = $id_qcm;
@@ -34,7 +34,7 @@ class Qcm {
         $this->created_at = $created_at;
         $this->date_limit = $date_limit;
         $this->is_published = $is_published;
-        $this->u_unique_id_qcm = $u_unique_id_qcm;
+        $this->uuid_qcm = $uuid_qcm;
     }
 
     public function buildQcm()
@@ -42,7 +42,7 @@ class Qcm {
         $cnx = Connexion::getInstance();
         $createdAt = new DateTime('now');
         $date = $createdAt->format('Y-m-d H:i:s');
-        $req = "INSERT INTO qcm VALUES(:id_qcm, :id_teacher, :title, :createdAt, :dateLimit, :is_published, :u_unique_id_qcm)";
+        $req = "INSERT INTO qcm VALUES(:id_qcm, :id_teacher, :title, :createdAt, :dateLimit, :is_published, :uuid_qcm)";
 
         $cnx->prepareAndExecute(
             $req,
@@ -53,9 +53,21 @@ class Qcm {
                 'createdAt' => $date,
                 'dateLimit' => $this->date_limit,
                 'is_published' => 0,
-                '$u_unique_id_qcm' => $this->u_unique_id_qcm,
+                'uuid_qcm' => $this->uuid_qcm,
             ]
         );
+    }
+
+    public function checkDateLimit()
+    {
+      $today = new DateTime('now');
+      $formattedTodayDate = $today->format('Y-m-d H:i:s');
+      $limitDate = $this->date_limit;
+      if ($formattedTodayDate < $limitDate) {
+        echo "<a class='btn btn-primary border border-primary btn-sm ' href='qcm-exam.php?uuid_qcm={$this->uuid_qcm}&id_qcm={$this->id_qcm}'>Commencer</a>";
+      }else {
+        echo "Désolé, la date limite est dépassée!";
+      }
     }
 
     public static function getQcmList($is_published = 0)
@@ -89,28 +101,28 @@ class Qcm {
         return $result->tab();
     }
 
-    public static function getQuestionsByQcmU_unique_id_qcm($u_unique_id_qcm)
+    public static function getQuestionsByQcmuuid($uuid_qcm)
     {
         $cnx = Connexion::getInstance();
-        $req = "SELECT DISTINCT questions.* FROM questions INNER JOIN contenir ON contenir.id_question = questions.id_question INNER JOIN qcm ON contenir.id_qcm = qcm.id_qcm INNER JOIN response ON response.id_question = questions.id_question WHERE qcm.u_unique_id_qcm = :u_unique_id_qcm";
+        $req = "SELECT DISTINCT questions.* FROM questions INNER JOIN contenir ON contenir.id_question = questions.id_question INNER JOIN qcm ON contenir.id_qcm = qcm.id_qcm INNER JOIN response ON response.id_question = questions.id_question WHERE qcm.uuid_qcm = :uuid_qcm";
 
         $result = $cnx->prepareAndExecute(
             $req,
             [
-                'u_unique_id_qcm' => $u_unique_id_qcm,
+                'uuid_qcm' => $uuid_qcm,
             ]
         );
 
         return $result->tab(Question::class);
     }
 
-    public static function checkIfQcmExist($u_unique_id_qcm, $id_qcm)
+    public static function checkIfQcmExist($uuid_qcm, $id_qcm)
     {
         $cnx = Connexion::getInstance();
-        $req = "SELECT * FROM qcm WHERE uuid_qcm = :u_unique_id_qcm AND id_qcm = :id_qcm";
+        $req = "SELECT * FROM qcm WHERE uuid_qcm = :uuid_qcm AND id_qcm = :id_qcm";
 
         $result = $cnx->prepareAndExecute($req, [
-            'u_unique_id_qcm' => $u_unique_id_qcm,
+            'uuid_qcm' => $uuid_qcm,
             'id_qcm' => $id_qcm
         ]);
 
@@ -339,17 +351,17 @@ class Qcm {
     /**
      * @return null
      */
-    public function getU_unique_id_qcmQcm()
+    public function getUuidQcm()
     {
-        return $this->u_unique_id_qcm;
+        return $this->uuid_qcm;
     }
 
     /**
-     * @param null $u_unique_id_qcm
+     * @param null $uuid_qcm
      */
-    public function setUuniqueIdQcm($u_unique_id_qcm): void
+    public function setUuidQcm($uuid_qcm): void
     {
-        $this->u_unique_id_qcm = $u_unique_id_qcm;
+        $this->uuid_qcm = $uuid_qcm;
     }
 
 
