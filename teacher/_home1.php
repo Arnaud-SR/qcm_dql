@@ -68,7 +68,7 @@ $(document).ready(function () {
   qcmDetailsBtn.click(function () {
     let qcm_title = $(divis).data('title');
     let questionsArray = $(divis).data('questions');
-    let audivorName = $(divis).data('teacher-name');
+    let authorName = $(divis).data('teacher-name');
     let html = '';
     (questionsArray.questions).forEach(function (e, i) {
       var responsesHtml = '';
@@ -78,7 +78,7 @@ $(document).ready(function () {
     html += `${e.content}<br>`;
   });
   $('#modal_qcm_title').html(qcm_title);
-  $('#modal_qcm_teacher_name').html(audivorName);
+  $('#modal_qcm_teacher_name').html(authorName);
   $('#questions_modal_qcm').html(html);
 });
 qcmResultsBtn.on('click',function () {
