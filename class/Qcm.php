@@ -1,12 +1,13 @@
 <?php
 
 class Qcm {
-    public $id_qcm;
-    public $title;
-    public $id_teacher;
-    public $created_at;
-    public $date_limit;
-    public $is_published;
+    private $id_qcm;
+    private $title;
+    private $id_teacher;
+    private $created_at;
+    private $date_limit;
+    private $is_published;
+    private $u_unique_id_qcm;
 
     /**
      * Qcm constructor.
@@ -23,7 +24,8 @@ class Qcm {
         $id_teacher = null,
         $created_at = null,
         $date_limit = null,
-        $is_published = null
+        $is_published = null,
+        $u_unique_id_qcm = null
     )
     {
         $this->id_qcm = $id_qcm;
@@ -32,6 +34,7 @@ class Qcm {
         $this->created_at = $created_at;
         $this->date_limit = $date_limit;
         $this->is_published = $is_published;
+        $this->$u_unique_id_qcm = $uuid_qcm;
     }
 
     public function buildQcm()
@@ -39,7 +42,7 @@ class Qcm {
         $cnx = Connexion::getInstance();
         $createdAt = new DateTime('now');
         $date = $createdAt->format('Y-m-d H:i:s');
-        $req = "INSERT INTO qcm VALUES(:id_qcm, :id_teacher, :title, :createdAt, :dateLimit, :is_published )";
+        $req = "INSERT INTO qcm VALUES(:id_qcm, :id_teacher, :title, :createdAt, :dateLimit, :is_published, :uuid_qcm)";
 
         $cnx->prepareAndExecute(
             $req,
@@ -50,6 +53,7 @@ class Qcm {
                 'createdAt' => $date,
                 'dateLimit' => $this->date_limit,
                 'is_published' => 0,
+                '$u_unique_id_qcm' => $this->uuid_qcm,
             ]
         );
     }
@@ -85,19 +89,32 @@ class Qcm {
         return $result->tab();
     }
 
-    public static function getQuestionsByQcmId($id_qcm)
+    public static function getQuestionsByQcmU_unique_id_qcm($uuid_qcm)
     {
         $cnx = Connexion::getInstance();
-        $req = "SELECT DISTINCT questions.* FROM questions INNER JOIN contenir ON contenir.id_question = questions.id_question INNER JOIN qcm ON contenir.id_qcm = qcm.id_qcm INNER JOIN response ON response.id_question = questions.id_question WHERE qcm.id_qcm = :id_qcm";
+        $req = "SELECT DISTINCT questions.* FROM questions INNER JOIN contenir ON contenir.id_question = questions.id_question INNER JOIN qcm ON contenir.id_qcm = qcm.id_qcm INNER JOIN response ON response.id_question = questions.id_question WHERE qcm.u_unique_id_qcm = :uuid";
 
         $result = $cnx->prepareAndExecute(
             $req,
             [
-                'id_qcm' => $id_qcm,
+                'u_unique_id_qcm' => $u_unique_id_qcm,
             ]
         );
 
         return $result->tab(Question::class);
+    }
+
+    public static function checkIfQcmExist($u_unique_id_qcm, $id_qcm)
+    {
+        $cnx = Connexion::getInstance();
+        $req = "SELECT * FROM qcm WHERE uuid_qcm = :u_unique_id_qcm AND id_qcm = :id_qcm";
+
+        $result = $cnx->prepareAndExecute($req, [
+            'u_unique_id_qcm' => $u_unique_id_qcm,
+            'id_qcm' => $id_qcm
+        ]);
+
+        return $result->rowNb() >= 1;
     }
 
     public static function getAllQcm()
@@ -309,4 +326,22 @@ class Qcm {
     {
         $this->date_limit = $date_limit;
     }
+
+    /**
+     * @return null
+     */
+    public function getU_unique_id_qcmQcm()
+    {
+        return $this->u_unique_id_qcm;
+    }
+
+    /**
+     * @param null $uuid_qcm
+     */
+    public function setUuniqueIdQcm($uuid_qcm): void
+    {
+        $this->uuid_qcm = $u_unique_id_qcm;
+    }
+
+
 }

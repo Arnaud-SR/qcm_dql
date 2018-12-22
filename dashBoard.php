@@ -17,7 +17,7 @@ if (filter_input(INPUT_POST, "submitQuestion")) {
   $question->setIdTeacher($_SESSION['id_user']);
   $question->setTheme(filter_input(INPUT_POST, "select_theme", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
 
-  if (!$tabError) {
+if (!$tabError) {
     $question->addQuestion();
     //Recupère l'id de la question qui vient d'être enregistrée en base
     $id_question = $cnx->pk();
@@ -74,7 +74,7 @@ if (filter_input(INPUT_POST, "submitQuestion")) {
             exit();
           }
 
-        }
+}
 
 if (!empty($_GET['idQuestion'])) {
     $id = $_GET['idQuestion'];
@@ -87,20 +87,21 @@ if (!empty($_SESSION['id_question_modify']) && !empty($_GET['content_modify_ques
     exit;
 }
 
-        if (filter_input(INPUT_POST, 'submitQCM')) {
-          $qcm = new Qcm();
+if (filter_input(INPUT_POST, 'submitQCM')) {
+    $qcm = new Qcm();
           $qcm->setTitle(filter_input(INPUT_POST, "qcm_title", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
           $qcm->setIdTeacher($_SESSION['id_user']);
           $qcm->setDateLimit(
             filter_input(INPUT_POST, "date_limit_qcm", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES)
           );
+          $qcm->setUuidQcm(bin2hex(random_bytes(10)));
           $qcm->buildQcm();
           $id_qcm = $cnx->pk();
           foreach ($_POST['add_question'] as $id_question) {
             $qcm_q = new Contenir();
             $qcm_q->addQuestionToQCM($id_qcm, $id_question);
           }
-        }
+}
 
         $user = User::getUser();
         User::checkIfIsTeacher();
