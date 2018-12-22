@@ -13,29 +13,29 @@ $qcmList = QCM::getAllQcm();
     foreach ($qcmList as $qcm) {
       $questions = $qcm->getQuestions();
       $questionsJson = json_encode($questions);
-      $is_visible = $qcm->is_published ? 'fas fa-eye text-success' : 'fas fa-eye-slash text-danger';
-      $teacher = QCM::getTeacherName($qcm->id_teacher);
+      $is_visible = $qcm->getisPublished() ? 'fas fa-eye text-success' : 'fas fa-eye-slash text-danger';
+      $teacher = QCM::getTeacherName($qcm->getIdTeacher());
       $teacherName = $teacher[0]->prenom." ".$teacher[0]->nom;
-      $studentsResults = QCM::getAllStudentResultsForOneQCM($qcm->id_qcm);
+      $studentsResults = QCM::getAllStudentResultsForOneQCM($qcm->getIdQcm());
 
       echo
       "<div class='bg-light border rounded p-3 mb-3'>
         <div class='container mb-3'>
           <div class='d-flex justify-content-between mb-4'>
-            <div class=''>#{$qcm->id_qcm}</div>
-            <div class='text-muted'> Rendre ce QCM visible/invisible pour les étudiants => <a href=''><a href='published-qcm.php?qcm={$qcm->id_qcm}'><span class='{$is_visible}'></a></span></div>
+            <div class=''>#{$qcm->getIdQcm()}</div>
+            <div class='text-muted'> Rendre ce QCM visible/invisible pour les étudiants => <a href=''><a href='published-qcm.php?qcm={$qcm->getIdQcm()}'><span class='{$is_visible}'></a></span></div>
           </div>
           <div class='d-flex flex-column mt-3'>
-            <h5 class='text-center'>{$qcm->title}</h5>
-            <div class='text-center text-muted'>Crée le {$qcm->created_at} par {$teacherName}</div>
-            <div class='text-center'>Date limite: {$qcm->date_limit}</div>
+            <h5 class='text-center'>{$qcm->getTitle()}</h5>
+            <div class='text-center text-muted'>Crée le {$qcm->getCreatedAt()} par {$teacherName}</div>
+            <div class='text-center'>Date limite: {$qcm->getDateLimit()}</div>
           </div>
           <div class='d-flex align-self-end justify-content-end mt-3'>
-            <div><span class='btn btn-info modal_qcm_detail mr-4' data-id='{$qcm->id_qcm}'>Résultats</span></div>
-            <div ><span class='btn btn-primary modal_qcm_detail' data-toggle='modal' data-target='#_qcm_modal' data-questions='{$questionsJson}' data-title='{$qcm->title}' data-teacher-name='{$teacherName}'>Détail du QCM</span></div>
+            <div><span class='btn btn-info modal_qcm_detail mr-4' data-id='{$qcm->getIdQcm()}'>Résultats</span></div>
+            <div ><span class='btn btn-primary modal_qcm_detail' data-toggle='modal' data-target='#_qcm_modal' data-questions='{$questionsJson}' data-title='{$qcm->getTitle()}' data-teacher-name='{$teacherName}'>Détail du QCM</span></div>
           </div>
         </div>
-        <div id='qcmResults{$qcm->id_qcm}' class='d-none' '>
+        <div id='qcmResults{$qcm->getIdQcm()}' class='d-none' '>
           <table class='table'>
             <thead>
               <tr>
