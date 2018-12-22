@@ -58,6 +58,33 @@ class Results {
         return $result->rowNb() > 0;
     }
 
+    public static function checkIfIdResultExist($id_result)
+    {
+        $cnx = Connexion::getInstance();
+        $req = "SELECT * FROM results WHERE id_result = :id_result";
+
+        $result = $cnx->prepareAndExecute($req, [
+            'id_result' => $id_result
+        ]);
+
+        return $result->rowNb() > 0;
+    }
+
+    public static function publicateResult($id_result)
+    {
+        $cnx = Connexion::getInstance();
+        $req = "UPDATE results SET is_publicated = 1 WHERE id_result = :id_result";
+
+        $cnx->prepareAndExecute(
+            $req,
+            [
+                'id_result' => $id_result,
+            ]
+        );
+
+        return true;
+    }
+
     /**
      * @return null
      */

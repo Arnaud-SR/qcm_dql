@@ -144,7 +144,7 @@ class Qcm {
     {
         $cnx = Connexion::getInstance();
 
-        $req = "SELECT user.nom, user.prenom, result FROM user, results WHERE user.id_user = results.id_student AND id_qcm = :id_qcm ";
+        $req = "SELECT user.nom, user.prenom, result, id_result, is_publicated FROM user, results WHERE user.id_user = results.id_student AND id_qcm = :id_qcm";
 
         $studentsResults = $cnx->prepareAndExecute($req, [
           'id_qcm' => $id_qcm
@@ -156,12 +156,21 @@ class Qcm {
             $lastName = $student->nom;
             $firstName = $student->prenom;
             $mark = $student->result;
-            $res=$res."<tr><th scope='row'>".$row."</th><td>".$lastName."</td><td>".$firstName."</td><td>".$mark."</td></tr>";
+            $id_result = $student->id_result;
+            $is_publicated = !$student->is_publicated ? "<td><a href='publicate-result.php?id_result={$id_result}' class='btn btn-warning'>Publier la note</a></td>" : "<td><span class='btn btn-info'>Resultat publié</span></td>";
+              $res = $res."<td scope='row'>".$row."</td><td>".$lastName."</td><td>".$firstName."</td><td>".$mark."</td>".$is_publicated;
             $row++;
           }
 
 
         return $res;
+    }
+
+    public static function getStudentResultInfoForOneQcm($id_qcm)
+    {
+        $cnx = Connexion::getInstance();
+
+        $req = "SELECT";
     }
 
 
