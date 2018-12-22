@@ -8,62 +8,67 @@ $qcmList = QCM::getAllQcm();
     <h2>Liste des QCM</h2>
   </div>
   <div class="card-body">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Crée le</th>
-          <th>Enseignant</th>
-          <th>Date limite</th>
-          <th style="width: 175px">Intitulé</th>
-          <th class="text-center">Nombre de question</th>
-          <th class="text-center">Résultats</th>
-          <th class="text-center">Détails</th>
-          <th>Visiblité</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
-        foreach ($qcmList as $qcm) {
-          $nbQuestions = QCM::countNbQuestions($qcm->getIdQcm());
-          $questions = $qcm->getQuestions();
-          $questionsJson = json_encode($questions);
+  <div class="container">
+    <?php
+    foreach ($qcmList as $qcm) {
+      $questions = $qcm->getQuestions();
+      $questionsJson = json_encode($questions);
+      $is_visible = $qcm->getisPublished() ? 'fas fa-eye text-success' : 'fas fa-eye-slash text-danger';
+      $teacher = QCM::getTeacherName($qcm->getIdTeacher());
+      $teacherName = $teacher[0]->prenom." ".$teacher[0]->nom;
+      $studentsResults = QCM::getAllStudentResultsForOneQCM($qcm->getIdQcm());
 
-          $is_visible = $qcm->getIsPublished() ? 'fas fa-eye text-success' : 'fas fa-eye-slash text-danger';
-          $teacher = QCM::getTeacherName($qcm->getIdTeacher());
-          $teacherName = $teacher[0]->prenom." ".$teacher[0]->nom;
-
-            echo
-            "<tr>
-              <td>{$qcm->getIdQcm()}</td>
-              <td>{$qcm->getCreatedAt()}</td>
-              <td>{$teacherName}</td>
-              <td>{$qcm->getDateLimit()}</td>
-              <td>{$qcm->getTitle()}</td>
-              <td class='text-center'>$nbQuestions</td>
-              <td>              
-              </td>
-              <td><span class='btn btn-info modal_qcm_detail' data-toggle='modal' data-target='#_qcm_modal' data-questions='{$questionsJson}' data-title='{$qcm->getTitle()}' data-teacher-name='{$teacherName}'>Détail du QCM</span></td>
-              <td class='text-center'><a href=''><a href='published-qcm.php?qcm={$qcm->getIdQcm()}'><span class='{$is_visible}' title='rendre ce QCM visible par les étudiants'></a></span>
-              </td>
-            </tr>";
-        }
-        ?>
-      </tbody>
-    </table>
+      echo
+      "<div class='bg-light border rounded p-3 mb-3'>
+        <div class='container mb-3'>
+          <div class='d-flex justify-content-between mb-4'>
+            <div class=''>#{$qcm->getIdQcm()}</div>
+            <div class='text-muted'> Rendre ce QCM visible/invisible pour les étudiants => <a href=''><a href='published-qcm.php?qcm={$qcm->getIdQcm()}'><span class='{$is_visible}'></a></span></div>
+          </div>
+          <div class='d-flex flex-column mt-3'>
+            <h5 class='text-center'>{$qcm->getTitle()}</h5>
+            <div class='text-center text-muted'>Crée le {$qcm->getCreatedAt()} par {$teacherName}</div>
+            <div class='text-center'>Date limite: {$qcm->getDateLimit()}</div>
+          </div>
+          <div class='d-flex align-self-end justify-content-end mt-3'>
+            <div><span class='btn btn-info modal_qcm_detail mr-4' data-id='{$qcm->getIdQcm()}'>Résultats</span></div>
+            <div ><span class='btn btn-primary modal_qcm_detail' data-toggle='modal' data-target='#_qcm_modal' data-questions='{$questionsJson}' data-title='{$qcm->getTitle()}' data-teacher-name='{$teacherName}'>Détail du QCM</span></div>
+          </div>
+        </div>
+        <div id='qcmResults{$qcm->getIdQcm()}' class='d-none' '>
+          <table class='table'>
+            <thead>
+              <tr>
+                <th scope='col'>#</th>
+                <th scope='col'>Nom</th>
+                <th scope='col'>Prénom</th>
+                <th scope='col'>Résultat</th>
+              </tr>
+            </thead>
+            <tbody>".$studentsResults."</tbody>
+          </table>
+        </div>
+      </div>
+      ";
+    }
+    ?>
   </div>
+</div>
+</div>
 </div>
 <?php
 require 'modals/_qcm_modal.php';
-require 'modals/_results_modal.php';
 ?>
 
 <script>
 $(document).ready(function () {
-  $('.modal_qcm_detail').click(function () {
-    let qcm_title = $(this).data('title');
-    let questionsArray = $(this).data('questions');
-    let authorName = $(this).data('teacher-name');
+  let qcmDetailsBtn = $('.btn-primary');
+  let qcmResultsBtn = $('.btn-info');
+
+  qcmDetailsBtn.click(function () {
+    let qcm_title = $(divis).data('title');
+    let questionsArray = $(divis).data('questions');
+    let authorName = $(divis).data('teacher-name');
     let html = '';
     (questionsArray.questions).forEach(function (e, i) {
       var responsesHtml = '';
@@ -75,8 +80,14 @@ $(document).ready(function () {
   $('#modal_qcm_title').html(qcm_title);
   $('#modal_qcm_teacher_name').html(authorName);
   $('#questions_modal_qcm').html(html);
+});
+qcmResultsBtn.on('click',function () {
+  let resultsBtnId = $(this).data('id');
+  let resultBlock = $('[id="qcmResults' + resultsBtnId + '"]');
+  resultBlock.toggleClass('d-none');
+})
 
 });
-})
-;
+
+
 </script>
