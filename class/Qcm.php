@@ -112,6 +112,55 @@ class Qcm {
         return $result->tab(Qcm::class);
     }
 
+    public static function getTeacherName($id_teacher)
+    {
+        $cnx = Connexion::getInstance();
+
+        $req = "SELECT prenom, nom FROM user WHERE id_user = :id_teacher";
+
+        $result = $cnx->prepareAndExecute($req, ['id_teacher' => $id_teacher])->tab();
+
+        return $result;
+    }
+
+    public static function getAllStudentResultsForOneQCM($id_qcm)
+    {
+        $cnx = Connexion::getInstance();
+
+        $req = "SELECT user.nom, user.prenom, result FROM user, results WHERE user.id_user = results.id_student AND id_qcm = :id_qcm ";
+
+        $studentsResults = $cnx->prepareAndExecute($req, [
+          'id_qcm' => $id_qcm
+          ])->tab();
+
+          $row=0;
+          $res = "";
+          foreach ($studentsResults as $student) {
+            $lastName = $student->nom;
+            $firstName = $student->prenom;
+            $mark = $student->result;
+            $res=$res."<tr><th scope='row'>".$row."</th><td>".$lastName."</td><td>".$firstName."</td><td>".$mark."</td></tr>";
+            $row++;
+          }
+
+
+        return $res;
+    }
+
+
+
+    public static function getAllResults($id_qcm)
+    {
+        $cnx = Connexion::getInstance();
+        $req = "SELECT * FROM results WHERE id_qcm = :id_qcm";
+
+        $result = $cnx->prepareAndExecute($req, [
+            'id_qcm' => $id_qcm,
+        ]);
+
+        return $result->tab();
+    }
+
     public static function countNbQuestions($id_qcm)
     {
         $cnx = Connexion::getInstance();
@@ -139,16 +188,7 @@ class Qcm {
         return true;
     }
 
-    public static function getTeacherName($id_teacher)
-    {
-        $cnx = Connexion::getInstance();
 
-        $req = "SELECT prenom, nom FROM user WHERE id_user = :id_teacher";
-
-        $result = $cnx->prepareAndExecute($req, ['id_teacher' => $id_teacher])->tab();
-
-        return $result;
-    }
 
     public function getQuestions()
     {
