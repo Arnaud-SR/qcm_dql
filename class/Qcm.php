@@ -64,7 +64,7 @@ class Qcm {
       $formattedTodayDate = $today->format('Y-m-d H:i:s');
       $limitDate = $this->date_limit;
       if ($formattedTodayDate < $limitDate) {
-        echo "<a class='btn btn-info btn-sm ' href='qcm-exam.php?uuid_qcm={$this->uuid_qcm}&id_qcm={$this->id_qcm}'>Commencer</a>";
+        echo "<a class='btn btn-primary border border-primary btn-sm ' href='qcm-exam.php?uuid_qcm={$this->uuid_qcm}&id_qcm={$this->id_qcm}'>Commencer</a>";
       }else {
         echo "Désolé, la date limite est dépassée!";
       }
