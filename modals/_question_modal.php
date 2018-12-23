@@ -29,7 +29,7 @@
          </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" >Modifier</button>
+        <button type="button" id="modifyBtn" class="btn btn-secondary" >Modifier</button>
       </div>
     </div>
   </div>

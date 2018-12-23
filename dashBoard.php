@@ -13,9 +13,9 @@ $cnx = Connexion::getInstance();
 if (filter_input(INPUT_POST, "submitQuestion")) {
   $question = new Question();
 
-  $question->setTitle(filter_input(INPUT_POST, "question_title", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
+  $question->setTitle(filter_input(INPUT_POST, "question_title", FILTER_SANITIZE_STRING, FILTER_SANITIZE_MAGIC_QUOTES));
   $question->setIdTeacher($_SESSION['id_user']);
-  $question->setTheme(filter_input(INPUT_POST, "select_theme", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
+  $question->setTheme(filter_input(INPUT_POST, "select_theme", FILTER_SANITIZE_STRING, FILTER_SANITIZE_MAGIC_QUOTES));
 
 if (!$tabError) {
     $question->addQuestion();
@@ -28,7 +28,7 @@ if (!$tabError) {
           INPUT_POST,
           "response_a_title",
           FILTER_SANITIZE_STRING,
-          FILTER_FLAG_NO_ENCODE_QUOTES
+          FILTER_SANITIZE_MAGIC_QUOTES
           )
         );
         $responseA->addResponse($id_question, isset($_POST['a_is_correct']) ? 1 : 0);
@@ -40,7 +40,7 @@ if (!$tabError) {
             INPUT_POST,
             "response_b_title",
             FILTER_SANITIZE_STRING,
-            FILTER_FLAG_NO_ENCODE_QUOTES
+            FILTER_SANITIZE_MAGIC_QUOTES
             )
           );
           $responseB->addResponse($id_question, isset($_POST['b_is_correct']) ? 1 : 0);
@@ -52,7 +52,7 @@ if (!$tabError) {
               INPUT_POST,
               "response_c_title",
               FILTER_SANITIZE_STRING,
-              FILTER_FLAG_NO_ENCODE_QUOTES
+              FILTER_SANITIZE_MAGIC_QUOTES
               )
             );
             $responseC->addResponse($id_question, isset($_POST['c_is_correct']) ? 1 : 0);
@@ -64,7 +64,7 @@ if (!$tabError) {
                 INPUT_POST,
                 "response_d_title",
                 FILTER_SANITIZE_STRING,
-                FILTER_FLAG_NO_ENCODE_QUOTES
+                FILTER_SANITIZE_MAGIC_QUOTES
                 )
               );
               $responseD->addResponse($id_question, isset($_POST['d_is_correct']) ? 1 : 0);
@@ -89,16 +89,16 @@ if (!empty($_SESSION['id_question_modify']) && !empty($_GET['content_modify_ques
 
 if (filter_input(INPUT_POST, 'submitQCM')) {
     $qcm = new Qcm();
-          $qcm->setTitle(filter_input(INPUT_POST, "qcm_title", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
+          $qcm->setTitle(filter_input(INPUT_POST, "qcm_title", FILTER_SANITIZE_STRING, FILTER_SANITIZE_MAGIC_QUOTES));
           $qcm->setIdTeacher($_SESSION['id_user']);
           $qcm->setDateLimit(
-            filter_input(INPUT_POST, "date_limit_qcm", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES)
+            filter_input(INPUT_POST, "date_limit_qcm", FILTER_SANITIZE_STRING, FILTER_SANITIZE_MAGIC_QUOTES)
           );
           $qcm->setUuidQcm(bin2hex(random_bytes(10)));
           $qcm->buildQcm();
           $id_qcm = $cnx->pk();
           foreach ($_POST['add_question'] as $id_question) {
-            $qcm_q = new Contenir();
+            $qcm_q = new compose();
             $qcm_q->addQuestionToQCM($id_qcm, $id_question);
           }
 }
