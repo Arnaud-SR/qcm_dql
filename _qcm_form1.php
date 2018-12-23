@@ -155,21 +155,6 @@ $thematics = Question::getAllThematics();
         })
     });
 
-    function whenClickOnModifyBtn_replaceModifyBtnWithQuitBtn() {
-      $('#modifyBtn').replaceWith('<button type="button" id="quitBtn" class="btn btn-danger mr-3">Quitter</button>');
-      $('#quitBtn').on('click', function () {
-        location.reload();
-      })
-    }
-
-    function whenClickOnInput_appendSubmitBtn() {
-      //au clic sur un champ du formulaire, un bouton submit est ajouté au DOM
-      let formInput = $('#form_modify_question').find($('.form-control'));
-      formInput.on('click', function () {
-          $('.modal-footer').html('<button type="submit"  name="submitSetQuestion" class="btn btn-success" >Envoyer</button>');
-      });
-    }
-
     function displayByThematics() {
         var select = $('#select_thematics');
         var theme = $('.tr_theme');
@@ -239,7 +224,19 @@ $thematics = Question::getAllThematics();
         });
       }
 
+      function whenClickOnModifyBtn_replaceModifyBtnWithQuitBtn() {
+        $('#modifyBtn').replaceWith('<button type="button" id="quitBtn" class="btn btn-danger mr-3">Quitter</button>');
+        $('#quitBtn').on('click', function () {
+          location.reload();
+        })
+      }
 
-
+      function whenClickOnInput_appendSubmitBtn() {
+        //au clic sur un champ du formulaire, un bouton submit est ajouté au DOM
+        let formInput = $('#form_modify_question').find($('.form-control'));
+        formInput.on('click', function () {
+            $('.modal-footer').html('<button type="submit"  name="submitSetQuestion" class="btn btn-success" >Envoyer</button>');
+        });
+      }
 
 </script>
