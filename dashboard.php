@@ -98,7 +98,7 @@ if (filter_input(INPUT_POST, 'submitQCM')) {
           $qcm->buildQcm();
           $id_qcm = $cnx->pk();
           foreach ($_POST['add_question'] as $id_question) {
-            $qcm_q = new compose();
+            $qcm_q = new Compose();
             $qcm_q->addQuestionToQCM($id_qcm, $id_question);
           }
 }

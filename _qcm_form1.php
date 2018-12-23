@@ -132,7 +132,7 @@ $(document).ready(function () {
     $('#table-response').html(html);
     console.log("json:" + JSON.stringify(responsesIdArray));
 
-    $.get("dashBoard.php",{idQuestion: questionId});
+    $.get("dashboard.php",{idQuestion: questionId});
 
   });
 
@@ -150,10 +150,10 @@ $(document).ready(function () {
     whenClickOnModifyBtn_replaceModifyBtnWithQuitBtn();
     whenClickOnInput_appendSubmitBtn();
 
-    //au clic sur le bouton submit, envoi du titre de la question vers la page cible dashBoard.php pour récupération puis insertion dans la base de données
+    //au clic sur le bouton submit, envoi du titre de la question vers la page cible dashboard.php pour récupération puis insertion dans la base de données
     $('#form_modify_question').on('submit', function () {
       let newQuestionTitle = $('#modify_question_title_input').val();
-      $.get("dashBoard.php", {content_modify_question: newQuestionTitle});
+      $.get("dashboard.php", {content_modify_question: newQuestionTitle});
 
     })
   })
