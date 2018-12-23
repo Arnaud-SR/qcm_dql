@@ -21,6 +21,7 @@ $qcmFinished = QCM::getQcmFinished();
       <div class='d-flex justify-content-between mt-3'>
       <a class='btn btn-info btn-sm ' href='qcm-exam.php?uuid_qcm={$qcm_waiting->uuid_qcm}&id_qcm={$qcm_waiting->getIdQcm()}'>Commencer</a>
 
+      {$qcm_waiting->checkDateLimit()}
       </div>
       </div>
       </div>";
