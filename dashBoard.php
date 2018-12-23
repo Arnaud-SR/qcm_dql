@@ -94,7 +94,7 @@ if (filter_input(INPUT_POST, 'submitQCM')) {
           $qcm->setDateLimit(
             filter_input(INPUT_POST, "date_limit_qcm", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES)
           );
-          $qcm->setUuidQcm(bin2hex(random_bytes(10)));
+          $qcm->setUuniqueIdQcm(bin2hex(random_bytes(10)));
           $qcm->buildQcm();
           $id_qcm = $cnx->pk();
           foreach ($_POST['add_question'] as $id_question) {

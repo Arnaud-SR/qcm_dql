@@ -17,7 +17,6 @@ $qcmList = QCM::getAllQcm();
       $teacher = QCM::getTeacherName($qcm->getIdTeacher());
       $teacherName = $teacher[0]->prenom." ".$teacher[0]->nom;
       $studentsResults = QCM::getAllStudentResultsForOneQCM($qcm->getIdQcm());
-      $resultInfo = QCM::getStudentResultInfoForOneQcm($qcm->getIdQcm());
 
       echo
       "<div class='bg-light border rounded p-3 mb-3'>

@@ -53,7 +53,7 @@ class Qcm {
                 'createdAt' => $date,
                 'dateLimit' => $this->date_limit,
                 'is_published' => 0,
-                '$u_unique_id_qcm' => $this->u_unique_id_qcm,
+                'u_unique_id_qcm' => $this->u_unique_id_qcm,
             ]
         );
     }
@@ -92,7 +92,7 @@ class Qcm {
     public static function getQuestionsByQcmU_unique_id_qcm($u_unique_id_qcm)
     {
         $cnx = Connexion::getInstance();
-        $req = "SELECT DISTINCT questions.* FROM questions INNER JOIN contenir ON contenir.id_question = questions.id_question INNER JOIN qcm ON contenir.id_qcm = qcm.id_qcm INNER JOIN response ON response.id_question = questions.id_question WHERE qcm.u_unique_id_qcm = :u_unique_id_qcm";
+        $req = "SELECT DISTINCT questions.* FROM questions INNER JOIN contenir ON contenir.id_question = questions.id_question INNER JOIN qcm ON contenir.id_qcm = qcm.id_qcm INNER JOIN response ON response.id_question = questions.id_question WHERE qcm.uuid_qcm = :u_unique_id_qcm";
 
         $result = $cnx->prepareAndExecute(
             $req,
@@ -158,22 +158,13 @@ class Qcm {
             $mark = $student->result;
             $id_result = $student->id_result;
             $is_publicated = !$student->is_publicated ? "<td><a href='publicate-result.php?id_result={$id_result}' class='btn btn-warning'>Publier la note</a></td>" : "<td><span class='btn btn-info'>Resultat publié</span></td>";
-              $res = $res."<td scope='row'>".$row."</td><td>".$lastName."</td><td>".$firstName."</td><td>".$mark."</td>".$is_publicated;
+              $res = $res."<td scope='row'>".$row."</td><td>".$lastName."</td><td>".$firstName."</td><td>".$mark."</td>".$is_publicated."</tr>";
             $row++;
           }
 
 
         return $res;
     }
-
-    public static function getStudentResultInfoForOneQcm($id_qcm)
-    {
-        $cnx = Connexion::getInstance();
-
-        $req = "SELECT";
-    }
-
-
 
     public static function getAllResults($id_qcm)
     {

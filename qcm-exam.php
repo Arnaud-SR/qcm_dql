@@ -8,7 +8,7 @@ if (isset($_SESSION['id_teacher']) || !QCM::checkIfQcmExist($_GET['uuid_qcm'], $
     die('error');
 }
 $id_qcm = $_GET['id_qcm'];
-$qcm = QCM::getQuestionsByQcmUuid($_GET['uuid_qcm']);
+$qcm = QCM::getQuestionsByQcmU_unique_id_qcm($_GET['uuid_qcm']);
 $countQuestions = count($qcm);
 if (filter_input(INPUT_POST, "finish_qcm")) {
     $tabError = [];
