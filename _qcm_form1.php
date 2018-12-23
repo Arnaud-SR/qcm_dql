@@ -151,6 +151,7 @@ $thematics = Question::getAllThematics();
             $('#form_modify_question').on('submit', function () {
                 let newQuestionTitle = $('#modify_question_title_input').val();
                 $.get("dashBoard.php", {content_modify_question: newQuestionTitle});
+                // let newAnswersTitle =
             })
         })
     });
@@ -191,7 +192,7 @@ $thematics = Question::getAllThematics();
       let titreDelaQuestion =  $('#question_content_modal').text();
       //le bloc contenant le titre de la question est remplacé par un textarea
       let blocTitreDelaQuestion = $('#question_content_modal');
-      blocTitreDelaQuestion.replaceWith('<textarea class="form-control col-sm-11 mb-5 mx-auto" name="question_title_u" type="text" rows="2" id="modify_question_title_input">');
+      blocTitreDelaQuestion.replaceWith('<textarea class="form-control col-sm-11 mb-5 mx-auto" type="text" rows="2" id="modify_question_title_input">');
       //affiche titre de la question en placeholder dans le textarea
       $('textarea').attr('placeholder',titreDelaQuestion);
     }
@@ -234,9 +235,21 @@ $thematics = Question::getAllThematics();
       function whenClickOnInput_appendSubmitBtn() {
         //au clic sur un champ du formulaire, un bouton submit est ajouté au DOM
         let formInput = $('#form_modify_question').find($('.form-control'));
-        formInput.on('click', function () {
-            $('.modal-footer').html('<button type="submit"  name="submitSetQuestion" class="btn btn-success" >Envoyer</button>');
+        formInput.bind('click', function f() {
+            $('.modal-footer').append('<button type="submit"  name="submitSetQuestion" class="btn btn-success" >Envoyer</button>');
+            $('.form-control').unbind('click', f);
         });
       }
+
+//       $("#test .clique").click( function(){
+//       alert($(this).attr('id));
+//       });
+//
+//       $("#test .clique").bind('click',function f(){
+//  alert($(this).attr('id'));
+//  $(this).unbind('click',f);
+// });
+
+
 
 </script>
