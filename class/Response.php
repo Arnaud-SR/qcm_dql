@@ -34,6 +34,18 @@ class Response {
         ]);
     }
 
+    public static function updateResponse($id_response, $responseTitle ,$is_correct)
+    {
+        $cnx = Connexion::getInstance();
+
+        $query = "UPDATE response SET response = :responseTitle, is_correct = :is_correct WHERE id_response = :id_response";
+        $cnx->prepareAndExecute($query,array(
+            'responseTitle' => $responseTitle,
+            'id_response' => $id_response,
+            'is_correct' => $is_correct
+          ));
+    }
+
     /**
      * @return null
      */

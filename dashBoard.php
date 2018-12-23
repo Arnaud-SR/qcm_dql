@@ -8,6 +8,8 @@ if (!isset($_SESSION['id_user'])) {
 $qcmNoPublished = QCM::getQcmList();
 $qcmPublished = QCM::getQcmList(1);
 
+
+//création d'une nouvelle question et des réponses qui lui sont associées
 $tabError = [];
 $cnx = Connexion::getInstance();
 if (filter_input(INPUT_POST, "submitQuestion")) {
@@ -17,7 +19,7 @@ if (filter_input(INPUT_POST, "submitQuestion")) {
   $question->setIdTeacher($_SESSION['id_user']);
   $question->setTheme(filter_input(INPUT_POST, "select_theme", FILTER_SANITIZE_STRING, FILTER_SANITIZE_MAGIC_QUOTES));
 
-if (!$tabError) {
+  if (!$tabError) {
     $question->addQuestion();
     //Recupère l'id de la question qui vient d'être enregistrée en base
     $id_question = $cnx->pk();
@@ -74,21 +76,27 @@ if (!$tabError) {
             exit();
           }
 
-}
+        }
 
-if (!empty($_GET['idQuestion'])) {
-    $id = $_GET['idQuestion'];
-    $_SESSION['id_question_modify'] = $id;
-    exit;
-}
 
-if (!empty($_SESSION['id_question_modify']) && !empty($_GET['content_modify_question'])) {
-    Question::updateQuestion($_SESSION['id_question_modify'], $_GET['content_modify_question']);
-    exit;
-}
+        //modification d'une question
+        //récupération de l'id d'une question et d'une variable de session contenant cet id
+        if (!empty($_GET['idQuestion'])) {
+          $id = $_GET['idQuestion'];
+          $_SESSION['id_question_modify'] = $id;
+          exit;
+        }
+        //insertion du nouveau titre de la question dans la base de données
+        if (!empty($_SESSION['id_question_modify']) && !empty($_GET['content_modify_question'])) {
+          Question::updateQuestion($_SESSION['id_question_modify'], $_GET['content_modify_question']);
+          exit;
+        }
 
-if (filter_input(INPUT_POST, 'submitQCM')) {
-    $qcm = new Qcm();
+        Response::updateResponse(1, "test update" ,0);
+
+        //construction d'un qcm
+        if (filter_input(INPUT_POST, 'submitQCM')) {
+          $qcm = new Qcm();
           $qcm->setTitle(filter_input(INPUT_POST, "qcm_title", FILTER_SANITIZE_STRING, FILTER_SANITIZE_MAGIC_QUOTES));
           $qcm->setIdTeacher($_SESSION['id_user']);
           $qcm->setDateLimit(
@@ -101,11 +109,13 @@ if (filter_input(INPUT_POST, 'submitQCM')) {
             $qcm_q = new compose();
             $qcm_q->addQuestionToQCM($id_qcm, $id_question);
           }
-}
-
+        }
         $user = User::getUser();
         User::checkIfIsTeacher();
         ?>
+
+
+
         <!DOCTYPE html>
         <html lang="fr">
         <head>
@@ -116,7 +126,6 @@ if (filter_input(INPUT_POST, 'submitQCM')) {
           <header class="d-flex container-fluid text-white " style="height:140px;padding: 20px 5vw;background-color:#153456;">
             <h1> Gestionnaire de QCM
               <?php
-              //var_dump($user);
               if (isset($_SESSION['is_teacher'])) {
                 echo "pour l'enseignant ".$user->prenom." ".$user->nom;
               }else{
@@ -153,4 +162,4 @@ if (filter_input(INPUT_POST, 'submitQCM')) {
             </div>
           </main>
         </body>
-      </html>
+        </html>
