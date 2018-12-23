@@ -135,36 +135,39 @@ $thematics = Question::getAllThematics();
         $('#select_thematics').on('change', function () {
             $('#form_search_thematics').submit();
         })
-        quitQuestionModal();
 
         //pour modifier une question et ses réponses associées
         //au clic, on remplace les éléments affichant la question et les réponses par des champs textuels contenant les valeurs de la question des réponses associées
-        let boutonModifier = $('.modal-footer').find('button');
-        boutonModifier.on('click', function () {
+
+        $('#modifyBtn').on('click', function () {
             replaceBlocWithForm();
             replaceQuestionTitleWithTextArea();
             replaceReponseTitleWithInput();
             replaceCellWithCheckboxInput();
-        })
-        //au clic sur un champ du formulaire, le bouton modifier est enlevé du DOM et un bouton submit est ajouté au DOM
-        let formInput = $('.form-control');
-        formInput.on('click', function () {
-            $('.modal-footer').remove(boutonModifier);
-            $('.modal-footer').append('<button type="submit"  name="submitSetQuestion" class="btn btn-success" >Envoyer</button>');
-        });
-        //au clic sur le bouton submit, envoi des données du formulaire vers la page cible dashBoard.php pour récupération puis insertion dans la base de données
-        $('#form_modify_question').on('submit', function () {
-            let newQuestionTitle = $('#modify_question_title_input').val();
-            $.get("dashBoard.php", {content_modify_question: newQuestionTitle});
-        })
+            whenClickOnModifyBtn_replaceModifyBtnWithQuitBtn();
+            whenClickOnInput_appendSubmitBtn();
 
-
+            //au clic sur le bouton submit, envoi du titre de la question vers la page cible dashBoard.php pour récupération puis insertion dans la base de données
+            $('#form_modify_question').on('submit', function () {
+                let newQuestionTitle = $('#modify_question_title_input').val();
+                $.get("dashBoard.php", {content_modify_question: newQuestionTitle});
+            })
+        })
     });
 
-    function quitQuestionModal() {
-      $('.btn.btn-danger.mr-3').on('click', function () {
+    function whenClickOnModifyBtn_replaceModifyBtnWithQuitBtn() {
+      $('#modifyBtn').replaceWith('<button type="button" id="quitBtn" class="btn btn-danger mr-3">Quitter</button>');
+      $('#quitBtn').on('click', function () {
         location.reload();
       })
+    }
+
+    function whenClickOnInput_appendSubmitBtn() {
+      //au clic sur un champ du formulaire, un bouton submit est ajouté au DOM
+      let formInput = $('#form_modify_question').find($('.form-control'));
+      formInput.on('click', function () {
+          $('.modal-footer').html('<button type="submit"  name="submitSetQuestion" class="btn btn-success" >Envoyer</button>');
+      });
     }
 
     function displayByThematics() {
@@ -235,6 +238,7 @@ $thematics = Question::getAllThematics();
             this.name = 'response_cb_' + (index+1) ;
         });
       }
+
 
 
 
