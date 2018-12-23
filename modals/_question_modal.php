@@ -30,6 +30,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" >Modifier</button>
+        <button type="button" class="btn btn-danger mr-3">Quitter</button>
       </div>
     </div>
   </div>

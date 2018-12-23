@@ -1,4 +1,4 @@
-disableModifierBtn<?php
+<?php
 $questionArray = Question::getAllQuestions();
 $thematics = Question::getAllThematics();
 ?>
@@ -88,13 +88,15 @@ $thematics = Question::getAllThematics();
         displayByThematics();
         //pour afficher une question et ses réponses associées
         $('.modal_question').on('click', function () {
-          // au click, on charge toutes les données en data-attribute
+          // au clic, on charge toutes les données en data-attribute
             let questionId = $(this).data('id');
             let teacher_fullName = $(this).data('author_name');
             let questionTheme = $(this).data('theme');
             let responsesArray = $(this).data('responses');
             let questionTitle = $(this).data('title');
             let html = '';
+
+            console.log(responsesArray);
 
             $.get("dashBoard.php",{idQuestion: questionId});
             //à partir d'un tableau json, pour chaque index de réponse (clé), on affiche l'intitulé de la réponse correspondante (valeur)
@@ -133,28 +135,37 @@ $thematics = Question::getAllThematics();
         $('#select_thematics').on('change', function () {
             $('#form_search_thematics').submit();
         })
+        quitQuestionModal();
 
         //pour modifier une question et ses réponses associées
-        //au click, on remplace les éléments affichant la question et les réponses par des champs textuels contenant les valeurs de la question des réponses associées
+        //au clic, on remplace les éléments affichant la question et les réponses par des champs textuels contenant les valeurs de la question des réponses associées
         let boutonModifier = $('.modal-footer').find('button');
         boutonModifier.on('click', function () {
             replaceBlocWithForm();
             replaceQuestionTitleWithTextArea();
-            disableModifierBtn();
             replaceReponseTitleWithInput();
             replaceCellWithCheckboxInput();
-            replaceModifierBtnWithSubmitBtn();
-            quitModification();
-
-            //au clic sur le bouton submit, envoi des données du formulaire vers la page cible dashBoard.php pour récupération puis insertion dans la base de données
-            $('#form_modify_question').on('submit', function () {
-                let titreDelaQuestionModifie = $('#modify_question_title_input').val();
-                $.get("dashBoard.php", {content_modify_question: titreDelaQuestionModifie});
-            })
-
-
         })
+        //au clic sur un champ du formulaire, le bouton modifier est enlevé du DOM et un bouton submit est ajouté au DOM
+        let formInput = $('.form-control');
+        formInput.on('click', function () {
+            $('.modal-footer').remove(boutonModifier);
+            $('.modal-footer').append('<button type="submit"  name="submitSetQuestion" class="btn btn-success" >Envoyer</button>');
+        });
+        //au clic sur le bouton submit, envoi des données du formulaire vers la page cible dashBoard.php pour récupération puis insertion dans la base de données
+        $('#form_modify_question').on('submit', function () {
+            let newQuestionTitle = $('#modify_question_title_input').val();
+            $.get("dashBoard.php", {content_modify_question: newQuestionTitle});
+        })
+
+
     });
+
+    function quitQuestionModal() {
+      $('.btn.btn-danger.mr-3').on('click', function () {
+        location.reload();
+      })
+    }
 
     function displayByThematics() {
         var select = $('#select_thematics');
@@ -186,7 +197,6 @@ $thematics = Question::getAllThematics();
     function replaceBlocWithForm() {
       //le bloc contenant l'affichage de la question/des réponses est remplacé par un formulaire
       $('.modal-content').replaceWith("<form class='modal-content' action='' method='post' id='form_modify_question'>" + $('.modal-content').html() + "</form>");
-      $('.modal-footer').html('<button type="button" class="btn btn-danger mr-3">Annuler la modification</button>');
     }
 
     function replaceQuestionTitleWithTextArea() {
@@ -215,11 +225,6 @@ $thematics = Question::getAllThematics();
       });
     }
 
-      function disableModifierBtn() {
-        //désactivation du bouton modifier
-        $(this).prop("disabled",true);
-      }
-
       function replaceCellWithCheckboxInput() {
         //remplace l'affichage des bonnes réponses par des input pour modifier les bonnes réponses
         let checkboxReponse = $('#table-response').find('th.form-check');
@@ -231,17 +236,6 @@ $thematics = Question::getAllThematics();
         });
       }
 
-      function replaceModifierBtnWithSubmitBtn() {
-        //au clic sur un champ du formulaire, le bouton modifier devient un bouton submit pour envoyer le formulaire
-        let champDuFormulaire = $('.form-control');
-        champDuFormulaire.on('click', function () {
-            $('.modal-footer').append('<button type="submit"  name="submitSetQuestion" class="btn btn-success" >Envoyer</button>');
-        });
-      }
 
-      function quitModification() {
-        $('button.btn.btn-danger.mr-3').on('click', function () {
-        location.reload();
-        })
-      }
+
 </script>
