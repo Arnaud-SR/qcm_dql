@@ -19,9 +19,7 @@ $qcmFinished = QCM::getQcmFinished();
       <h6 class='cad-subtitle mb-2 text-muted'> Date de publication: {$qcm_waiting->getCreatedAt()}</h6>
       <h6 class='cad-subtitle mb-2 text-danger'> Date limite: {$qcm_waiting->getDateLimit()}</h6>
       <div class='d-flex justify-content-between mt-3'>
-      <a class='btn btn-info btn-sm ' href='qcm-exam.php?uuid_qcm={$qcm_waiting->uuid_qcm}&id_qcm={$qcm_waiting->getIdQcm()}'>Commencer</a>
-
-      {$qcm_waiting->checkDateLimit()}
+            {$qcm_waiting->checkDateLimit()}
       </div>
       </div>
       </div>";

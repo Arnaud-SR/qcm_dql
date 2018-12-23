@@ -42,7 +42,7 @@ class Qcm {
         $cnx = Connexion::getInstance();
         $createdAt = new DateTime('now');
         $date = $createdAt->format('Y-m-d H:i:s');
-        $req = "INSERT INTO qcm VALUES(:id_qcm, :id_teacher, :title, :createdAt, :dateLimit, :is_published, :uuid_qcm)";
+        $req = "INSERT INTO qcm VALUES(:id_qcm, :id_teacher, :title, :createdAt, :dateLimit, :is_published, :u_unique_id_qcm)";
 
         $cnx->prepareAndExecute(
             $req,
@@ -64,7 +64,7 @@ class Qcm {
       $formattedTodayDate = $today->format('Y-m-d H:i:s');
       $limitDate = $this->date_limit;
       if ($formattedTodayDate < $limitDate) {
-        echo "<a class='btn btn-primary border border-primary btn-sm ' href='qcm-exam.php?uuid_qcm={$this->uuid_qcm}&id_qcm={$this->id_qcm}'>Commencer</a>";
+          echo "<a class='btn btn-warning border border-primary btn-sm ' href='qcm-exam.php?uuid_qcm={$this->uuid_qcm}&id_qcm={$this->id_qcm}'>Commencer</a>";
       }else {
         echo "Désolé, la date limite est dépassée!";
       }
