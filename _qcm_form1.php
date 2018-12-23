@@ -87,10 +87,7 @@ $(document).ready(function () {
   displayErrorQcm();
   displayByThematics();
 
-  let responsesArray = {
-    'idResponse' : [],
-    'responseTitle' : []
-  };
+
 
   //pour afficher une question et ses réponses associées
   $('.modal_question').on('click', function () {
@@ -101,15 +98,11 @@ $(document).ready(function () {
     let responsesJSONArray = $(this).data('responses');
     let questionTitle = $(this).data('title');
     let html = '';
-
-    $.get("dashBoard.php",{idQuestion: questionId});
-
+    let responsesIdArray = [];
     //à partir d'un tableau json, pour chaque index de réponse (clé), on affiche l'intitulé de la réponse correspondante (valeur)
     responsesJSONArray.forEach(function (e, answerIndex) {
       let is_correct = e.is_correct == 1 ? '✅' : '';
       // console.log("idQuestion:" + questionId + "idResponse" + answerIndex + ": "+ e.id_response);
-      responsesArray['idResponse'].push(e.id_response);
-      responsesArray['responseTitle'].push('responseTitle');
 
       switch (answerIndex){
         case 0:
@@ -127,6 +120,8 @@ $(document).ready(function () {
         default:
         break;
       }
+      responsesIdArray.push(e.id_response);
+
       html += "<tr ><th scope='row'>" +
       answerIndex +
       "</th><th scope='row' class='col-sm-8'>" +
@@ -138,8 +133,10 @@ $(document).ready(function () {
     $('#question_content_modal').html(questionTitle);
     $('#question_theme_modal').html(questionTheme);
     $('#table-response').html(html);
-    console.log("idResponse" + responsesArray['idResponse']);
-    console.log("responseTitle" + responsesArray['responseTitle']);
+    console.log("json:" + JSON.stringify(responsesIdArray));
+
+    $.get("dashBoard.php",{idQuestion: questionId});
+
   });
 
 
