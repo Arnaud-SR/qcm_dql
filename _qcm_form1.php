@@ -1,4 +1,4 @@
-<?php
+disableModifierBtn<?php
 $questionArray = Question::getAllQuestions();
 $thematics = Question::getAllThematics();
 ?>
@@ -138,17 +138,21 @@ $thematics = Question::getAllThematics();
         //au click, on remplace les éléments affichant la question et les réponses par des champs textuels contenant les valeurs de la question des réponses associées
         let boutonModifier = $('.modal-footer').find('button');
         boutonModifier.on('click', function () {
-            remplaceBlocParForm();
-            rendreLeTitreDelaQuestionModifiable();
-            desactiveBoutonModifier();
-            rendreIntitulesDesReponsesModifiables();
-            remplaceCelluleParCaseAcocher();
-            remplaceBoutonModifierParBoutonSubmit();
+            replaceBlocWithForm();
+            replaceQuestionTitleWithTextArea();
+            disableModifierBtn();
+            replaceReponseTitleWithInput();
+            replaceCellWithCheckboxInput();
+            replaceModifierBtnWithSubmitBtn();
+            quitModification();
+
             //au clic sur le bouton submit, envoi des données du formulaire vers la page cible dashBoard.php pour récupération puis insertion dans la base de données
             $('#form_modify_question').on('submit', function () {
                 let titreDelaQuestionModifie = $('#modify_question_title_input').val();
                 $.get("dashBoard.php", {content_modify_question: titreDelaQuestionModifie});
             })
+
+
         })
     });
 
@@ -179,12 +183,13 @@ $thematics = Question::getAllThematics();
         });
     }
 
-    function remplaceBlocParForm() {
+    function replaceBlocWithForm() {
       //le bloc contenant l'affichage de la question/des réponses est remplacé par un formulaire
       $('.modal-content').replaceWith("<form class='modal-content' action='' method='post' id='form_modify_question'>" + $('.modal-content').html() + "</form>");
+      $('.modal-footer').html('<button type="button" class="btn btn-danger mr-3">Annuler la modification</button>');
     }
 
-    function rendreLeTitreDelaQuestionModifiable() {
+    function replaceQuestionTitleWithTextArea() {
       let titreDelaQuestion =  $('#question_content_modal').text();
       //le bloc contenant le titre de la question est remplacé par un textarea
       let blocTitreDelaQuestion = $('#question_content_modal');
@@ -193,7 +198,7 @@ $thematics = Question::getAllThematics();
       $('textarea').attr('placeholder',titreDelaQuestion);
     }
 
-    function rendreIntitulesDesReponsesModifiables() {
+    function replaceReponseTitleWithInput() {
       let tableauTitresDesReponses = new Array();
       let ligneDuTableauDesReponses = $('#table-response').find('tr');
       ligneDuTableauDesReponses.each(function (index) {
@@ -210,12 +215,12 @@ $thematics = Question::getAllThematics();
       });
     }
 
-      function desactiveBoutonModifier() {
+      function disableModifierBtn() {
         //désactivation du bouton modifier
         $(this).prop("disabled",true);
       }
 
-      function remplaceCelluleParCaseAcocher() {
+      function replaceCellWithCheckboxInput() {
         //remplace l'affichage des bonnes réponses par des input pour modifier les bonnes réponses
         let checkboxReponse = $('#table-response').find('th.form-check');
         checkboxReponse.html('<input class="form-control" name="" type="checkbox">');
@@ -226,12 +231,17 @@ $thematics = Question::getAllThematics();
         });
       }
 
-      function remplaceBoutonModifierParBoutonSubmit() {
-        //au clic sur un champ du formulaire, le bouton de la modal devient un bouton submit pour envoyer le formulaire
+      function replaceModifierBtnWithSubmitBtn() {
+        //au clic sur un champ du formulaire, le bouton modifier devient un bouton submit pour envoyer le formulaire
         let champDuFormulaire = $('.form-control');
-        let boutonModifierDesactive = $('.modal-footer');
         champDuFormulaire.on('click', function () {
-            boutonModifierDesactive.html('<button type="submit"  name="submitSetQuestion" class="btn btn-success" >Envoyer</button>');
+            $('.modal-footer').append('<button type="submit"  name="submitSetQuestion" class="btn btn-success" >Envoyer</button>');
         });
+      }
+
+      function quitModification() {
+        $('button.btn.btn-danger.mr-3').on('click', function () {
+        location.reload();
+        })
       }
 </script>
