@@ -77,7 +77,6 @@ if (!$tabError) {
 }
 
 if (!empty($_GET['idQuestion'])) {
-  var_dump($_GET['idQuestion']);
     $id = $_GET['idQuestion'];
     $_SESSION['id_question_modify'] = $id;
     exit;
