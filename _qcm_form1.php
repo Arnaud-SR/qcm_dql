@@ -78,7 +78,6 @@ $thematics = Question::getAllThematics();
   <div class="d-flex justify-content-center">
     <input type="submit" value="envoyer" class="btn btn-success btn-lg mt-5 mr-5" name="submitQCM">
   </div>
-
   <?php
   ?>
 </form>
@@ -86,8 +85,6 @@ $thematics = Question::getAllThematics();
 $(document).ready(function () {
   displayErrorQcm();
   displayByThematics();
-
-
 
   //pour afficher une question et ses réponses associées
   $('.modal_question').on('click', function () {
@@ -138,8 +135,6 @@ $(document).ready(function () {
     $.get("dashBoard.php",{idQuestion: questionId});
 
   });
-
-
 
   $('#select_thematics').on('change', function () {
     $('#form_search_thematics').submit();
@@ -225,7 +220,7 @@ function replaceReponseTitleWithInput() {
 function replaceCellWithCheckboxInput() {
   //remplace l'affichage des bonnes réponses par des input pour modifier les bonnes réponses
   let checkboxReponse = $('#table-response').find('th.form-check');
-  checkboxReponse.html('<input class="form-control" name="" type="checkbox">');
+  checkboxReponse.html('<input name="" type="checkbox">');
   //attribut name unique pour différencier les checkbox
   let checkboxDansTableauDesReponses = $('#table-response').find('[type="checkbox"]');
   checkboxDansTableauDesReponses.each(function(index){
