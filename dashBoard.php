@@ -77,6 +77,7 @@ if (!$tabError) {
 }
 
 if (!empty($_GET['idQuestion'])) {
+  var_dump($_GET['idQuestion']);
     $id = $_GET['idQuestion'];
     $_SESSION['id_question_modify'] = $id;
     exit;
@@ -98,7 +99,7 @@ if (filter_input(INPUT_POST, 'submitQCM')) {
           $qcm->buildQcm();
           $id_qcm = $cnx->pk();
           foreach ($_POST['add_question'] as $id_question) {
-            $qcm_q = new Contenir();
+            $qcm_q = new compose();
             $qcm_q->addQuestionToQCM($id_qcm, $id_question);
           }
 }

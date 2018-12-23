@@ -1,7 +1,7 @@
 <?php
 
 
-class Contenir
+class Compose
 {
     private $id_qcm;
     private $id_question;
@@ -16,7 +16,7 @@ class Contenir
     {
         $cnx = Connexion::getInstance();
 
-        $req = "INSERT INTO contenir VALUES(:id_qcm, :id_question)";
+        $req = "INSERT INTO compose VALUES(:id_qcm, :id_question)";
         $cnx->prepareAndExecute(
             $req,
             [

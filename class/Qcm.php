@@ -104,7 +104,7 @@ class Qcm {
     public static function getQuestionsByQcmuuid($uuid_qcm)
     {
         $cnx = Connexion::getInstance();
-        $req = "SELECT DISTINCT questions.* FROM questions INNER JOIN contenir ON contenir.id_question = questions.id_question INNER JOIN qcm ON contenir.id_qcm = qcm.id_qcm INNER JOIN response ON response.id_question = questions.id_question WHERE qcm.uuid_qcm = :uuid_qcm";
+        $req = "SELECT DISTINCT questions.* FROM questions INNER JOIN compose ON compose.id_question = questions.id_question INNER JOIN qcm ON compose.id_qcm = qcm.id_qcm INNER JOIN response ON response.id_question = questions.id_question WHERE qcm.uuid_qcm = :uuid_qcm";
 
         $result = $cnx->prepareAndExecute(
             $req,
@@ -202,7 +202,7 @@ class Qcm {
     public static function countNbQuestions($id_qcm)
     {
         $cnx = Connexion::getInstance();
-        $req = "SELECT * FROM contenir WHERE id_qcm = :id_qcm";
+        $req = "SELECT * FROM compose WHERE id_qcm = :id_qcm";
 
         $result = $cnx->prepareAndExecute(
             $req,
@@ -232,8 +232,8 @@ class Qcm {
     {
         $cnx = Connexion::getInstance();
 
-        $req = "SELECT response.* FROM questions INNER JOIN contenir ON questions.id_question = contenir.id_question INNER JOIN response ON response.id_question = questions.id_question WHERE contenir.id_qcm = :id_qcm";
-        $req2 = "SELECT * FROM questions INNER JOIN contenir ON questions.id_question = contenir.id_question WHERE contenir.id_qcm = :id_qcm";
+        $req = "SELECT response.* FROM questions INNER JOIN compose ON questions.id_question = compose.id_question INNER JOIN response ON response.id_question = questions.id_question WHERE compose.id_qcm = :id_qcm";
+        $req2 = "SELECT * FROM questions INNER JOIN compose ON questions.id_question = compose.id_question WHERE compose.id_qcm = :id_qcm";
 
 
         return [

@@ -86,7 +86,9 @@ $thematics = Question::getAllThematics();
     $(document).ready(function () {
         displayErrorQcm();
         displayByThematics();
+        //pour afficher une question et ses réponses associées
         $('.modal_question').on('click', function () {
+          // au click, on charge toutes les données en data-attribute
             let questionId = $(this).data('id');
             let teacher_fullName = $(this).data('author_name');
             let questionTheme = $(this).data('theme');
@@ -95,8 +97,7 @@ $thematics = Question::getAllThematics();
             let html = '';
 
             $.get("dashBoard.php",{idQuestion: questionId});
-
-            // En gros, au click, on charge toutes les données en data-attribute et pour les réponses on fait une boucle dessus
+            //à partir d'un tableau json, pour chaque index de réponse (clé), on affiche l'intitulé de la réponse correspondante (valeur)
             responsesArray.forEach(function (e, answerIndex) {
                 let is_correct = e.is_correct == 1 ? '✅' : '';
 
@@ -132,36 +133,23 @@ $thematics = Question::getAllThematics();
         $('#select_thematics').on('change', function () {
             $('#form_search_thematics').submit();
         })
-        $('.modal-footer').find('button').on('click', function () {
-            $('.modal-content').replaceWith("<form class='modal-content' action='' method='post' id='form_modify_question'>" + $('.modal-content').html() + "</form>");
 
-            let questionContentModal =  $('#question_content_modal').text();
-            let answerTitleTab = new Array();
-
-            $('#question_content_modal').replaceWith('<textarea class="form-control col-sm-11 mb-5 mx-auto" name="question_title_u" type="text" rows="2" id="modify_question_title_input">');
-            $('textarea').attr('placeholder',questionContentModal);
-            $(this).prop("disabled",true);
-            $('#table-response').find('tr').each(function (index) {
-                answerTitleTab[index] = $('#table-response').find('tr:nth-child(' + (index+1) + ') > th:nth-child(2)').text();
-            })
-            $('#table-response').find('th.col-sm-8').html('<input class="form-control col-sm-11" value="" type="text" name="">');
-            $('#table-response').find('input').each(function(index){
-                this.name = 'response_title_' + (index+1) ;
-                this.value = answerTitleTab[index];
-            });
-            $('#table-response').find('th.form-check').html('<input class="form-control" name="" type="checkbox">');
-            $('#table-response').find('[type="checkbox"]').each(function(index){
-                this.name = 'response_cb_' + (index+1) ;
-            });
-            $('.form-control').on('click', function () {
-                $('.modal-footer').html('<button type="submit"  name="submitSetQuestion" class="btn btn-success" >Envoyer</button>');
-            });
+        //pour modifier une question et ses réponses associées
+        //au click, on remplace les éléments affichant la question et les réponses par des champs textuels contenant les valeurs de la question des réponses associées
+        let boutonModifier = $('.modal-footer').find('button');
+        boutonModifier.on('click', function () {
+            remplaceBlocParForm();
+            rendreLeTitreDelaQuestionModifiable();
+            desactiveBoutonModifier();
+            rendreIntitulesDesReponsesModifiables();
+            remplaceCelluleParCaseAcocher();
+            remplaceBoutonModifierParBoutonSubmit();
+            //au clic sur le bouton submit, envoi des données du formulaire vers la page cible dashBoard.php pour récupération puis insertion dans la base de données
             $('#form_modify_question').on('submit', function () {
-                let content = $('#modify_question_title_input').val();
-                $.get("dashBoard.php", {content_modify_question: content});
+                let titreDelaQuestionModifie = $('#modify_question_title_input').val();
+                $.get("dashBoard.php", {content_modify_question: titreDelaQuestionModifie});
             })
         })
-
     });
 
     function displayByThematics() {
@@ -190,4 +178,60 @@ $thematics = Question::getAllThematics();
             }
         });
     }
+
+    function remplaceBlocParForm() {
+      //le bloc contenant l'affichage de la question/des réponses est remplacé par un formulaire
+      $('.modal-content').replaceWith("<form class='modal-content' action='' method='post' id='form_modify_question'>" + $('.modal-content').html() + "</form>");
+    }
+
+    function rendreLeTitreDelaQuestionModifiable() {
+      let titreDelaQuestion =  $('#question_content_modal').text();
+      //le bloc contenant le titre de la question est remplacé par un textarea
+      let blocTitreDelaQuestion = $('#question_content_modal');
+      blocTitreDelaQuestion.replaceWith('<textarea class="form-control col-sm-11 mb-5 mx-auto" name="question_title_u" type="text" rows="2" id="modify_question_title_input">');
+      //affiche titre de la question en placeholder dans le textarea
+      $('textarea').attr('placeholder',titreDelaQuestion);
+    }
+
+    function rendreIntitulesDesReponsesModifiables() {
+      let tableauTitresDesReponses = new Array();
+      let ligneDuTableauDesReponses = $('#table-response').find('tr');
+      ligneDuTableauDesReponses.each(function (index) {
+          tableauTitresDesReponses[index] = $('#table-response').find('tr:nth-child(' + (index+1) + ') > th:nth-child(2)').text();
+      })
+      //remplace titre de la réponse par un input
+      let contenuLigneTableauDesReponses = $('#table-response').find('th.col-sm-8');
+      contenuLigneTableauDesReponses.html('<input class="form-control col-sm-11" value="" type="text" name="">');
+      //affiche titre de la réponse en placeholder dans l'input + attribut name unique pour différencier les réponses
+      let nouvelInputTableauDesReponses = $('#table-response').find('input');
+      nouvelInputTableauDesReponses.each(function(numeroDeLigneTableauReponses){
+          this.name = 'response_title_' + (numeroDeLigneTableauReponses+1) ;
+          this.value = tableauTitresDesReponses[numeroDeLigneTableauReponses];
+      });
+    }
+
+      function desactiveBoutonModifier() {
+        //désactivation du bouton modifier
+        $(this).prop("disabled",true);
+      }
+
+      function remplaceCelluleParCaseAcocher() {
+        //remplace l'affichage des bonnes réponses par des input pour modifier les bonnes réponses
+        let checkboxReponse = $('#table-response').find('th.form-check');
+        checkboxReponse.html('<input class="form-control" name="" type="checkbox">');
+        //attribut name unique pour différencier les checkbox
+        let checkboxDansTableauDesReponses = $('#table-response').find('[type="checkbox"]');
+        checkboxDansTableauDesReponses.each(function(index){
+            this.name = 'response_cb_' + (index+1) ;
+        });
+      }
+
+      function remplaceBoutonModifierParBoutonSubmit() {
+        //au clic sur un champ du formulaire, le bouton de la modal devient un bouton submit pour envoyer le formulaire
+        let champDuFormulaire = $('.form-control');
+        let boutonModifierDesactive = $('.modal-footer');
+        champDuFormulaire.on('click', function () {
+            boutonModifierDesactive.html('<button type="submit"  name="submitSetQuestion" class="btn btn-success" >Envoyer</button>');
+        });
+      }
 </script>
