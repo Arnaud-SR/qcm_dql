@@ -96,11 +96,10 @@ $(document).ready(function () {
     let questionTitle = $(this).data('title');
     let html = '';
     let responsesIdArray = [];
+
     //à partir d'un tableau json, pour chaque index de réponse (clé), on affiche l'intitulé de la réponse correspondante (valeur)
     responsesJSONArray.forEach(function (e, answerIndex) {
       let is_correct = e.is_correct == 1 ? '✅' : '';
-      // console.log("idQuestion:" + questionId + "idResponse" + answerIndex + ": "+ e.id_response);
-
       switch (answerIndex){
         case 0:
         answerIndex = 'A.';
@@ -130,11 +129,21 @@ $(document).ready(function () {
     $('#question_content_modal').html(questionTitle);
     $('#question_theme_modal').html(questionTheme);
     $('#table-response').html(html);
-    console.log("json:" + JSON.stringify(responsesIdArray));
+    //console.log("json:" + JSON.stringify(responsesIdArray));
 
     $.get("dashBoard.php",{idQuestion: questionId});
+    console.log(responsesJSONArray);
+
+    //test envoi de requête ajax des réponses modifiées
+    $.get("dashBoard.php",{
+      0:{idResponse: "1", response: "tutu", isCorrect: "1"},
+      1:{idResponse: "2", response: "toto", isCorrect: "0"},
+      2:{idResponse: "3", response: "tata", isCorrect: "0"},
+      3:{idResponse: "4", response: "tete", isCorrect: "0"}
+    });
 
   });
+
 
   $('#select_thematics').on('change', function () {
     $('#form_search_thematics').submit();

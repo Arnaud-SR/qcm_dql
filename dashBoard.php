@@ -92,7 +92,28 @@ if (filter_input(INPUT_POST, "submitQuestion")) {
           exit;
         }
 
-        Response::updateResponse(1, "test update" ,0);
+        // //réception requête ajax get qui contient tableau json
+        // //decodage de json vers php  = tableauReponsephp
+        // //variable de session contenant le tableauReponsephp
+        if (!empty($_GET['json_response_Array'])) {
+          $response_array = json_decode($_GET['json_response_Array'], true);
+          var_dump($response_array);
+          $_SESSION['response_Array'] = $response_array;
+          exit;
+        }
+
+        // //insertion des nouvelles réponses dans la base de données
+        if (!empty($_SESSION['response_Array'])) {
+          for ($i=0; $i < 4; $i++) {
+          Response::updateResponse($_SESSION['response_Array'][i]->id_response,
+                                   $_SESSION['response_Array'][i]->response ,
+                                   $_SESSION['response_Array'][i]->is_correct);
+          }
+          exit;
+        }
+
+
+
 
         //construction d'un qcm
         if (filter_input(INPUT_POST, 'submitQCM')) {
